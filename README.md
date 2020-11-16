@@ -1,4 +1,2 @@
-# ManagIt
-
-## About
+## About ManagIt
 Warehouse management project on Android platform
