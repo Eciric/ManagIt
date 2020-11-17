@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/startingFragment">
+
+    <fragment
+        android:id="@+id/startingFragment"
+        android:name="res.managit.startingFragment"
+        android:label="fragment_starting"
+        tools:layout="@layout/fragment_starting" >
+        <action
+            android:id="@+id/action_startingFragment_to_whCreatorFragment"
+            app:destination="@id/whCreatorFragment" />
+        <action
+            android:id="@+id/action_startingFragment_to_whSelectorFragment"
+            app:destination="@id/whSelectorFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/whCreatorFragment"
+        android:name="res.managit.whCreatorFragment"
+        android:label="fragment_wh_creator"
+        tools:layout="@layout/fragment_wh_creator" />
+    <fragment
+        android:id="@+id/whSelectorFragment"
+        android:name="res.managit.whSelectorFragment"
+        android:label="fragment_wh_selector"
+        tools:layout="@layout/fragment_wh_selector" />
+</navigation>
