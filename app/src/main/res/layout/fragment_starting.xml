@@ -7,21 +7,21 @@ android:layout_height="match_parent"
 android:background="@drawable/gradient_background"
 tools:context=".startingFragment">
 
-<Button
-    android:id="@+id/button"
-    android:layout_width="210dp"
-    android:layout_height="97dp"
-    android:layout_marginBottom="32dp"
-    android:background="@drawable/button_background"
-    android:text="Create Warehouse"
-    android:textColor="#FFFFFF"
-    app:layout_constraintBottom_toTopOf="@+id/button2"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.497"
-    app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/createWHButton"
+        android:layout_width="210dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_background"
+        android:text="Create Warehouse"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/selectWHButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<Button
-    android:id="@+id/button3"
+    <Button
+    android:id="@+id/quitButton"
     android:layout_width="210dp"
     android:layout_height="97dp"
     android:layout_marginBottom="148dp"
@@ -33,32 +33,32 @@ tools:context=".startingFragment">
     app:layout_constraintHorizontal_bias="0.497"
     app:layout_constraintStart_toStartOf="parent" />
 
-<Button
-    android:id="@+id/button2"
-    android:layout_width="210dp"
-    android:layout_height="97dp"
-    android:layout_marginBottom="32dp"
-    android:background="@drawable/button_background"
-    android:text="Select Warehouse"
-    android:textColor="#FFFFFF"
-    app:layout_constraintBottom_toTopOf="@+id/button3"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.497"
-    app:layout_constraintStart_toStartOf="parent" />
+    <Button
+        android:id="@+id/selectWHButton"
+        android:layout_width="210dp"
+        android:layout_height="97dp"
+        android:layout_marginBottom="32dp"
+        android:background="@drawable/button_background"
+        android:text="Select Warehouse"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/quitButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
 
-<TextView
-    android:id="@+id/textView"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="76dp"
-    android:layout_marginBottom="128dp"
-    android:text="ManagIt"
-    android:textColor="#FFFFFF"
-    android:textSize="36sp"
-    android:textStyle="italic"
-    app:layout_constraintBottom_toTopOf="@+id/button"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="76dp"
+        android:text="ManagIt"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/createWHButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
