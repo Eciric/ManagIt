@@ -12,6 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+
+import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.WarehouseDb;
+import res.managit.dbo.entity.Category;
+import res.managit.dbo.entity.Product;
+
+import static res.managit.dbo.DatabaseFunctions.createDatabase;
 
 public class whCreatorFragment extends Fragment implements View.OnClickListener {
 
@@ -40,6 +48,12 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
     public void onClick(View view) {
         if (view.getId() == R.id.createButton) {
             //NOTE(Przemek): Implement the database integration here.
+            EditText text = (EditText) getView().findViewById(R.id.et_name);
+            String name = text.getText().toString();
+
+            WarehouseDb db = createDatabase(getContext(),name);
+            System.out.println(PublicDatabaseAcces.databaseNameList);
+
         }
     }
 }
