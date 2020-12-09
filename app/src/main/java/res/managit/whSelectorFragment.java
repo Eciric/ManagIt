@@ -43,6 +43,14 @@ public class whSelectorFragment extends Fragment {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.listview_text_formatter, R.id.textView2, PublicDatabaseAcces.databaseNameList);
         listView.setAdapter(arrayAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent in = new Intent(getActivity(), MenuActivity.class);
+                in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
+                startActivity(in);
+            }
+        });
     }
 
     @Override
