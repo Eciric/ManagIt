@@ -2,6 +2,7 @@ package res.managit.dbo.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 
@@ -13,7 +14,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(indices = @Index(value = {"streetName", "streetNumber", "postalCode", "city", "country", "phoneNumber"} , unique = true))
 @Setter
 @Getter
 @NoArgsConstructor
