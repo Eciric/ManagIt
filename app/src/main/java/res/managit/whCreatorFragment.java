@@ -13,11 +13,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
+import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Product;
+
+
+import java.util.concurrent.Executors;
 
 import static res.managit.dbo.DatabaseFunctions.createDatabase;
 
@@ -50,10 +55,24 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
             //NOTE(Przemek): Implement the database integration here.
             EditText text = (EditText) getView().findViewById(R.id.et_name);
             String name = text.getText().toString();
+            TextView errorText = getView().findViewById(R.id.error_text);
+
+            if (name.isEmpty()) {
+                errorText.setText("Warehouse name cannot be empty!");
+                return;
+            }
+
+            //Executors.newSingleThreadExecutor().execute(() -> {});
 
             WarehouseDb db = createDatabase(getContext(),name);
-            System.out.println(PublicDatabaseAcces.databaseNameList);
+            if (db != null){
+                errorText.setText("");
+            }
+            else {
+                errorText.setText("This name is already in use!");
+            }
 
+            text.getText().clear();
         }
     }
 }
