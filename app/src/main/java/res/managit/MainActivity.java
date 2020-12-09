@@ -19,8 +19,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         PublicDatabaseAcces publicDatabaseAcces = new PublicDatabaseAcces();
         PublicDatabaseAcces.databaseList = new ArrayList<WarehouseDb>();
         PublicDatabaseAcces.databaseNameList = new ArrayList<String>();
+        
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
     }
 }

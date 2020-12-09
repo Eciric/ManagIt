@@ -13,10 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.util.Objects;
+
 public class startingFragment extends Fragment implements View.OnClickListener {
 
+    boolean exit;
     NavController navController;
     public startingFragment() {}
+
+    public startingFragment(boolean exit) {
+        this.exit = exit;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,6 +34,7 @@ public class startingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        if (exit) requireActivity().finish();
 
         navController = Navigation.findNavController(view);
         Button createWH = view.findViewById(R.id.createWHButton);
