@@ -7,4 +7,7 @@
     <color name="endGradient">#D788BC</color>
     <color name="startGradientBtn">#8632CC</color>
     <color name="endGradientBtn">#9912FF</color>
+    <color name="drawerBackground">#ffe9ec</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
