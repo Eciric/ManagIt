@@ -1,9 +1,6 @@
 package res.managit.dbo.entity;
 
-import androidx.room.ColumnInfo;
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import androidx.room.TypeConverter;
+import androidx.room.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -13,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(indices = @Index(value = {"date","action", "amount", "worker_Id", "supplier_Id", "customer_Id", "product_Id"} , unique = true))
 @Setter
 @Getter
 @NoArgsConstructor

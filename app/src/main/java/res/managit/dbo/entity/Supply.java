@@ -2,6 +2,7 @@ package res.managit.dbo.entity;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(indices = @Index(value = {"supply_name", "contact_Id"} , unique = true))
 @Setter
 @Getter
 @NoArgsConstructor

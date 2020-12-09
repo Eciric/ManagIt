@@ -23,9 +23,10 @@ public class MainActivity extends AppCompatActivity {
         PublicDatabaseAcces.databaseList = new ArrayList<WarehouseDb>();
         PublicDatabaseAcces.databaseNameList = new ArrayList<String>();
 
-        //todo(KRYSTIAN) trzeba poprawic by nie dodawac takis samych elementow w niektorzych kategoriach -  cos z IGNORE
-        //todo(KRYSTIAN) Tworza sie bazy o takich samych nazwach - do zmiany
-        //todo(KRYSTIAN) wyprobowac inna metode kreatora bazy - ta moze wykorzystywac za duzo wątków
+
+        //(KRYSTIAN) trzeba poprawic by nie dodawac takis samych elementow w niektorzych kategoriach -  cos z IGNORE - done
+        //(KRYSTIAN) Tworza sie bazy o takich samych nazwach - do zmiany - done
+        //(KRYSTIAN) wyprobowac inna metode kreatora bazy - ta moze wykorzystywac za duzo wątków - done
 
     }
 }

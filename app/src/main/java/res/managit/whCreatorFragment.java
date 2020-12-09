@@ -17,9 +17,14 @@ import android.widget.EditText;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
+import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Product;
 
+
+import java.util.concurrent.Executors;
+
 import static res.managit.dbo.DatabaseFunctions.createDatabase;
+import static res.managit.dbo.DatabaseFunctions.isExisting;
 
 public class whCreatorFragment extends Fragment implements View.OnClickListener {
 
@@ -51,7 +56,17 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
             EditText text = (EditText) getView().findViewById(R.id.et_name);
             String name = text.getText().toString();
 
-            WarehouseDb db = createDatabase(getContext(),name);
+      //Executors.newSingleThreadExecutor().execute(() -> {});
+
+            boolean exist = isExisting(name);
+            if(exist == false){
+                WarehouseDb db = createDatabase(getContext(),name);
+                getView().findViewById(R.id.used_name).setVisibility(View.INVISIBLE);
+            }
+            else {
+                getView().findViewById(R.id.used_name).setVisibility(View.VISIBLE);
+            }
+
             System.out.println(PublicDatabaseAcces.databaseNameList);
 
         }

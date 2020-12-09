@@ -37,9 +37,11 @@ import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
 @Database(entities = {Category.class, Contact.class, Customer.class, Event.class, Product.class,
         Supply.class, Worker.class, EventProductCross.class, EventCustomerCross.class,
-        EventSupplyCross.class, EventWorkerCross.class}, version = 1, exportSchema = false)
+        EventSupplyCross.class, EventWorkerCross.class}, version = 2, exportSchema = false)
 @TypeConverters({ListConverter.class, DateConverter.class})
 public abstract class WarehouseDb extends RoomDatabase {
+
+
     public abstract CategoryDao categoryDao();
 
     public abstract ContactDao contactDao();
@@ -62,23 +64,9 @@ public abstract class WarehouseDb extends RoomDatabase {
 
     public abstract EventProductCrossDao eventProductCrossDao();
 
-    //todo sprawdzic czy to zadziała bo sa problemy z budowaniem "Cannot access database on the main thread since"
-//    private static volatile WarehouseDb INSTANCE;
-//    private static final int NUMBER_OF_THREADS = 4;
-//    static final ExecutorService databaseWriteExecutor =
-//            Executors.newFixedThreadPool(NUMBER_OF_THREADS);
-//
-//    static WarehouseDb getDatabase(final Context context, String name) {
-//        if (INSTANCE == null) {
-//            synchronized (WarehouseDb.class) {
-//                if (INSTANCE == null) {
-//                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-//                            WarehouseDb.class, name)
-//                            .build();
-//                }
-//            }
-//        }
-//        return INSTANCE;
-//    }
+  // NOTE(Krystian) wykonywanie jakichkolwiek dzialan na bazie musi zostac umieszczone w
+  // Executors.newSingleThreadExecutor().execute(()->{kod ktory ma sie wykonac});
+  // dzieki temu nie ma problemów z iloscia wykorzystywanych watkow
+
 
 }
