@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity
+@Entity(indices = @Index(value = {"worker_name", "worker_lastName", "role", "contact_Id"} , unique = true))
 @Setter
 @Getter
 @NoArgsConstructor
