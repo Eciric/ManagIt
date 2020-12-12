@@ -1,5 +1,6 @@
 package res.managit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import java.util.Objects;
+
+import static res.managit.dbo.DatabaseFunctions.saveDatabaseNames;
 
 public class startingFragment extends Fragment implements View.OnClickListener {
 
@@ -54,6 +57,7 @@ public class startingFragment extends Fragment implements View.OnClickListener {
             navController.navigate(R.id.action_startingFragment_to_whSelectorFragment);
         }
         else if (v.getId() == R.id.quitButton) {
+            saveDatabaseNames(getContext(),"DatabaseNames.csv");
             System.exit(0);
         }
     }
