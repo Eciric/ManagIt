@@ -10,6 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import res.managit.dbo.entity.Contact;
+import res.managit.dbo.entity.Customer;
 
 @Dao
 public interface ContactDao {
