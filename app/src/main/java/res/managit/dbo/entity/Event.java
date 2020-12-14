@@ -36,4 +36,7 @@ public class Event {
         this.product_Id = product_Id;
     }
 
+    public long getEventId() {
+        return eventId;
+    }
 }
