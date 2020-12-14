@@ -31,4 +31,8 @@ public class Worker {
         this.role = role;
         this.contact_Id = contact_Id;
     }
+
+    public long getWorkerId() {
+        return workerId;
+    }
 }

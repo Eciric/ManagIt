@@ -37,4 +37,8 @@ public class Contact {
         this.country = country;
         this.phoneNumber = phoneNumber;
     }
+
+    public long getContactId() {
+        return contactId;
+    }
 }
