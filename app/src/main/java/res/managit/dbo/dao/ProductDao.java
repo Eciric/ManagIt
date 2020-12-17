@@ -52,6 +52,9 @@ public interface ProductDao {
     @Delete
     void deleteProduct(Product... products);
 
+    @Query("DELETE FROM product")
+    void deleteAll();
+
     //modyfikowanie produktu
     @Update
     void updateProduct(Product product);

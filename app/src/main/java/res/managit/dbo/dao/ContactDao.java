@@ -19,6 +19,9 @@ public interface ContactDao {
     @Query("SELECT * FROM contact")
     public List<Contact> getAll();
 
+    @Query("SELECT * FROM contact WHERE phoneNumber LIKE :number")
+    public Contact getByPhoneNumber(String number);
+
     //wstawia nowy kontakt
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertContact(Contact... contacts);
@@ -26,6 +29,9 @@ public interface ContactDao {
     //usuwa kontakt
     @Delete
     void deleteContact(Contact... contacts);
+
+    @Query("DELETE FROM Contact")
+    void deleteAll();
 
     //modyfikuje kontakt
     @Update

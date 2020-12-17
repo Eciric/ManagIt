@@ -51,6 +51,9 @@ public interface WorkerDao {
     @Delete
     void deleteWorker(Worker... workers);
 
+    @Query("DELETE FROM worker")
+    void deleteAll();
+
     //modyfikuje pracownika
     @Update
     void updateWorker(Worker worker);

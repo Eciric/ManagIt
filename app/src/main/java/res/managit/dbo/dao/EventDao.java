@@ -23,6 +23,9 @@ public interface EventDao {
     @Query("Select * from Event")
      public List<Event> getAll();
 
+    @Query("SELECT * FROM Event WHERE `action` LIKE :act")
+    public List<Event> getEventByAction(String act);
+
     //zwraca event i wszystkich pracownikow ktorzy z nim sa powiazani
     @Transaction
     @Query("Select * from Event")
@@ -50,6 +53,9 @@ public interface EventDao {
     //usuwa event
     @Delete
     void deleteEvent(Event... events);
+
+    @Query("DELETE FROM event")
+    void deleteAll();
 
     //modyfikuje event
     @Update

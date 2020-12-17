@@ -52,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         System.out.println(PublicDatabaseAcces.databaseNameList);
 
 
+
+
         if (getIntent().getBooleanExtra("EXIT", false)) {
             saveDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
             finish();
