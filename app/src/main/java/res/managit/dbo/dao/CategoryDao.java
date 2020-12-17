@@ -30,6 +30,9 @@ public interface CategoryDao {
     @Delete
     void deleteCategory(Category... categories);
 
+    @Query("DELETE FROM category")
+    void deleteAll();
+
     //modyfikuje kategorie
     @Update
     void updateCategory(Category category);

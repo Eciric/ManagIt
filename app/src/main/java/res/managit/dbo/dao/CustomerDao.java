@@ -53,6 +53,9 @@ public interface CustomerDao {
     @Delete
     void deleteCustomer(Customer... customers);
 
+    @Query("DELETE FROM customer")
+    void deleteAll();
+
     //modyfikuje klienta
     @Update
     void updateCustomer(Customer customer);
