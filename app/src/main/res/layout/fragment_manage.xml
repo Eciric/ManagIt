@@ -6,15 +6,57 @@
     tools:context=".manageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40sp"
-        android:text="Manage Fragment"
-        android:textColor="@color/black"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:orientation="vertical"
+        android:padding="16dp">
+        <Button
+            android:id="@+id/products"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Products"
+            android:textAlignment="textStart"
+            android:textSize="36sp" />
 
+        <Button
+            android:id="@+id/workers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Workers"
+            android:textAlignment="textStart"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/suppliers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Suppliers"
+            android:textAlignment="textStart"
+            android:textSize="36sp" />
+
+        <Button
+            android:id="@+id/customers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Customers"
+            android:textAlignment="textStart"
+            android:textSize="36sp" />
+
+    </LinearLayout>
+
+<!--    <TextView-->
+<!--        android:id="@+id/toUpdate"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:text="giig"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="36sp" />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/button"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Button" />-->
 
 </FrameLayout>
