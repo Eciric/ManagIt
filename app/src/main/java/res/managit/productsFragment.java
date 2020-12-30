@@ -1,23 +1,25 @@
 package res.managit;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.DatabaseRetriever;
+import res.managit.service.ProductsRetriever;
 
-public class manageFragment extends Fragment {
-    public manageFragment() {
+public class productsFragment extends Fragment {
+    public productsFragment() {
         // Required empty public constructor
     }
 
@@ -29,22 +31,13 @@ public class manageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setButtonListeners(view);
-        new DatabaseRetriever(view, PublicDatabaseAcces.currentDatabase).execute();
-    }
-
-    public void setButtonListeners(@NonNull View view) {
-        Button products = view.findViewById(R.id.products);
-        products.setOnClickListener((event) -> {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new productsFragment()).commit();
-        });
+        new ProductsRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage, container, false);
+        return inflater.inflate(R.layout.fragment_products, container, false);
     }
 }
