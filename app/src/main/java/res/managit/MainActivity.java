@@ -23,6 +23,7 @@ import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
+import res.managit.dbo.helpers.DatabaseInitializer;
 import res.managit.dbo.relations.manytomany.cross.EventCustomerCross;
 import res.managit.dbo.relations.manytomany.cross.EventProductCross;
 import res.managit.dbo.relations.manytomany.cross.EventSupplyCross;
@@ -49,10 +50,8 @@ public class MainActivity extends AppCompatActivity {
         reloadDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
         reloadDatabases(getApplicationContext());
 
-        System.out.println(PublicDatabaseAcces.databaseNameList);
-
-
-
+        // Odkomentuj aby wypelnic baze danych przykladowymi rekordami
+        // new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(0)).execute();
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             saveDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
