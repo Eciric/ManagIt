@@ -32,4 +32,16 @@ public class Product {
     public long getProductId() {
         return productId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public long getCategory_Id() {
+        return category_Id;
+    }
 }
