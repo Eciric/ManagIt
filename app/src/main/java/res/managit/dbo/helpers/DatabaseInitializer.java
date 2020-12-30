@@ -18,7 +18,7 @@ import res.managit.dbo.entity.Worker;
 *  Wywolanie -> new DatabaseInitializer(PublicDatabaseAcces.databaseList.get( <indeks bazy danych> )).execute();
 *  UWAGA - przed dodaniem nowych rekordow wszystkie dotychczasowe rekordy sa USUWANE!
 * */
-public class DatabaseInitializer extends AsyncTask<Void, Void, Integer> {
+public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
     private WarehouseDb db;
 
     public DatabaseInitializer(WarehouseDb db) {
@@ -26,7 +26,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Integer> {
     }
 
     @Override
-    protected Integer doInBackground(Void... voids) {
+    protected Void doInBackground(Void... voids) {
         db.categoryDao().deleteAll();
         db.categoryDao().insertCategory(new Category("Vegetable"));
         db.categoryDao().insertCategory(new Category("Meat"));
@@ -76,16 +76,12 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Integer> {
 
         // action: in - wjezdza dostawa, out - produkt wyjezdza z magazynu
         db.eventDao().deleteAll();
-        db.eventDao().insertEvent(new Event(LocalDateTime.now(),
-                           "in",
-                          100,
-                                   Arrays.asList(worker1.getWorkerId(), worker2.getWorkerId()),
-                                   Arrays.asList(supplier1.getSupplyId()),
-                       null,
-                                   Arrays.asList(product1.getProductId())));
-        db.eventDao().insertEvent(new Event(LocalDateTime.now(),
-                            "out",
-                            100,
+        db.eventDao().insertEvent(new Event(LocalDateTime.now(),"in",100,
+                                    Arrays.asList(worker1.getWorkerId(), worker2.getWorkerId()),
+                                    Arrays.asList(supplier1.getSupplyId()),
+                        null,
+                                    Arrays.asList(product1.getProductId())));
+        db.eventDao().insertEvent(new Event(LocalDateTime.now(), "out", 100,
                                     Arrays.asList(worker3.getWorkerId()),
                                     null,
                                     Arrays.asList(customer2.getCustomerId(), customer1.getCustomerId()),
