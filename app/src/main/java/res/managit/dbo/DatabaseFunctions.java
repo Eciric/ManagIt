@@ -67,8 +67,11 @@ public abstract class DatabaseFunctions {
 
     public static void reloadDatabases(Context context) {
         for (String name : PublicDatabaseAcces.databaseNameList) {
+
             WarehouseDb Db = Room.databaseBuilder(context, WarehouseDb.class, name).build();
             PublicDatabaseAcces.databaseList.add(Db);
+
+
         }
     }
 
@@ -85,6 +88,7 @@ public abstract class DatabaseFunctions {
             fis.close();
             String[] tempNames = new String(fileContent).split(",");
             for (String s : tempNames) {
+                if(s.length()!=0)
                 PublicDatabaseAcces.databaseNameList.add(s);
             }
         } catch (IOException e) {
