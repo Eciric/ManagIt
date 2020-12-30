@@ -16,5 +16,9 @@ public class PublicDatabaseAcces {
         PublicDatabaseAcces.databaseList = databaseList;
     }
 
+    public static WarehouseDb getDatabaseByName(String name) {
+        int index = databaseNameList.indexOf(name);
+        return databaseList.get(index);
+    }
 
 }
