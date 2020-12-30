@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    Bundle bundle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,9 +28,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        bundle = new Bundle();
+        bundle.putString("dbName", dbName);
+
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new statisticsFragment()).commit();
-        
+
         drawer = findViewById(R.id.drawer_activity);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -57,8 +61,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         new planerFragment()).commit();
                 break;
             case R.id.nav_manage:
+                manageFragment manage = new manageFragment();
+                manage.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new manageFragment()).commit();
+                        manage).commit();
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
