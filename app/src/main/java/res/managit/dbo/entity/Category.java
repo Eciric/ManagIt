@@ -28,4 +28,8 @@ public class Category {
     public long getCategoryId() {
         return categoryId;
     }
+
+    public String getName() {
+        return name;
+    }
 }

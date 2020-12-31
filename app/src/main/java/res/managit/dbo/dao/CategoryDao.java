@@ -22,6 +22,9 @@ public interface CategoryDao {
     @Query("SELECT * FROM category where category_name LIKE :name")
     public Category getCategoryByName(String name);
 
+    @Query("SELECT * FROM category where categoryId LIKE :id")
+    public Category getCategoryById(long id);
+
     //wstawia nowa kategorie
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertCategory(Category... categories);
