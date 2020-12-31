@@ -2,9 +2,12 @@ package res.managit.service;
 
 import android.content.Context;
 import android.os.AsyncTask;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,12 +18,12 @@ import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
 
-public class ProductsRetriever extends AsyncTask<Void, Void, List<Product>> {
+public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
     WarehouseDb db;
     View view;
     Context context;
 
-    public ProductsRetriever(Context context, View view, WarehouseDb db) {
+    public ProductListRetriever(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
