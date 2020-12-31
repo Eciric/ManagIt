@@ -24,6 +24,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import res.managit.Settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
@@ -96,7 +97,7 @@ public class planerFragment extends Fragment {
 
 
         //TODO ot jest dla przykladu, ale trzeba znalezc sposob jak pobrac ktora baza została wybrana i to na niej pracowac
-        WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(3);
+        WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
 
 
         Executors.newSingleThreadExecutor().execute(()->{
