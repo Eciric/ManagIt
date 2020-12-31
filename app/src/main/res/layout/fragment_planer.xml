@@ -5,14 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".planerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
     <TextView
+        android:id="@+id/Text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="40sp"
-        android:text="Planer Fragment"
-        android:textAlignment="center"
-        android:textSize="36sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="450dp"
+        android:text="Ala ma kota" />
+
+
+<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:paddingTop="40sp"-->
+<!--        android:text="Planer Fragment"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textSize="36sp"-->
+<!--        android:textStyle="bold" />-->
 
 </FrameLayout>

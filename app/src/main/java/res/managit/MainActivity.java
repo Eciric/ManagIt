@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         // Odkomentuj aby wypelnic baze danych przykladowymi rekordami
         // new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(0)).execute();
 
+
+
         if (getIntent().getBooleanExtra("EXIT", false)) {
             saveDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
             finish();

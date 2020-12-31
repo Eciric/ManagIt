@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "30.0.0"
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "res.managit"
@@ -69,4 +69,6 @@ dependencies {
     //openCSV
     implementation 'com.opencsv:opencsv:5.3'
 
+    //calendar
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
 }
