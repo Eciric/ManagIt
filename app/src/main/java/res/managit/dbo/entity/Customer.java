@@ -26,4 +26,16 @@ public class Customer {
         this.name = name;
         this.contact_Id = contact_Id;
     }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getContact_Id() {
+        return contact_Id;
+    }
 }

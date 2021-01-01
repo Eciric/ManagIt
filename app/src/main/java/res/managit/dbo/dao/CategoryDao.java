@@ -22,14 +22,19 @@ public interface CategoryDao {
     @Query("SELECT * FROM category where category_name LIKE :name")
     public Category getCategoryByName(String name);
 
-    //todo moga byc takie same nazwy wiec trzeb je zrobic unikalen cos z tym INGNORE
+    @Query("SELECT * FROM category where categoryId LIKE :id")
+    public Category getCategoryById(long id);
+
     //wstawia nowa kategorie
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertCategory(Category categories);
+    void insertCategory(Category... categories);
 
     //usuwa kategorie
     @Delete
     void deleteCategory(Category... categories);
+
+    @Query("DELETE FROM category")
+    void deleteAll();
 
     //modyfikuje kategorie
     @Update

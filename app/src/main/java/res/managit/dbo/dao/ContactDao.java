@@ -10,6 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 import res.managit.dbo.entity.Contact;
+import res.managit.dbo.entity.Customer;
 
 @Dao
 public interface ContactDao {
@@ -18,6 +19,12 @@ public interface ContactDao {
     @Query("SELECT * FROM contact")
     public List<Contact> getAll();
 
+    @Query("SELECT * FROM contact WHERE phoneNumber LIKE :number")
+    public Contact getByPhoneNumber(String number);
+
+    @Query("SELECT * FROM contact WHERE contactId LIKE :id")
+    public Contact getById(long id);
+
     //wstawia nowy kontakt
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertContact(Contact... contacts);
@@ -25,6 +32,9 @@ public interface ContactDao {
     //usuwa kontakt
     @Delete
     void deleteContact(Contact... contacts);
+
+    @Query("DELETE FROM Contact")
+    void deleteAll();
 
     //modyfikuje kontakt
     @Update

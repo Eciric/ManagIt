@@ -25,4 +25,11 @@ public class Category {
         this.name = name;
     }
 
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

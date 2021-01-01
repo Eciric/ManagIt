@@ -25,7 +25,11 @@ public interface SupplyDao {
 
     //zwraca wszystkich dostawcow o danej nazwie
     @Query("SELECT * FROM Supply WHERE supply_name LIKE :name")
-    public Supply getSupllyByName(String name);
+    public Supply getSupplyByName(String name);
+
+    //zwraca dostawce o danym id
+    @Query("SELECT * FROM Supply WHERE supplyId LIKE :id")
+    public Supply getSupplyById(long id);
 
     //zwraca wszystkich dostawcow i kontakty dla kazdego z nich
     @Transaction
@@ -51,6 +55,9 @@ public interface SupplyDao {
     //usuwanie dostawcy
     @Delete
     void deleteSupply(Supply... supplies);
+
+    @Query("DELETE FROM supply")
+    void deleteAll();
 
     //modyfikowanie dostawcy
     @Update

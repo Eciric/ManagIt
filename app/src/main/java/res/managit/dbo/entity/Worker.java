@@ -31,4 +31,24 @@ public class Worker {
         this.role = role;
         this.contact_Id = contact_Id;
     }
+
+    public long getWorkerId() {
+        return workerId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public long getContact_Id() {
+        return contact_Id;
+    }
 }

@@ -26,4 +26,16 @@ public class Supply {
         this.name = name;
         this.contact_Id = contact_Id;
     }
+
+    public long getSupplyId() {
+        return supplyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getContact_Id() {
+        return contact_Id;
+    }
 }

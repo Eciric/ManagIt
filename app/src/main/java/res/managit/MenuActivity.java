@@ -25,11 +25,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         String dbName = getIntent().getStringExtra("dbName");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(dbName);
         setSupportActionBar(toolbar);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new statisticsFragment()).commit();
-        
+
         drawer = findViewById(R.id.drawer_activity);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -56,9 +57,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new planerFragment()).commit();
                 break;
-            case R.id.nav_add:
+            case R.id.nav_manage:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new addFragment()).commit();
+                        new manageFragment()).commit();
                 break;
             case R.id.nav_settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
