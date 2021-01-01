@@ -14,9 +14,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductRetriever;
@@ -65,6 +62,6 @@ public class productsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_products, container, false);
+        return inflater.inflate(R.layout.fragment_list, container, false);
     }
 }
