@@ -15,11 +15,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
-import res.managit.service.ProductListRetriever;
-import res.managit.service.ProductRetriever;
 import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
-import res.managit.service.WorkerRetriever;
 
 public class suppliersFragment extends Fragment {
     public suppliersFragment() {
@@ -38,7 +35,7 @@ public class suppliersFragment extends Fragment {
 
         ListView productsList = view.findViewById(R.id.list);
         productsList.setOnItemClickListener((adapterView, view1, i, l) -> {
-            View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.suppliers_popup, null);
+            View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.suppliers_customers_popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
             popupWindow.showAsDropDown(popupView, 0, 0);
 
