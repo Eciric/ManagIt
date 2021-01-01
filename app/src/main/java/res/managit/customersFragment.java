@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.service.CustomerRetriever;
 import res.managit.service.CustomersListRetriever;
 import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
@@ -33,8 +34,29 @@ public class customersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         new CustomersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+
+        ListView productsList = view.findViewById(R.id.list);
+        productsList.setOnItemClickListener((adapterView, view1, i, l) -> {
+            View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.suppliers_customers_popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            popupWindow.showAsDropDown(popupView, 0, 0);
+
+            Button close = popupView.findViewById(R.id.close);
+            close.setOnClickListener((event) -> {
+                popupWindow.dismiss();
+            });
+
+            Long id = getCustmomerId((String)adapterView.getAdapter().getItem(i));
+            new CustomerRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
+        });
+
     }
 
+    private long getCustmomerId(String text) {
+        int index = text.lastIndexOf(']');
+        String id = text.substring(1,index);
+        return Long.parseLong(id);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
