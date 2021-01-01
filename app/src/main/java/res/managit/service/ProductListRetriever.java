@@ -36,7 +36,7 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     @Override
     protected void onPostExecute(List<Product> result) {
-        ListView products = view.findViewById(R.id.productsList);
+        ListView products = view.findViewById(R.id.list);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createProductLabels(result));
         products.setAdapter(arrayAdapter);
     }

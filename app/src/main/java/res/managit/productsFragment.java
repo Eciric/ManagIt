@@ -33,7 +33,7 @@ public class productsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         new ProductListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
 
-        ListView productsList = view.findViewById(R.id.productsList);
+        ListView productsList = view.findViewById(R.id.list);
         productsList.setOnItemClickListener((adapterView, view1, i, l) -> {
             View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.products_popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);

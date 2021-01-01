@@ -7,7 +7,7 @@
     android:background="@drawable/gradient_background">
 
     <ListView
-        android:id="@+id/productsList"
+        android:id="@+id/list"
         android:layout_width="410dp"
         android:layout_height="680dp"
         android:layout_marginStart="1dp"
