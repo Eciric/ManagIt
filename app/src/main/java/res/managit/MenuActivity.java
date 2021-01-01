@@ -25,6 +25,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         String dbName = getIntent().getStringExtra("dbName");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle(dbName);
         setSupportActionBar(toolbar);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

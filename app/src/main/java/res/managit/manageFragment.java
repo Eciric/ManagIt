@@ -5,13 +5,12 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.DatabaseRetriever;
@@ -29,6 +28,8 @@ public class manageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Manage");
         setButtonListeners(view);
         new DatabaseRetriever(view, PublicDatabaseAcces.currentDatabase).execute();
     }

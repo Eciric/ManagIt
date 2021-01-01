@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -32,6 +33,8 @@ public class productsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         new ProductListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Products");
 
         ListView productsList = view.findViewById(R.id.list);
         productsList.setOnItemClickListener((adapterView, view1, i, l) -> {
