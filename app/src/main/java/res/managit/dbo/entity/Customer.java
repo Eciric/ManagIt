@@ -30,4 +30,12 @@ public class Customer {
     public long getCustomerId() {
         return customerId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getContact_Id() {
+        return contact_Id;
+    }
 }
