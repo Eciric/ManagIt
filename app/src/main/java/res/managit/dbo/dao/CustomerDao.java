@@ -28,6 +28,10 @@ public interface CustomerDao {
     @Query("SELECT * FROM Customer WHERE customer_name LIKE :name")
     public List<Customer> getCustomerByName(String name);
 
+    //zwraca klienta o danym id
+    @Query("SELECT * FROM Customer WHERE customerId LIKE :id")
+    public Customer getCustomerById(long id);
+
     //zwraca wszystkich klientow i kontatky do kazdego z nich
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
