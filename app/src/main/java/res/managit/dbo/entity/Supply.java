@@ -30,4 +30,12 @@ public class Supply {
     public long getSupplyId() {
         return supplyId;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public long getContact_Id() {
+        return contact_Id;
+    }
 }
