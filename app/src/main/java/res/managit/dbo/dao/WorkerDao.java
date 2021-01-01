@@ -26,6 +26,10 @@ public interface WorkerDao {
     @Query("SELECT * FROM Worker WHERE worker_name LIKE :name")
     public Worker getWorkerByName(String name);
 
+    //zwraca wszystkich pracownikow o podanym id
+    @Query("SELECT * FROM Worker WHERE workerId LIKE :id")
+    public Worker getWorkerById(long id);
+
     //zwraca wsztstkich pracownikow i kontakt do kazdego z nich
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)

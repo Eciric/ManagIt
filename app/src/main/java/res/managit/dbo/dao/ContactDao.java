@@ -22,6 +22,9 @@ public interface ContactDao {
     @Query("SELECT * FROM contact WHERE phoneNumber LIKE :number")
     public Contact getByPhoneNumber(String number);
 
+    @Query("SELECT * FROM contact WHERE contactId LIKE :id")
+    public Contact getById(long id);
+
     //wstawia nowy kontakt
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertContact(Contact... contacts);
