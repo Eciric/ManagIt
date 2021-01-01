@@ -17,7 +17,9 @@ import android.widget.PopupWindow;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductRetriever;
+import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
+import res.managit.service.WorkerRetriever;
 
 public class suppliersFragment extends Fragment {
     public suppliersFragment() {
@@ -33,6 +35,27 @@ public class suppliersFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         new SuppliersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+
+        ListView productsList = view.findViewById(R.id.list);
+        productsList.setOnItemClickListener((adapterView, view1, i, l) -> {
+            View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.suppliers_popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            popupWindow.showAsDropDown(popupView, 0, 0);
+
+            Button close = popupView.findViewById(R.id.close);
+            close.setOnClickListener((event) -> {
+                popupWindow.dismiss();
+            });
+
+            Long id = getSupplierId((String)adapterView.getAdapter().getItem(i));
+            new SupplierRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
+        });
+    }
+
+    private long getSupplierId(String text) {
+        int index = text.lastIndexOf(']');
+        String id = text.substring(1,index);
+        return Long.parseLong(id);
     }
 
     @Override
