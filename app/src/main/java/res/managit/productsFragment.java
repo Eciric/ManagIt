@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
@@ -40,6 +41,11 @@ public class productsFragment extends Fragment {
             View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.products_popup, null);
             final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
             popupWindow.showAsDropDown(popupView, 0, 0);
+
+            Button close = popupView.findViewById(R.id.close);
+            close.setOnClickListener((event) -> {
+                popupWindow.dismiss();
+            });
 
             String name = getProductName((String)adapterView.getAdapter().getItem(i));
             new ProductRetriever(popupView, PublicDatabaseAcces.currentDatabase, name).execute();
