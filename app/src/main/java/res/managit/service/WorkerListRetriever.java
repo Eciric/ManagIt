@@ -39,11 +39,11 @@ public class WorkerListRetriever extends AsyncTask<Void, Void, List<Worker>> {
     @Override
     protected void onPostExecute(List<Worker> result) {
         ListView workers = view.findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createProductLabels(result));
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createWorkerLabels(result));
         workers.setAdapter(arrayAdapter);
     }
 
-    private List<String> createProductLabels(List<Worker> result) {
+    private List<String> createWorkerLabels(List<Worker> result) {
         List<String> workers = new ArrayList<>();
         for (Worker w : result) {
             workers.add("[" + w.getWorkerId() + "] " + w.getName() + " " + w.getLastName());
