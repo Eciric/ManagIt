@@ -21,7 +21,11 @@
         android:id="@+id/whCreatorFragment"
         android:name="res.managit.whCreatorFragment"
         android:label="fragment_wh_creator"
-        tools:layout="@layout/fragment_wh_creator" />
+        tools:layout="@layout/fragment_wh_creator" >
+        <action
+            android:id="@+id/action_whCreatorFragment_to_whSelectorFragment"
+            app:destination="@id/whSelectorFragment" />
+    </fragment>
     <fragment
         android:id="@+id/whSelectorFragment"
         android:name="res.managit.whSelectorFragment"

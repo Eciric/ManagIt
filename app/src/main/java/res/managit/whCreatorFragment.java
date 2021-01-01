@@ -67,6 +67,7 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
             WarehouseDb db = createDatabase(getContext(),name);
             if (db != null){
                 errorText.setText("");
+                navController.navigate(R.id.action_whCreatorFragment_to_whSelectorFragment);
             }
             else {
                 errorText.setText("This name is already in use!");
