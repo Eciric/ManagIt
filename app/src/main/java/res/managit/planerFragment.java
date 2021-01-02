@@ -1,24 +1,18 @@
 package res.managit;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import androidx.fragment.app.Fragment;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
 
-import org.w3c.dom.Text;
-
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.chrono.ChronoLocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -30,11 +24,11 @@ import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
 import res.managit.materials.DrawableUtils;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link planerFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class planerFragment extends Fragment {
 
@@ -44,11 +38,15 @@ public class planerFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     //added calendar variable
-    CalendarView calendarView;
+    private CalendarView calendarView;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private ListView listEvents;
+    private ArrayAdapter<String> adapterToEventsList;
 
     public planerFragment() {
         // Required empty public constructor
@@ -83,8 +81,6 @@ public class planerFragment extends Fragment {
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,24 +91,24 @@ public class planerFragment extends Fragment {
         //list with calendar events not databases
         List<EventDay> events = new ArrayList<>();
 
-
-        //TODO ot jest dla przykladu, ale trzeba znalezc sposob jak pobrac ktora baza została wybrana i to na niej pracowac
         WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
 
-
-        Executors.newSingleThreadExecutor().execute(()->{
+        Executors.newSingleThreadExecutor().execute(() -> {
             List<Event> eventList = db.eventDao().getAll();
-        for(Event event : eventList){
-            LocalDateTime date = event.getDate();
-            Calendar calendar1 = Calendar.getInstance();
-            calendar1.set(date.getYear(),date.getMonthValue()-1,date.getDayOfMonth(),date.getHour(),date.getMinute());
-            //TODO nie ustaiwa sie godzina w calendar
-            //TODO daje tylko L albo UL jako znaczek przy dacie jak chcesz to mozeszz cos z tym pokombinowac
-//            System.out.println("Godz ev: " +date.getHour() +":"+ date.getMinute());
-//            System.out.println("Godz cal: " +calendar1.get(Calendar.HOUR) +":"+ calendar1.get(Calendar.MINUTE) );
-            events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(getActivity().getApplicationContext(), event.getAction().equals("loading") ? "L":"UL")));
+            for (Event event : eventList) {
+                LocalDateTime date = event.getDate();
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(date.getYear(),
+                        date.getMonthValue() - 1,
+                        date.getDayOfMonth(),
+                        date.getHour(),
+                        date.getMinute());
+                //TODO daje tylko L albo UL jako znaczek przy dacie jak chcesz to mozeszz cos z tym pokombinowac
+                events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
+                                .getApplicationContext(),
+                        event.getAction().equals("loading") ? "L" : "UL")));
 
-        }
+            }
         });
 
         //set how many months we can see. In that case 1 previous and 5 next
@@ -123,39 +119,53 @@ public class planerFragment extends Fragment {
         calendarView.setMinimumDate(min);
         calendarView.setMaximumDate(max);
 
-
         //add icons/events to dates
         calendarView.setEvents(events);
-        TextView textView = (TextView) view.findViewById(R.id.Text);
+
+        //initialize variable to events lists
+        listEvents = (ListView) view.findViewById(R.id.eventsList);
+        ArrayList<String> eventsListInCurrentDate = new ArrayList<>();
+        adapterToEventsList = new ArrayAdapter<>(getContext(), R.layout.one_row_event, eventsListInCurrentDate);
+        listEvents.setAdapter(adapterToEventsList);
+
+
         calendarView.setOnDayClickListener(eventDay ->
-                Executors.newSingleThreadExecutor().execute(()->{
+                Executors.newSingleThreadExecutor().execute(() -> {
                     List<Event> eventList = db.eventDao().getAll();
-                    LocalDateTime dateTime = LocalDateTime.of(eventDay.getCalendar().get(Calendar.YEAR), eventDay.getCalendar().get(Calendar.MONTH)+1, eventDay.getCalendar().get(Calendar.DATE),eventDay.getCalendar().get(Calendar.HOUR), eventDay.getCalendar().get(Calendar.MINUTE));
+                    List<Event> chosenEvents = new ArrayList<>();
+                    LocalDateTime dateTime = LocalDateTime.of(eventDay.getCalendar()
+                                    .get(Calendar.YEAR), eventDay
+                                    .getCalendar()
+                                    .get(Calendar.MONTH) + 1,
+                            eventDay.getCalendar().get(Calendar.DATE),
+                            eventDay.getCalendar().get(Calendar.HOUR),
+                            eventDay.getCalendar().get(Calendar.MINUTE));
                     //TODO nie ustawia sie godzina w dacie w kalendarzu wiec ten if nigdy nie zadziala bo o ile daty sie zgodza to godz zawsze jest 00:00
                     //TODO wyswietla sie tylko toString trzeba to jakos ladnie rozmiescic a nie tak jak ja nasrane tekstu
                     //TODO dodanie przycisku do dodawania eventu: przycisk -> nowy fragment
-//                    System.out.println("Godz cal: " +eventDay.getCalendar().get(Calendar.HOUR) +":"+ eventDay.getCalendar().get(Calendar.MINUTE) );
-                    for(Event event : eventList){
-                        if(event.getDate().isEqual(dateTime)){
+
+                    for (Event event : eventList) {
+                        if (event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear()) {
                             //trzeba ustawiac text poza tym Executors bo inaczej wywala error z tym ze tylko głowny watek moze miec dostep do view
-                            setEventText(textView,event.toString());
-                            break;
+                            chosenEvents.add(event);
                         }
                     }
-
+                    setEventList(chosenEvents);
                 })
         );
-
-
         return view;
     }
 
     //function to set text in main thread
-    private void setEventText(final TextView text, String value){
+    private void setEventList(List<Event> events) {
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                text.setText(value);
+                adapterToEventsList.clear();
+                if (events.size() == 0)
+                    adapterToEventsList.add("no plans");
+                else
+                    adapterToEventsList.addAll(events.toString());
             }
         });
     }
