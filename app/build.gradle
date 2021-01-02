@@ -69,4 +69,7 @@ dependencies {
     //openCSV
     implementation 'com.opencsv:opencsv:5.3'
 
+    //calendar
+    implementation 'com.applandeo:material-calendar-view:1.7.0'
+
 }
