@@ -4,6 +4,9 @@ import android.os.AsyncTask;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import res.managit.R;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Contact;
@@ -14,25 +17,25 @@ import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
 public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
-    //NOTE(Krystian): Zostawiłem klase Data w razie gdyby trzeba bylo rozbudowac wyswietlanie o informacje o customerach czy productach a nie tylko liczby
     WarehouseDb db;
     View view;
     Event event;
 
     protected class Data {
         protected Event event;
-//        protected Worker worker;
-//        protected Supply supply;
-//        protected Product product;
-//        protected Customer customer;
+        protected List<Worker> worker;
+        protected List<Supply> supply;
+        protected List<Product> product;
+        protected List<Customer> customer;
 
-        public Data(Event event) {
+        public Data(Event event, List<Worker> worker, List<Supply> supply, List<Product> product, List<Customer> customer) {
             this.event = event;
-//            this.worker = worker;
-//            this.supply = supply;
-//            this.product = product;
-//            this.customer = customer;
+            this.worker = worker;
+            this.supply = supply;
+            this.product = product;
+            this.customer = customer;
         }
+
     }
 
     public EventRetriever(View view, WarehouseDb db, Event event) {
@@ -44,8 +47,21 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
 
     @Override
     protected Data doInBackground(Void... voids) {
-        //Event event = db.eventDao().getEventById(id);
-        Data data = new Data(event);
+        List<Worker> worker = new ArrayList<>();
+        List<Supply> supply = new ArrayList<>();
+        List<Product> product = new ArrayList<>();
+        List<Customer> customer = new ArrayList<>();
+        for (Long id : event.worker_Id)
+            worker.add(db.workerDao().getWorkerById(id));
+        for (Long id : event.supplier_Id)
+            supply.add(db.supplyDao().getSupplyById(id));
+        for (Long id : event.product_Id)
+            product.add(db.productDao().getProductById(id));
+        for (Long id : event.customer_Id)
+            customer.add(db.customerDao().getCustomerById(id));
+
+
+        Data data = new Data(event, worker, supply, product, customer);
         return data;
     }
 
@@ -59,12 +75,31 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         TextView customers = view.findViewById(R.id.customers);
         TextView products = view.findViewById(R.id.products);
 
+        String textDate = event.date.getYear() + " " + event.getDate().getMonth() + " " + event.getDate().getDayOfMonth() + " " + event.getDate().getHour() + ":" + event.getDate().getMinute();
+        if (event.getDate().getMinute() == 0)
+            textDate += "0";
+
+        List<String> workersNames = new ArrayList<>();
+        List<String> suppliesNames = new ArrayList<>();
+        List<String> customersNames = new ArrayList<>();
+        List<String> productsNames = new ArrayList<>();
+
+        for (Worker w : result.worker)
+            workersNames.add(w.getName());
+        for (Supply s : result.supply)
+            suppliesNames.add(s.getName());
+        for (Product p : result.product)
+            productsNames.add(p.getName());
+        for (Customer c : result.customer)
+            customersNames.add(c.getName());
+
+
         action.setText("Action: " + result.event.getAction());
-        date.setText("Date: " + result.event.getDate());
+        date.setText("Date: " + textDate);
         amount.setText("Amount: " + result.event.getAmount());
-        workers.setText("Workers: " + result.event.getWorker_Id().toString());
-        suppliers.setText("Suppliers: " + result.event.getSupplier_Id().toString());
-        customers.setText("Customers: " + result.event.getCustomer_Id().toString());
-        products.setText("Products: " + result.event.getProduct_Id().toString());
+        workers.setText("Workers: " + workersNames.toString().replace("[","").replace("]",""));
+        suppliers.setText("Suppliers: " + suppliesNames.toString().replace("[","").replace("]",""));
+        customers.setText("Customers: " + customersNames.toString().replace("[","").replace("]",""));
+        products.setText("Products: " + productsNames.toString().replace("[","").replace("]",""));
     }
 }

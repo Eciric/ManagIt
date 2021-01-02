@@ -110,7 +110,6 @@ public class planerFragment extends Fragment {
                         date.getDayOfMonth(),
                         date.getHour(),
                         date.getMinute());
-                //TODO daje tylko L albo UL jako znaczek przy dacie jak chcesz to mozeszz cos z tym pokombinowac
                 events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
                                 .getApplicationContext(),
                         event.getAction().equals("loading") ? "L" : "UL")));
@@ -168,8 +167,7 @@ public class planerFragment extends Fragment {
                             eventDay.getCalendar().get(Calendar.DATE),
                             eventDay.getCalendar().get(Calendar.HOUR),
                             eventDay.getCalendar().get(Calendar.MINUTE));
-                    //TODO nie ustawia sie godzina w dacie w kalendarzu wiec ten if nigdy nie zadziala bo o ile daty sie zgodza to godz zawsze jest 00:00
-                    //TODO wyswietla sie tylko toString trzeba to jakos ladnie rozmiescic a nie tak jak ja nasrane tekstu
+
                     //TODO dodanie przycisku do dodawania eventu: przycisk -> nowy fragment
 
                     for (Event event : eventList) {

@@ -26,9 +26,6 @@ public interface EventDao {
     @Query("SELECT * FROM Event WHERE `action` LIKE :act")
     public List<Event> getEventByAction(String act);
 
-    @Query("SELECT * FROM Event WHERE `eventId` LIKE :id")
-    public Event getEventById(Long id);
-
     //zwraca event i wszystkich pracownikow ktorzy z nim sa powiazani
     @Transaction
     @Query("Select * from Event")

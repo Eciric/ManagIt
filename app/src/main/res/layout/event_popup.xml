@@ -6,8 +6,8 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:layout_width="350sp"
-        android:layout_height="400sp"
+        android:layout_width="385sp"
+        android:layout_height="600sp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
             android:id="@+id/action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textSize="25sp"
             android:textColor="@color/white" />
@@ -28,7 +28,7 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -38,7 +38,7 @@
             android:id="@+id/amount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textAlignment="center"
             android:textSize="25sp"
@@ -48,7 +48,7 @@
             android:id="@+id/workers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textSize="25sp"
             android:textColor="@color/white"/>
@@ -57,7 +57,7 @@
             android:id="@+id/suppliers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textSize="25sp"
             android:textColor="@color/white"/>
@@ -66,7 +66,7 @@
             android:id="@+id/customers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginVertical="15dp"
             android:layout_marginHorizontal="20dp"
             android:textSize="25sp"
             android:textColor="@color/white"/>
@@ -75,7 +75,8 @@
             android:id="@+id/products"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="35dp"
             android:layout_marginHorizontal="20dp"
             android:textSize="25sp"
             android:textColor="@color/white"/>

@@ -23,6 +23,9 @@ public interface ProductDao {
     @Query("SELECT * FROM Product")
     public List<Product> getAll();
 
+    @Query("SELECT * FROM Product where productId like :id")
+    public Product getProductById(Long id);
+
     //zwraca wszystkie produkty o podanej nazwie
     @Query("SELECT * FROM Product WHERE product_name LIKE :name")
     public Product getProductByName(String name);
