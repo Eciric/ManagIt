@@ -39,4 +39,61 @@ public class Event {
     public long getEventId() {
         return eventId;
     }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
+    }
+
+    public String getAction() {
+        return action;
+    }
+
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public List<Long> getWorker_Id() {
+        return worker_Id;
+    }
+
+    public void setWorker_Id(List<Long> worker_Id) {
+        this.worker_Id = worker_Id;
+    }
+
+    public List<Long> getSupplier_Id() {
+        return supplier_Id;
+    }
+
+    public void setSupplier_Id(List<Long> supplier_Id) {
+        this.supplier_Id = supplier_Id;
+    }
+
+    public List<Long> getCustomer_Id() {
+        return customer_Id;
+    }
+
+    public void setCustomer_Id(List<Long> customer_Id) {
+        this.customer_Id = customer_Id;
+    }
+
+    public List<Long> getProduct_Id() {
+        return product_Id;
+    }
+
+    public void setProduct_Id(List<Long> product_Id) {
+        this.product_Id = product_Id;
+    }
+
 }
