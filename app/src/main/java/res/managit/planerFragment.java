@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -18,7 +19,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.Settings.Settings;
+import res.managit.service.EventAdapter;
+import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
@@ -46,7 +48,7 @@ public class planerFragment extends Fragment {
 
 
     private ListView listEvents;
-    private ArrayAdapter<String> adapterToEventsList;
+    private EventAdapter adapterToEventsList;
 
     public planerFragment() {
         // Required empty public constructor
@@ -124,9 +126,18 @@ public class planerFragment extends Fragment {
 
         //initialize variable to events lists
         listEvents = (ListView) view.findViewById(R.id.eventsList);
-        ArrayList<String> eventsListInCurrentDate = new ArrayList<>();
-        adapterToEventsList = new ArrayAdapter<>(getContext(), R.layout.one_row_event, eventsListInCurrentDate);
+        ArrayList<Event> eventsListInCurrentDate = new ArrayList<>();
+        adapterToEventsList = new EventAdapter(this.getContext(), eventsListInCurrentDate);
         listEvents.setAdapter(adapterToEventsList);
+
+        listEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View v, int position,
+                                    long arg3) {
+                Event value = (Event) adapter.getItemAtPosition(position);
+                System.out.println(value.toString());
+            }
+        });
 
 
         calendarView.setOnDayClickListener(eventDay ->
@@ -162,10 +173,7 @@ public class planerFragment extends Fragment {
             @Override
             public void run() {
                 adapterToEventsList.clear();
-                if (events.size() == 0)
-                    adapterToEventsList.add("no plans");
-                else
-                    adapterToEventsList.addAll(events.toString());
+                adapterToEventsList.addAll(events);
             }
         });
     }

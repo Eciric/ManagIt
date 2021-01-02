@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import res.managit.Settings.Settings;
+import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 
 public class whSelectorFragment extends Fragment {

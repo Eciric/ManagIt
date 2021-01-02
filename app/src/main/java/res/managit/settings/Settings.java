@@ -1,4 +1,4 @@
-package res.managit.Settings;
+package res.managit.settings;
 
 public class Settings {
     private static int actualSelectedDataBase;
