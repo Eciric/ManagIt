@@ -130,38 +130,38 @@ public class MainActivity extends AppCompatActivity {
         EventProductCross eventProductCross13 = new EventProductCross(3,9);
         EventProductCross eventProductCross14 = new EventProductCross(3,10);
 
-//        //database create
-//        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseAnother");
-//
-//        //Insert Category
-//        Executors.newSingleThreadExecutor().execute(()->{db.categoryDao().insertCategory(category1, category2, category3, category4);});
-//
-//        //Insert Product
-//        Executors.newSingleThreadExecutor().execute(()->{ db.productDao().insertProduct(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10);});
-//
-//        //Insert Contact
-//        Executors.newSingleThreadExecutor().execute(()->{db.contactDao().insertContact(contact1, contact2, contact3, contact4, contact5, contact6);});
-//
-//        //Insert Worker
-//        Executors.newSingleThreadExecutor().execute(()->{db.workerDao().insertWorker(worker1, worker2, worker3);});
-//
-//        //Insert Supplier
-//        Executors.newSingleThreadExecutor().execute(()->{db.supplyDao().insertSupply(supply1, supply2);});
-//
-//        //Insert Customer
-//        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1);});
-//
-//        //Insert Event
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3, event4);});
-//
-//        //Inset EventWorker
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventWorkerCrossDao().insertEventWorkerCross(eventWorkerCross1, eventWorkerCross2, eventWorkerCross3, eventWorkerCross4, eventWorkerCross5);});
-//        //Inset EventSupplier
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventSupplyCrossDao().insertEventSupplyCross(eventSupplyCross1, eventSupplyCross2, eventSupplyCross3, eventSupplyCross4);});
-//        //Inset EventCustomer
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventCustomerCrossDao().insertEventCustomerCross(eventCustomerCross1);});
-//        //Inset EventProduct
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventProductCrossDao().insertEventProductCross(eventProductCross1, eventProductCross2, eventProductCross3, eventProductCross4, eventProductCross5, eventProductCross6, eventProductCross7, eventProductCross8, eventProductCross9, eventProductCross10, eventProductCross11, eventProductCross12, eventProductCross13, eventProductCross14);});
+        //database create
+        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseAnother");
+
+        //Insert Category
+        Executors.newSingleThreadExecutor().execute(()->{db.categoryDao().insertCategory(category1, category2, category3, category4);});
+
+        //Insert Product
+        Executors.newSingleThreadExecutor().execute(()->{ db.productDao().insertProduct(product1, product2, product3, product4, product5, product6, product7, product8, product9, product10);});
+
+        //Insert Contact
+        Executors.newSingleThreadExecutor().execute(()->{db.contactDao().insertContact(contact1, contact2, contact3, contact4, contact5, contact6);});
+
+        //Insert Worker
+        Executors.newSingleThreadExecutor().execute(()->{db.workerDao().insertWorker(worker1, worker2, worker3);});
+
+        //Insert Supplier
+        Executors.newSingleThreadExecutor().execute(()->{db.supplyDao().insertSupply(supply1, supply2);});
+
+        //Insert Customer
+        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1);});
+
+        //Insert Event
+        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3, event4);});
+
+        //Inset EventWorker
+        Executors.newSingleThreadExecutor().execute(()->{db.eventWorkerCrossDao().insertEventWorkerCross(eventWorkerCross1, eventWorkerCross2, eventWorkerCross3, eventWorkerCross4, eventWorkerCross5);});
+        //Inset EventSupplier
+        Executors.newSingleThreadExecutor().execute(()->{db.eventSupplyCrossDao().insertEventSupplyCross(eventSupplyCross1, eventSupplyCross2, eventSupplyCross3, eventSupplyCross4);});
+        //Inset EventCustomer
+        Executors.newSingleThreadExecutor().execute(()->{db.eventCustomerCrossDao().insertEventCustomerCross(eventCustomerCross1);});
+        //Inset EventProduct
+        Executors.newSingleThreadExecutor().execute(()->{db.eventProductCrossDao().insertEventProductCross(eventProductCross1, eventProductCross2, eventProductCross3, eventProductCross4, eventProductCross5, eventProductCross6, eventProductCross7, eventProductCross8, eventProductCross9, eventProductCross10, eventProductCross11, eventProductCross12, eventProductCross13, eventProductCross14);});
 
 
         if (getIntent().getBooleanExtra("EXIT", false)) {

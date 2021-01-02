@@ -18,7 +18,7 @@ import res.managit.dbo.entity.Worker;
 *  Wywolanie -> new DatabaseInitializer(PublicDatabaseAcces.databaseList.get( <indeks bazy danych> )).execute();
 *  UWAGA - przed dodaniem nowych rekordow wszystkie dotychczasowe rekordy sa USUWANE!
 * */
-public class DatabaseInitializer extends AsyncTask<Void, Void, Integer> {
+public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
     private WarehouseDb db;
 
     public DatabaseInitializer(WarehouseDb db) {
@@ -26,7 +26,7 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Integer> {
     }
 
     @Override
-    protected Integer doInBackground(Void... voids) {
+    protected Void doInBackground(Void... voids) {
         db.categoryDao().deleteAll();
         db.categoryDao().insertCategory(new Category("Vegetable"));
         db.categoryDao().insertCategory(new Category("Meat"));
