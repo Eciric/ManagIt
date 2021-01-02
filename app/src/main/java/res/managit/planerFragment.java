@@ -4,9 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 
 import androidx.fragment.app.Fragment;
 
@@ -19,7 +22,9 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import res.managit.service.CustomerRetriever;
 import res.managit.service.EventAdapter;
+import res.managit.service.EventRetriever;
 import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
@@ -134,8 +139,20 @@ public class planerFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapter, View v, int position,
                                     long arg3) {
+
+                View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.event_popup, null);
+                final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+                popupWindow.showAsDropDown(popupView,0,0);
+
+                Button close = popupView.findViewById(R.id.close);
+                close.setOnClickListener((event) -> {
+                    popupWindow.dismiss();
+                });
+
                 Event value = (Event) adapter.getItemAtPosition(position);
                 System.out.println(value.toString());
+                new EventRetriever(popupView, PublicDatabaseAcces.currentDatabase, value).execute();
+
             }
         });
 
