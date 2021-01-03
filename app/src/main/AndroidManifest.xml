@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".add.event.AddEventFirstStepActivity"></activity>
+        <activity android:name=".AddEventSecondStepActivity"></activity>
+        <activity android:name=".add.event.AddEventFirstStepActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

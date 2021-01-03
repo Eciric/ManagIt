@@ -168,8 +168,6 @@ public class planerFragment extends Fragment {
                             eventDay.getCalendar().get(Calendar.HOUR),
                             eventDay.getCalendar().get(Calendar.MINUTE));
 
-                    //TODO dodanie przycisku do dodawania eventu: przycisk -> nowy fragment
-
                     for (Event event : eventList) {
                         if (event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear()) {
                             //trzeba ustawiac text poza tym Executors bo inaczej wywala error z tym ze tylko głowny watek moze miec dostep do view

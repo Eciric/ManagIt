@@ -1,30 +1,29 @@
 package res.managit.add.event;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CursorAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.Spinner;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import com.google.gson.Gson;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
+
+import res.managit.AddEventSecondStepActivity;
 import res.managit.R;
-import res.managit.adaper.EventAdapter;
 import res.managit.add.event.adapter.CustomerAdapter;
 import res.managit.add.event.adapter.SupplierAdapter;
 import res.managit.dbo.PublicDatabaseAcces;
@@ -32,27 +31,9 @@ import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.Supply;
-import res.managit.materials.DrawableUtils;
-import res.managit.service.EventRetriever;
 import res.managit.settings.Settings;
 import res.managit.wizard.event.DatePickerFragment;
 import res.managit.wizard.event.TimePickerFragment;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Executors;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemSelectedListener;
-
-import com.applandeo.materialcalendarview.EventDay;
-import com.google.android.material.snackbar.Snackbar;
 
 
 public class AddEventFirstStepActivity extends AppCompatActivity implements OnItemSelectedListener {
@@ -68,12 +49,65 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
     private Button buttonNextStep;
     private CheckBox checkBoxCustomer;
 
+    private String spinnerTypeAction;
+
+    private static Integer hourOfDayEvent;
+    private static Integer minuteEvent;
+    private static Integer yearEvent;
+    private static Integer monthEvent;
+    private static Integer dayEvent;
+
+    public static Integer getYearEvent() {
+        return yearEvent;
+
+    }
+
+    public static void setYearEvent(Integer yearEvent) {
+        AddEventFirstStepActivity.yearEvent = yearEvent;
+    }
+
+    public static Integer getMonthEvent() {
+        return monthEvent;
+    }
+
+    public static void setMonthEvent(Integer monthEvent) {
+        AddEventFirstStepActivity.monthEvent = monthEvent;
+    }
+
+    public static Integer getDayEvent() {
+        return dayEvent;
+    }
+
+    public static void setDayEvent(Integer day) {
+        AddEventFirstStepActivity.dayEvent = day;
+    }
+
+    public static Integer getHourOfDayEvent() {
+        return hourOfDayEvent;
+    }
+
+    public static void setHourOfDayEvent(Integer hourOfDayEvent) {
+        AddEventFirstStepActivity.hourOfDayEvent = hourOfDayEvent;
+    }
+
+    public static Integer getMinuteEvent() {
+        return minuteEvent;
+    }
+
+    public static void setMinuteEvent(Integer minuteEvent) {
+        AddEventFirstStepActivity.minuteEvent = minuteEvent;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_first_step);
 
-
+        hourOfDayEvent = null;
+        minuteEvent = null;
+        yearEvent = null;
+        monthEvent = null;
+        dayEvent = null;
         // initialize choosing type event
 
         // Spinner element
@@ -86,7 +120,7 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         List<String> categories = new ArrayList<String>();
         categories.add("Load");
         categories.add("Unload");
-
+        spinnerTypeAction = "Load";
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
@@ -120,27 +154,40 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
         listSuppliers.setAdapter(supplierAdapter);
 
-//        listSuppliers.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//                Supply dataModel= suppliersArrayList.get(position);
-//                dataModel.
-//            }
-//        });
-
         buttonNextStep = (Button) findViewById(R.id.buttonNextStep);
         buttonNextStep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                System.out.println(SupplierAdapter.getSuppliesListChecked());
+                if (isAllAssigned()) {
+//                    System.out.println("wszystko git");
+//                    String monthString = monthEvent > 10 ? monthEvent.toString() : "0" + monthEvent.toString();
+//                    String minuteString = minuteEvent > 10 ? minuteEvent.toString() : "0" + minuteEvent.toString();
+//                    String hourString = hourOfDayEvent > 10 ? hourOfDayEvent.toString() : "0" + hourOfDayEvent.toString();
+//                    String dayString = dayEvent > 10 ? dayEvent.toString() : "0" + dayEvent.toString();
+//                    String yearString = yearEvent.toString();
+//                    String timeInString = yearString + "-" + monthString + "-" + minuteString + " " + hourString + ":" + minuteString;
+//
+//                    Gson gson = new Gson();
+//
+//
+//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+//                    LocalDateTime dateTime = LocalDateTime.parse(timeInString, formatter);
+//                    Event event = new Event(dateTime, spinnerTypeAction, 0, l)
+//                    String json = gson.toJson(myObj);
+                    Intent intent = new Intent(AddEventFirstStepActivity.this, AddEventSecondStepActivity.class);
+//                    if (1)
+//                        2
+                    startActivity(intent);
+                } else {
+                    System.out.println("nie moge przejs");
+                }
             }
         });
 
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        TimePickerFragment newFragment = new TimePickerFragment();
         newFragment.show(getSupportFragmentManager(), "timePicker");
     }
 
@@ -152,13 +199,20 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
-        String item = parent.getItemAtPosition(position).toString();
-
-        // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        spinnerTypeAction = parent.getItemAtPosition(position).toString();
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
         // TODO Auto-generated method stub
+    }
+
+    public boolean isAllAssigned() {
+        return hourOfDayEvent != null
+                && minuteEvent != null
+                && monthEvent != null
+                && yearEvent != null
+                && dayEvent != null
+                && SupplierAdapter.getSuppliesListChecked().size() != 0
+                && CustomerAdapter.getCustomerListChecked().size() != 0;
     }
 }

@@ -45,5 +45,11 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         return convertView;
     }
 
+    public static ArrayList<Customer> getCustomerListChecked() {
+        return customerListChecked;
+    }
 
+    public static void setCustomerListChecked(ArrayList<Customer> customerListChecked) {
+        CustomerAdapter.customerListChecked = customerListChecked;
+    }
 }
