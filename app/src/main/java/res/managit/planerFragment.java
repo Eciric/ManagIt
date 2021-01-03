@@ -1,12 +1,12 @@
 package res.managit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,8 +23,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.service.CustomerRetriever;
-import res.managit.service.EventAdapter;
+import res.managit.adaper.EventAdapter;
+import res.managit.add.event.AddEventFirstStepActivity;
 import res.managit.service.EventRetriever;
 import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
@@ -136,8 +137,7 @@ public class planerFragment extends Fragment {
 
         listEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3) {
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 
                 View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.event_popup, null);
                 final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
@@ -179,6 +179,15 @@ public class planerFragment extends Fragment {
                     setEventList(chosenEvents);
                 })
         );
+
+        //set button to add event
+        FloatingActionButton fab = view.findViewById(R.id.add_event_button_start_activity);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAddEventFirstStepActivity();
+            }
+        });
         return view;
     }
 
@@ -191,6 +200,11 @@ public class planerFragment extends Fragment {
                 adapterToEventsList.addAll(events);
             }
         });
+    }
+
+    private void openAddEventFirstStepActivity(){
+        Intent intent = new Intent(getActivity(), AddEventFirstStepActivity.class);
+        startActivity(intent);
     }
 
 }

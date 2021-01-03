@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Customer
         Customer customer1 = new Customer("Jan",3);
+        Customer customer2 = new Customer("Marek",4);
+        Customer customer3 = new Customer("Krystian",5);
 
         //Event
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
@@ -131,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
         EventProductCross eventProductCross14 = new EventProductCross(3,10);
 
 //        //database create
-//        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseAnother");
+//        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouse1");
 //
 //        //Insert Category
 //        Executors.newSingleThreadExecutor().execute(()->{db.categoryDao().insertCategory(category1, category2, category3, category4);});
@@ -149,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
 //        Executors.newSingleThreadExecutor().execute(()->{db.supplyDao().insertSupply(supply1, supply2);});
 //
 //        //Insert Customer
-//        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1);});
+//        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1, customer2, customer3);});
 //
 //        //Insert Event
 //        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3, event4);});

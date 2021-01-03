@@ -1,4 +1,4 @@
-package res.managit.service;
+package res.managit.adaper;
 
 import android.content.Context;
 import android.view.LayoutInflater;
