@@ -27,10 +27,10 @@ import static res.managit.dbo.DatabaseFunctions.createDatabase;
 @RunWith(AndroidJUnit4.class)
 public class EventDaoTest {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-    Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading",5, new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)));
-    Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading",6, new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)));
-    Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading",1, new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
-    Event event5 = new Event(LocalDateTime.parse("01-01-2001 10:00",formatter),"T",1, new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l)));
+    Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading",new ArrayList<Long>(Arrays.asList(2l,3l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)));
+    Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading",new ArrayList<Long>(Arrays.asList(1l,3l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)));
+    Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading",new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
+    Event event5 = new Event(LocalDateTime.parse("01-01-2001 10:00",formatter),"T",new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l)));
 
     List<Event> testList = new ArrayList<>(Arrays.asList(event1, event2, event3));
 
