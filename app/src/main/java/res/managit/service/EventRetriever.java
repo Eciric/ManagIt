@@ -12,6 +12,7 @@ import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
@@ -23,6 +24,7 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
 
     protected class Data {
         protected Event event;
+        protected List<EventItem> items;
         protected List<Worker> worker;
         protected List<Supply> supply;
         protected List<Product> product;
@@ -36,6 +38,14 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
             this.customer = customer;
         }
 
+        public Data(Event event, List<EventItem> items, List<Worker> worker, List<Supply> supply, List<Product> product, List<Customer> customer) {
+            this.event = event;
+            this.items = items;
+            this.worker = worker;
+            this.supply = supply;
+            this.product = product;
+            this.customer = customer;
+        }
     }
 
     public EventRetriever(View view, WarehouseDb db, Event event) {
@@ -51,6 +61,7 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<Supply> supply = new ArrayList<>();
         List<Product> product = new ArrayList<>();
         List<Customer> customer = new ArrayList<>();
+        List<EventItem> item = new ArrayList<>();
         for (Long id : event.worker_Id)
             worker.add(db.workerDao().getWorkerById(id));
         for (Long id : event.supplier_Id)
@@ -59,9 +70,11 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
             product.add(db.productDao().getProductById(id));
         for (Long id : event.customer_Id)
             customer.add(db.customerDao().getCustomerById(id));
+        for(Long id : event.eventItem_Id)
+            item.add(db.eventItemDao().getEventItemById(id));
 
 
-        Data data = new Data(event, worker, supply, product, customer);
+        Data data = new Data(event, item, worker, supply, product, customer);
         return data;
     }
 
@@ -69,7 +82,6 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
     protected void onPostExecute(Data result) {
         TextView action = view.findViewById(R.id.action);
         TextView date = view.findViewById(R.id.date);
-        TextView amount = view.findViewById(R.id.amount);
         TextView workers = view.findViewById(R.id.workers);
         TextView suppliers = view.findViewById(R.id.suppliers);
         TextView customers = view.findViewById(R.id.customers);
@@ -83,20 +95,26 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<String> suppliesNames = new ArrayList<>();
         List<String> customersNames = new ArrayList<>();
         List<String> productsNames = new ArrayList<>();
-
-        for (Worker w : result.worker)
+        int i = 0;
+        System.out.println("Rozm: " + result.worker.size());
+        for (Worker w : result.worker){
+            System.out.println(w.toString());
             workersNames.add(w.getName());
+        }
+
         for (Supply s : result.supply)
             suppliesNames.add(s.getName());
-        for (Product p : result.product)
-            productsNames.add(p.getName());
+        for (Product p : result.product){
+            productsNames.add(p.getName() + " (" + result.items.get(i).amount + ")");
+            i++;
+        }
+
         for (Customer c : result.customer)
             customersNames.add(c.getName());
 
 
         action.setText("Action: " + result.event.getAction());
         date.setText("Date: " + textDate);
-        amount.setText("Amount: " + result.event.getAmount());
         workers.setText("Workers: " + workersNames.toString().replace("[","").replace("]",""));
         suppliers.setText("Suppliers: " + suppliesNames.toString().replace("[","").replace("]",""));
         customers.setText("Customers: " + customersNames.toString().replace("[","").replace("]",""));

@@ -10,14 +10,15 @@ import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
 /* Tworzy pare przykladowych rekordow w tablicach dla bazy przekazanej w konstruktorze
-*  Wywolanie -> new DatabaseInitializer(PublicDatabaseAcces.databaseList.get( <indeks bazy danych> )).execute();
-*  UWAGA - przed dodaniem nowych rekordow wszystkie dotychczasowe rekordy sa USUWANE!
-* */
+ *  Wywolanie -> new DatabaseInitializer(PublicDatabaseAcces.databaseList.get( <indeks bazy danych> )).execute();
+ *  UWAGA - przed dodaniem nowych rekordow wszystkie dotychczasowe rekordy sa USUWANE!
+ * */
 public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
     private WarehouseDb db;
 
@@ -74,18 +75,25 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
         db.customerDao().insertCustomer(customer1);
         db.customerDao().insertCustomer(customer2);
 
-        // action: in - wjezdza dostawa, out - produkt wyjezdza z magazynu
+        db.eventItemDao().deleteAll();
+        EventItem eventItem1 = new EventItem(34, 1, 1);
+        EventItem eventItem2 = new EventItem(56, 3, 2);
+        EventItem eventItem3 = new EventItem(78, 4, 2);
+        db.eventItemDao().insertEventItem(eventItem1, eventItem2, eventItem3);
+
+
+        // action: unloading - wjezdza dostawa, loading - produkt wyjezdza z magazynu
         db.eventDao().deleteAll();
-        db.eventDao().insertEvent(new Event(LocalDateTime.now(),"in",100,
-                                    Arrays.asList(worker1.getWorkerId(), worker2.getWorkerId()),
-                                    Arrays.asList(supplier1.getSupplyId()),
-                        null,
-                                    Arrays.asList(product1.getProductId())));
-        db.eventDao().insertEvent(new Event(LocalDateTime.now(), "out", 100,
-                                    Arrays.asList(worker3.getWorkerId()),
-                                    null,
-                                    Arrays.asList(customer2.getCustomerId(), customer1.getCustomerId()),
-                                    Arrays.asList(product3.getProductId(), product4.getProductId())));
+        db.eventDao().insertEvent(new Event(LocalDateTime.now(), "unloading", Arrays.asList(1l),
+                Arrays.asList(1l, 2l),
+                Arrays.asList(1l),
+                Arrays.asList(),
+                Arrays.asList(1l)));
+        db.eventDao().insertEvent(new Event(LocalDateTime.now(), "loading", Arrays.asList(2l, 3l),
+                Arrays.asList(3l),
+                Arrays.asList(),
+                Arrays.asList(2l, 1l),
+                Arrays.asList(3l, 4l)));
         return null;
     }
 }

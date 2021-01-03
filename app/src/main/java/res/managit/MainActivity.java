@@ -20,9 +20,11 @@ import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
+
 import res.managit.dbo.helpers.DatabaseInitializer;
 import res.managit.dbo.relations.manytomany.cross.EventCustomerCross;
 import res.managit.dbo.relations.manytomany.cross.EventProductCross;
@@ -32,7 +34,7 @@ import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 import static res.managit.dbo.DatabaseFunctions.createDatabase;
 import static res.managit.dbo.DatabaseFunctions.exportDatabase;
 
-import static res.managit.dbo.DatabaseFunctions.importDatabase;
+
 import static res.managit.dbo.DatabaseFunctions.reloadDatabaseNames;
 import static res.managit.dbo.DatabaseFunctions.reloadDatabases;
 import static res.managit.dbo.DatabaseFunctions.saveDatabaseNames;
@@ -51,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         reloadDatabases(getApplicationContext());
 
         // Odkomentuj aby wypelnic baze danych przykladowymi rekordami
-        // new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(0)).execute();
+       //new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(0)).execute();
 
         //category
         Category category1 = new Category("Czyszczenie szyb");
@@ -70,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Product product8 = new Product("Zderzak",20,4);
         Product product9 = new Product("Blotnik",36,4);
         Product product10 = new Product("Listwy ozdobne",15,4);
+
 
         //Contact
         Contact contact1 = new Contact("Kwiatowa",15,97222,"Lodz","Polska","987654321");
@@ -91,12 +94,30 @@ public class MainActivity extends AppCompatActivity {
         //Customer
         Customer customer1 = new Customer("Jan",3);
 
+        //EventItem
+        EventItem eventItem1 = new EventItem(50,1,1);
+        EventItem eventItem2 = new EventItem(150,5,1);
+        EventItem eventItem3 = new EventItem(80,8,1);
+
+        EventItem eventItem4 = new EventItem(90,6,2);
+        EventItem eventItem5 = new EventItem(58,9,2);
+        EventItem eventItem6 = new EventItem(62,10,2);
+
+        EventItem eventItem7 = new EventItem(52,1,3);
+        EventItem eventItem8 = new EventItem(90,2,3);
+        EventItem eventItem9 = new EventItem(12,3,3);
+        EventItem eventItem10 = new EventItem(52,4,3);
+        EventItem eventItem11 = new EventItem(62,6,3);
+        EventItem eventItem12 = new EventItem(72,8,3);
+        EventItem eventItem13 = new EventItem(62,9,3);
+        EventItem eventItem14 = new EventItem(12,10,3);
+
         //Event
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading",5, new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)));
-        Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading",6, new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)));
-        Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading",1, new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
-        Event event4 = new Event(LocalDateTime.parse("15-03-2021 14:30",formatter),"unloading",1, new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
+        Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading", new ArrayList<Long>(Arrays.asList(1l,2l,3l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)));
+        Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading", new ArrayList<Long>(Arrays.asList(4l,5l,6l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)));
+        Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading", new ArrayList<Long>(Arrays.asList(7l,8l,8l,10l,11l,12l,13l,14l)), new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
+        //Event event4 = new Event(LocalDateTime.parse("15-03-2021 14:30",formatter),"unloading",1, new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
 
         //EventWorker
         EventWorkerCross eventWorkerCross1 = new EventWorkerCross(1, 2);
@@ -131,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
         EventProductCross eventProductCross14 = new EventProductCross(3,10);
 
 //        //database create
-//        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseAnother");
+//        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseExtended");
 //
 //        //Insert Category
 //        Executors.newSingleThreadExecutor().execute(()->{db.categoryDao().insertCategory(category1, category2, category3, category4);});
@@ -152,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
 //        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1);});
 //
 //        //Insert Event
-//        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3, event4);});
+//        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3);});
 //
 //        //Inset EventWorker
 //        Executors.newSingleThreadExecutor().execute(()->{db.eventWorkerCrossDao().insertEventWorkerCross(eventWorkerCross1, eventWorkerCross2, eventWorkerCross3, eventWorkerCross4, eventWorkerCross5);});
@@ -163,6 +184,9 @@ public class MainActivity extends AppCompatActivity {
 //        //Inset EventProduct
 //        Executors.newSingleThreadExecutor().execute(()->{db.eventProductCrossDao().insertEventProductCross(eventProductCross1, eventProductCross2, eventProductCross3, eventProductCross4, eventProductCross5, eventProductCross6, eventProductCross7, eventProductCross8, eventProductCross9, eventProductCross10, eventProductCross11, eventProductCross12, eventProductCross13, eventProductCross14);});
 //
+//        //Insert EventItem
+//        Executors.newSingleThreadExecutor().execute(()->{db.eventItemDao().insertEventItem(eventItem1, eventItem2, eventItem3, eventItem4, eventItem5, eventItem6, eventItem7, eventItem8, eventItem9, eventItem10, eventItem11, eventItem12, eventItem13, eventItem14);});
+
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
             saveDatabaseNames(getApplicationContext(),"DatabaseNames.csv");

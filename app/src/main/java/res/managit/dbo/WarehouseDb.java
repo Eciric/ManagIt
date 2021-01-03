@@ -16,6 +16,7 @@ import res.managit.dbo.dao.CategoryDao;
 import res.managit.dbo.dao.ContactDao;
 import res.managit.dbo.dao.CustomerDao;
 import res.managit.dbo.dao.EventDao;
+import res.managit.dbo.dao.EventItemDao;
 import res.managit.dbo.dao.ProductDao;
 import res.managit.dbo.dao.SupplyDao;
 import res.managit.dbo.dao.WorkerDao;
@@ -27,6 +28,7 @@ import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
@@ -36,8 +38,8 @@ import res.managit.dbo.relations.manytomany.cross.EventSupplyCross;
 import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
 @Database(entities = {Category.class, Contact.class, Customer.class, Event.class, Product.class,
-        Supply.class, Worker.class, EventProductCross.class, EventCustomerCross.class,
-        EventSupplyCross.class, EventWorkerCross.class}, version = 2, exportSchema = false)
+        Supply.class, Worker.class, EventItem.class, EventProductCross.class, EventCustomerCross.class,
+        EventSupplyCross.class, EventWorkerCross.class}, version = 3, exportSchema = false)
 @TypeConverters({ListConverter.class, DateConverter.class})
 public abstract class WarehouseDb extends RoomDatabase {
 
@@ -55,6 +57,8 @@ public abstract class WarehouseDb extends RoomDatabase {
     public abstract SupplyDao supplyDao();
 
     public abstract WorkerDao workerDao();
+
+    public abstract EventItemDao eventItemDao();
 
     public abstract EventCustomerCrossDao eventCustomerCrossDao();
 

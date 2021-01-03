@@ -14,6 +14,10 @@ import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import res.managit.dbo.PublicDatabaseAcces;
+
+import static res.managit.dbo.DatabaseFunctions.exportDatabase;
+
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
@@ -70,7 +74,8 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         new statisticsFragment()).commit();
                 break;
             case R.id.nav_export:
-                Toast.makeText(this, "Export selected", Toast.LENGTH_SHORT).show();
+                exportDatabase(PublicDatabaseAcces.currentDatabaseName);
+                Toast.makeText(this, "Database exported", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_quit:
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);

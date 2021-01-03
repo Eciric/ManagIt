@@ -42,6 +42,7 @@ import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
@@ -186,16 +187,23 @@ public abstract class DatabaseFunctions {
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.customerDao().insertCustomer(customer);
                                     });
-                                } else if (entity == "Event") {
+                                } else if(entity == "EventItem"){
+                                    EventItem eventItem = new EventItem(Integer.parseInt(tempNames[1]),Long.parseLong(tempNames[2]),Long.parseLong(tempNames[3]));
+                                    Executors.newSingleThreadExecutor().execute(() -> {
+                                        db.eventItemDao().insertEventItem(eventItem);
+                                    });
+                                }
+                                else if (entity == "Event") {
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm    dd-MM-yyyy");
                                     LocalDateTime localDateTime = LocalDateTime.parse(tempNames[1], formatter);
+                                    String[] eventItems = tempNames[3].split(",");
                                     String[] workers = tempNames[4].split(",");
                                     String[] suppliers = tempNames[5].split(",");
                                     String[] customers = tempNames[6].split(",");
                                     String[] products = tempNames[7].split(",");
 
 
-                                    Event event = new Event(localDateTime, tempNames[2], Integer.parseInt(tempNames[3]), convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), convertStrLong(products));
+                                    Event event = new Event(localDateTime, tempNames[2], convertStrLong(eventItems), convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), convertStrLong(products));
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.eventDao().insertEvent(event);
                                     });

@@ -51,6 +51,7 @@ public class whSelectorFragment extends Fragment {
                 Settings.setActualSelectedDataBase(i);
                 in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
                 PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
+                PublicDatabaseAcces.currentDatabaseName = PublicDatabaseAcces.databaseNameList.get(i);
                 startActivity(in);
             }
         });
