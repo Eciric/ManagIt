@@ -14,23 +14,18 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.gson.Gson;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.AddEventSecondStepActivity;
+import res.managit.AddEventSecondStepLoadActivity;
 import res.managit.R;
 import res.managit.add.event.adapter.CustomerAdapter;
 import res.managit.add.event.adapter.SupplierAdapter;
+import res.managit.add.event.adapter.WorkerAdapter;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
-import res.managit.dbo.entity.Customer;
-import res.managit.dbo.entity.Event;
-import res.managit.dbo.entity.Supply;
+import res.managit.dbo.entity.Worker;
 import res.managit.settings.Settings;
 import res.managit.wizard.event.DatePickerFragment;
 import res.managit.wizard.event.TimePickerFragment;
@@ -38,16 +33,27 @@ import res.managit.wizard.event.TimePickerFragment;
 
 public class AddEventFirstStepActivity extends AppCompatActivity implements OnItemSelectedListener {
 
-    private ListView listCustomers;
-    private ArrayList<Customer> customerArrayList;
-    private static CustomerAdapter customerAdapter;
+//    private ListView listCustomers;
+//    private ArrayList<Customer> customerArrayList;
+//    private static CustomerAdapter customerAdapter;
+//
+//    private ListView listSuppliers;
+//    private ArrayList<Supply> suppliersArrayList;
+//    private static SupplierAdapter supplierAdapter;
 
-    private ListView listSuppliers;
-    private ArrayList<Supply> suppliersArrayList;
-    private static SupplierAdapter supplierAdapter;
+    private ListView listWorkers;
+    private ArrayList<Worker> workersArrayList;
+    private static WorkerAdapter workerAdapter;
+
+    public static WorkerAdapter getWorkerAdapter() {
+        return workerAdapter;
+    }
+
+    public static void setWorkerAdapter(WorkerAdapter workerAdapter) {
+        AddEventFirstStepActivity.workerAdapter = workerAdapter;
+    }
 
     private Button buttonNextStep;
-    private CheckBox checkBoxCustomer;
 
     private String spinnerTypeAction;
 
@@ -130,29 +136,16 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
-
-        //initialize for customers
-        listCustomers = (ListView) findViewById(R.id.customersList);
-        customerArrayList = new ArrayList<>();
+        //initialize for workers
+        listWorkers = (ListView) findViewById(R.id.workersList);
+        workersArrayList = new ArrayList<>();
         WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
-
         Executors.newSingleThreadExecutor().execute(() -> {
-            List<Customer> customerList = db.customerDao().getAll();
-            customerArrayList.addAll(customerList);
+            List<Worker> workerList = db.workerDao().getAll();
+            workersArrayList.addAll(workerList);
         });
-        customerAdapter = new CustomerAdapter(customerArrayList, getApplicationContext());
-        listCustomers.setAdapter(customerAdapter);
-
-
-        //initialize for suppliers
-        listSuppliers = (ListView) findViewById(R.id.suppliersList);
-        suppliersArrayList = new ArrayList<>();
-        Executors.newSingleThreadExecutor().execute(() -> {
-            List<Supply> supplyList = db.supplyDao().getAll();
-            suppliersArrayList.addAll(supplyList);
-        });
-        supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
-        listSuppliers.setAdapter(supplierAdapter);
+        workerAdapter = new WorkerAdapter(workersArrayList, getApplicationContext());
+        listWorkers.setAdapter(workerAdapter);
 
         buttonNextStep = (Button) findViewById(R.id.buttonNextStep);
         buttonNextStep.setOnClickListener(new View.OnClickListener() {
@@ -174,10 +167,11 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
 //                    LocalDateTime dateTime = LocalDateTime.parse(timeInString, formatter);
 //                    Event event = new Event(dateTime, spinnerTypeAction, 0, l)
 //                    String json = gson.toJson(myObj);
-                    Intent intent = new Intent(AddEventFirstStepActivity.this, AddEventSecondStepActivity.class);
-//                    if (1)
-//                        2
-                    startActivity(intent);
+                    if ( spinnerTypeAction.equals("Load") ){
+                        Intent intent = new Intent(AddEventFirstStepActivity.this, AddEventSecondStepLoadActivity.class);
+                        startActivity(intent);
+                    }
+
                 } else {
                     System.out.println("nie moge przejs");
                 }
@@ -211,8 +205,6 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
                 && minuteEvent != null
                 && monthEvent != null
                 && yearEvent != null
-                && dayEvent != null
-                && SupplierAdapter.getSuppliesListChecked().size() != 0
-                && CustomerAdapter.getCustomerListChecked().size() != 0;
+                && dayEvent != null;
     }
 }
