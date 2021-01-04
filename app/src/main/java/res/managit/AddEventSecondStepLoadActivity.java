@@ -1,6 +1,5 @@
 package res.managit;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -52,11 +51,13 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
         //initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
+        listProducts.setItemsCanFocus(true);
         productsArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Product> productList = db.productDao().getAll();
             productsArrayList.addAll(productList);
         });
+
         productsAdapter = new ProductAdapter(productsArrayList, getApplicationContext());
         listProducts.setAdapter(productsAdapter);
 

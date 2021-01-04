@@ -85,7 +85,25 @@ public class MainActivity extends AppCompatActivity {
         //Worker
         Worker worker1 = new Worker("Marek", "Kowalski", "manager", 4);
         Worker worker2 = new Worker("Arek", "Nowak", "forklift", 2);
-        Worker worker3 = new Worker("Karol", "Zulczyk", "forklift", 1);
+        Worker worker3 = new Worker("Karol", "Zulc3zyk", "forklift", 1);
+        Worker worker4 = new Worker("Karol1", "Zulc2zyk", "for2klift", 18);
+        Worker worker5 = new Worker("Karol2", "Zulc4zyk", "fork1lift", 13);
+        Worker worker6 = new Worker("Karol3", "Zulc1zyk", "fork2lift", 11);
+        Worker worker7 = new Worker("Karol4", "Zulc2zyk", "fork2lift", 14);
+        Worker worker8 = new Worker("Karol5", "Z4ulczyk", "for4klift", 15);
+        Worker worker9 = new Worker("Karol6", "Zulc2zyk", "fork1lift", 16);
+        Worker worker10 = new Worker("Karol7", "Zurlczyk", "forkl23ift", 17);
+
+        Worker worker11 = new Worker("Marek1", "Kowalski1", "man1ager", 4);
+        Worker worker12 = new Worker("Are1k", "Nowa1k", "forkli2ft", 2);
+        Worker worker13 = new Worker("Karol1", "Zulc3zyk3", "forklift", 1);
+        Worker worker14 = new Worker("Karol12", "Zulc2zyk4", "for2klift", 18);
+        Worker worker15 = new Worker("Karol23", "Zulc4zyk5", "fork1lift", 13);
+        Worker worker16 = new Worker("Karol33", "Zulc1zyk6", "fork2lift", 11);
+        Worker worker17 = new Worker("Karol44", "Zulc2zyk7", "fork2lift", 14);
+        Worker worker18 = new Worker("Karol55", "Z4ulczyk8", "for4klift", 15);
+        Worker worker19 = new Worker("Karol66", "Zulc2zyk9", "fork1lift", 16);
+        Worker worker20 = new Worker("Karol77", "Zurlczyk0", "forkl23ift", 17);
 
         //Supplier
         Supply supply1 = new Supply("iParts", 6);

@@ -77,8 +77,9 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                 WorkerAdapter.getWorkerListChecked().forEach(System.out::println);
                 System.out.println(AddEventFirstStepActivity.getDateTime().toString());
                 System.out.println("#############################");
-                Intent intent = new Intent(AddEventSecondStepUnloadActivity.this, planerFragment.class);
-                startActivity(intent);
+                AddEventSecondStepUnloadActivity.this.finish();
+//                Intent intent = new Intent(AddEventSecondStepUnloadActivity.this, planerFragment.class);
+//                startActivity(intent);
             }
         });
     }
