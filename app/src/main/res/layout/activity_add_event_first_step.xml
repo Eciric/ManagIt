@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".add.event.AddEventFirstStepActivity"
+    tools:context=".AddEventFirstStepActivity"
     android:weightSum="10">
 
     <TextView

@@ -52,7 +52,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch(item.getItemId()) {
+        switch (item.getItemId()) {
             case R.id.nav_planer:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new planerFragment()).commit();

@@ -9,7 +9,7 @@ import android.widget.TimePicker;
 
 import androidx.fragment.app.DialogFragment;
 
-import res.managit.add.event.AddEventFirstStepActivity;
+import res.managit.AddEventFirstStepActivity;
 
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 

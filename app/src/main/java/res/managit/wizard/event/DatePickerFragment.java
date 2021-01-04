@@ -9,7 +9,7 @@ import android.widget.DatePicker;
 
 import androidx.fragment.app.DialogFragment;
 
-import res.managit.add.event.AddEventFirstStepActivity;
+import res.managit.AddEventFirstStepActivity;
 
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {

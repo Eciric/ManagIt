@@ -23,10 +23,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.adaper.EventAdapter;
-import res.managit.add.event.AddEventFirstStepActivity;
+import res.managit.add.event.adapter.EventAdapter;
 import res.managit.service.EventRetriever;
-import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
@@ -98,8 +96,7 @@ public class planerFragment extends Fragment {
 
         //list with calendar events not databases
         List<EventDay> events = new ArrayList<>();
-
-        WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
+        WarehouseDb db = PublicDatabaseAcces.currentDatabase;
 
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Event> eventList = db.eventDao().getAll();

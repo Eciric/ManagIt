@@ -18,7 +18,6 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 
 public class whSelectorFragment extends Fragment {
@@ -48,7 +47,6 @@ public class whSelectorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Intent in = new Intent(getActivity(), MenuActivity.class);
-                Settings.setActualSelectedDataBase(i);
                 in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
                 PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
                 startActivity(in);

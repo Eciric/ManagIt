@@ -1,5 +1,6 @@
-package res.managit.add.event;
+package res.managit;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -7,39 +8,28 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.AddEventSecondStepLoadActivity;
-import res.managit.R;
-import res.managit.add.event.adapter.CustomerAdapter;
-import res.managit.add.event.adapter.SupplierAdapter;
 import res.managit.add.event.adapter.WorkerAdapter;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Worker;
-import res.managit.settings.Settings;
 import res.managit.wizard.event.DatePickerFragment;
 import res.managit.wizard.event.TimePickerFragment;
 
 
 public class AddEventFirstStepActivity extends AppCompatActivity implements OnItemSelectedListener {
-
-//    private ListView listCustomers;
-//    private ArrayList<Customer> customerArrayList;
-//    private static CustomerAdapter customerAdapter;
-//
-//    private ListView listSuppliers;
-//    private ArrayList<Supply> suppliersArrayList;
-//    private static SupplierAdapter supplierAdapter;
 
     private ListView listWorkers;
     private ArrayList<Worker> workersArrayList;
@@ -62,6 +52,16 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
     private static Integer yearEvent;
     private static Integer monthEvent;
     private static Integer dayEvent;
+
+    public static LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    public static void setDateTime(LocalDateTime dateTime) {
+        AddEventFirstStepActivity.dateTime = dateTime;
+    }
+
+    private static LocalDateTime dateTime;
 
     public static Integer getYearEvent() {
         return yearEvent;
@@ -123,7 +123,7 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         spinner.setOnItemSelectedListener(this);
 
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
+        List<String> categories = new ArrayList<>();
         categories.add("Load");
         categories.add("Unload");
         spinnerTypeAction = "Load";
@@ -139,7 +139,7 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         //initialize for workers
         listWorkers = (ListView) findViewById(R.id.workersList);
         workersArrayList = new ArrayList<>();
-        WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
+        WarehouseDb db = PublicDatabaseAcces.currentDatabase;
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Worker> workerList = db.workerDao().getAll();
             workersArrayList.addAll(workerList);
@@ -153,27 +153,29 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
             public void onClick(View view) {
                 if (isAllAssigned()) {
 //                    System.out.println("wszystko git");
-//                    String monthString = monthEvent > 10 ? monthEvent.toString() : "0" + monthEvent.toString();
-//                    String minuteString = minuteEvent > 10 ? minuteEvent.toString() : "0" + minuteEvent.toString();
-//                    String hourString = hourOfDayEvent > 10 ? hourOfDayEvent.toString() : "0" + hourOfDayEvent.toString();
-//                    String dayString = dayEvent > 10 ? dayEvent.toString() : "0" + dayEvent.toString();
-//                    String yearString = yearEvent.toString();
-//                    String timeInString = yearString + "-" + monthString + "-" + minuteString + " " + hourString + ":" + minuteString;
-//
-//                    Gson gson = new Gson();
-//
-//
-//                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-//                    LocalDateTime dateTime = LocalDateTime.parse(timeInString, formatter);
-//                    Event event = new Event(dateTime, spinnerTypeAction, 0, l)
-//                    String json = gson.toJson(myObj);
-                    if ( spinnerTypeAction.equals("Load") ){
-                        Intent intent = new Intent(AddEventFirstStepActivity.this, AddEventSecondStepLoadActivity.class);
-                        startActivity(intent);
-                    }
+                    monthEvent += 1;
+                    String monthString = monthEvent >= 10 ? monthEvent.toString() : "0" + monthEvent.toString();
+                    String minuteString = minuteEvent >= 10 ? minuteEvent.toString() : "0" + minuteEvent.toString();
+                    String hourString = hourOfDayEvent >= 10 ? hourOfDayEvent.toString() : "0" + hourOfDayEvent.toString();
+                    String dayString = dayEvent >= 10 ? dayEvent.toString() : "0" + dayEvent.toString();
+                    String yearString = yearEvent.toString();
+                    String timeInString = yearString + "-" + monthString + "-" + dayString + " " + hourString + ":" + minuteString;
 
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    dateTime = LocalDateTime.parse(timeInString, formatter);
+                    AddEventFirstStepActivity.this.finish();
+
+                    Intent intent = spinnerTypeAction.equals("Load") ?
+                            new Intent(AddEventFirstStepActivity.this, AddEventSecondStepLoadActivity.class) :
+                            new Intent(AddEventFirstStepActivity.this, AddEventSecondStepUnloadActivity.class);
+                    startActivity(intent);
                 } else {
-                    System.out.println("nie moge przejs");
+                    Context context = getApplicationContext();
+                    CharSequence text = "Please assigned all information!";
+                    int duration = Toast.LENGTH_LONG;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
                 }
             }
         });

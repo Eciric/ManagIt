@@ -14,7 +14,7 @@
         android:text="Set suppliers" />
 
     <ListView
-        android:id="@+id/suppliersList"
+        android:id="@+id/customersList"
         android:layout_width="wrap_content"
         android:layout_height="310dp" />
 
@@ -35,4 +35,3 @@
         android:layout_height="wrap_content"
         android:text="Add event" />
 </LinearLayout>
-
