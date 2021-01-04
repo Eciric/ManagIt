@@ -1,7 +1,5 @@
 package res.managit.dbo;
 
-import android.content.Context;
-
 import java.util.List;
 
 public class PublicDatabaseAcces {

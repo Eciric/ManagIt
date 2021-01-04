@@ -1,4 +1,4 @@
-package res.managit.service;
+package res.managit.add.event.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

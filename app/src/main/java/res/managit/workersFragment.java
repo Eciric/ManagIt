@@ -49,14 +49,14 @@ public class workersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            Long id = getWorkerId((String)adapterView.getAdapter().getItem(i));
+            Long id = getWorkerId((String) adapterView.getAdapter().getItem(i));
             new WorkerRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
         });
     }
 
     private long getWorkerId(String text) {
         int index = text.lastIndexOf(']');
-        String id = text.substring(1,index);
+        String id = text.substring(1, index);
         return Long.parseLong(id);
     }
 

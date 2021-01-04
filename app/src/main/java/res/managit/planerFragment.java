@@ -1,12 +1,12 @@
 package res.managit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.applandeo.materialcalendarview.CalendarView;
 import com.applandeo.materialcalendarview.EventDay;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,10 +23,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
 
-import res.managit.service.CustomerRetriever;
-import res.managit.service.EventAdapter;
+import res.managit.add.event.adapter.EventAdapter;
 import res.managit.service.EventRetriever;
-import res.managit.settings.Settings;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
@@ -97,8 +96,7 @@ public class planerFragment extends Fragment {
 
         //list with calendar events not databases
         List<EventDay> events = new ArrayList<>();
-
-        WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(Settings.getActualSelectedDataBase());
+        WarehouseDb db = PublicDatabaseAcces.currentDatabase;
 
         Executors.newSingleThreadExecutor().execute(() -> {
             List<Event> eventList = db.eventDao().getAll();
@@ -136,8 +134,7 @@ public class planerFragment extends Fragment {
 
         listEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position,
-                                    long arg3) {
+            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
 
                 View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.event_popup, null);
                 final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
@@ -168,8 +165,6 @@ public class planerFragment extends Fragment {
                             eventDay.getCalendar().get(Calendar.HOUR),
                             eventDay.getCalendar().get(Calendar.MINUTE));
 
-                    //TODO dodanie przycisku do dodawania eventu: przycisk -> nowy fragment
-
                     for (Event event : eventList) {
                         if (event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear()) {
                             //trzeba ustawiac text poza tym Executors bo inaczej wywala error z tym ze tylko głowny watek moze miec dostep do view
@@ -179,6 +174,15 @@ public class planerFragment extends Fragment {
                     setEventList(chosenEvents);
                 })
         );
+
+        //set button to add event
+        FloatingActionButton fab = view.findViewById(R.id.add_event_button_start_activity);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openAddEventFirstStepActivity();
+            }
+        });
         return view;
     }
 
@@ -191,6 +195,11 @@ public class planerFragment extends Fragment {
                 adapterToEventsList.addAll(events);
             }
         });
+    }
+
+    private void openAddEventFirstStepActivity(){
+        Intent intent = new Intent(getActivity(), AddEventFirstStepActivity.class);
+        startActivity(intent);
     }
 
 }

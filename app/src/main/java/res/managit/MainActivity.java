@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         PublicDatabaseAcces publicDatabaseAcces = new PublicDatabaseAcces();
         PublicDatabaseAcces.databaseList = new ArrayList<WarehouseDb>();
         PublicDatabaseAcces.databaseNameList = new ArrayList<String>();
-        reloadDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
+        reloadDatabaseNames(getApplicationContext(), "DatabaseNames.csv");
         reloadDatabases(getApplicationContext());
 
         // Odkomentuj aby wypelnic baze danych przykladowymi rekordami
@@ -62,37 +62,39 @@ public class MainActivity extends AppCompatActivity {
         Category category4 = new Category("Nadwozie");
 
         //Product
-        Product product1 = new Product("Dysza spryskiwacza",5,1);
-        Product product2 = new Product("Narzedzia",100,1);
-        Product product3 = new Product("Wycieraczki",500,1);
-        Product product4 = new Product("Filtr oleju",60,2);
-        Product product5 = new Product("Filtr powietrza",44,2);
-        Product product6 = new Product("Osuszacz",10,3);
-        Product product7 = new Product("Parownik",18,3);
-        Product product8 = new Product("Zderzak",20,4);
-        Product product9 = new Product("Blotnik",36,4);
-        Product product10 = new Product("Listwy ozdobne",15,4);
+        Product product1 = new Product("Dysza spryskiwacza", 5, 1);
+        Product product2 = new Product("Narzedzia", 100, 1);
+        Product product3 = new Product("Wycieraczki", 500, 1);
+        Product product4 = new Product("Filtr oleju", 60, 2);
+        Product product5 = new Product("Filtr powietrza", 44, 2);
+        Product product6 = new Product("Osuszacz", 10, 3);
+        Product product7 = new Product("Parownik", 18, 3);
+        Product product8 = new Product("Zderzak", 20, 4);
+        Product product9 = new Product("Blotnik", 36, 4);
+        Product product10 = new Product("Listwy ozdobne", 15, 4);
 
 
         //Contact
-        Contact contact1 = new Contact("Kwiatowa",15,97222,"Lodz","Polska","987654321");
-        Contact contact2 = new Contact("Sloneczna",22,97225,"Lodz","Polska","123456789");
-        Contact contact3 = new Contact("Nowa",57,90258,"Tomaszow","Polska","589623748");
-        Contact contact4 = new Contact("Piekna",95,95693,"Warszawa","Polska","598475692");
-        Contact contact5 = new Contact("Zelazna",62,98586,"Kielce","Polska","548921458");
-        Contact contact6 = new Contact("Zlota",15,98669,"Nowy Sacz","Polska","156987563");
+        Contact contact1 = new Contact("Kwiatowa", 15, 97222, "Lodz", "Polska", "987654321");
+        Contact contact2 = new Contact("Sloneczna", 22, 97225, "Lodz", "Polska", "123456789");
+        Contact contact3 = new Contact("Nowa", 57, 90258, "Tomaszow", "Polska", "589623748");
+        Contact contact4 = new Contact("Piekna", 95, 95693, "Warszawa", "Polska", "598475692");
+        Contact contact5 = new Contact("Zelazna", 62, 98586, "Kielce", "Polska", "548921458");
+        Contact contact6 = new Contact("Zlota", 15, 98669, "Nowy Sacz", "Polska", "156987563");
 
         //Worker
-        Worker worker1 = new Worker("Marek","Kowalski","manager",4);
-        Worker worker2 = new Worker("Arek","Nowak","forklift",2);
-        Worker worker3 = new Worker("Karol","Zulczyk","forklift",1);
+        Worker worker1 = new Worker("Marek", "Kowalski", "manager", 4);
+        Worker worker2 = new Worker("Arek", "Nowak", "forklift", 2);
+        Worker worker3 = new Worker("Karol", "Zulczyk", "forklift", 1);
 
         //Supplier
-        Supply supply1 = new Supply("iParts",6);
-        Supply supply2 = new Supply("CarStore",5);
+        Supply supply1 = new Supply("iParts", 6);
+        Supply supply2 = new Supply("CarStore", 5);
 
         //Customer
-        Customer customer1 = new Customer("Jan",3);
+        Customer customer1 = new Customer("Jan", 3);
+        Customer customer2 = new Customer("Marek", 4);
+        Customer customer3 = new Customer("Krystian", 5);
 
         //EventItem
         EventItem eventItem1 = new EventItem(50,1,1);
@@ -133,23 +135,23 @@ public class MainActivity extends AppCompatActivity {
         EventSupplyCross eventSupplyCross4 = new EventSupplyCross(3, 1);
 
         //EventCustomer
-        EventCustomerCross eventCustomerCross1  = new EventCustomerCross(1, 1);
+        EventCustomerCross eventCustomerCross1 = new EventCustomerCross(1, 1);
 
         //EventProduct
-        EventProductCross eventProductCross1 = new EventProductCross(1,1);
-        EventProductCross eventProductCross2 = new EventProductCross(1,5);
-        EventProductCross eventProductCross3 = new EventProductCross(1,8);
-        EventProductCross eventProductCross4 = new EventProductCross(2,6);
-        EventProductCross eventProductCross5 = new EventProductCross(2,9);
-        EventProductCross eventProductCross6 = new EventProductCross(2,10);
-        EventProductCross eventProductCross7 = new EventProductCross(3,1);
-        EventProductCross eventProductCross8 = new EventProductCross(3,2);
-        EventProductCross eventProductCross9 = new EventProductCross(3,3);
-        EventProductCross eventProductCross10 = new EventProductCross(3,4);
-        EventProductCross eventProductCross11 = new EventProductCross(3,6);
-        EventProductCross eventProductCross12 = new EventProductCross(3,8);
-        EventProductCross eventProductCross13 = new EventProductCross(3,9);
-        EventProductCross eventProductCross14 = new EventProductCross(3,10);
+        EventProductCross eventProductCross1 = new EventProductCross(1, 1);
+        EventProductCross eventProductCross2 = new EventProductCross(1, 5);
+        EventProductCross eventProductCross3 = new EventProductCross(1, 8);
+        EventProductCross eventProductCross4 = new EventProductCross(2, 6);
+        EventProductCross eventProductCross5 = new EventProductCross(2, 9);
+        EventProductCross eventProductCross6 = new EventProductCross(2, 10);
+        EventProductCross eventProductCross7 = new EventProductCross(3, 1);
+        EventProductCross eventProductCross8 = new EventProductCross(3, 2);
+        EventProductCross eventProductCross9 = new EventProductCross(3, 3);
+        EventProductCross eventProductCross10 = new EventProductCross(3, 4);
+        EventProductCross eventProductCross11 = new EventProductCross(3, 6);
+        EventProductCross eventProductCross12 = new EventProductCross(3, 8);
+        EventProductCross eventProductCross13 = new EventProductCross(3, 9);
+        EventProductCross eventProductCross14 = new EventProductCross(3, 10);
 
 //        //database create
 //        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseExtended");
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
 //        Executors.newSingleThreadExecutor().execute(()->{db.supplyDao().insertSupply(supply1, supply2);});
 //
 //        //Insert Customer
-//        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1);});
+//        Executors.newSingleThreadExecutor().execute(()->{db.customerDao().insertCustomer(customer1, customer2, customer3);});
 //
 //        //Insert Event
 //        Executors.newSingleThreadExecutor().execute(()->{db.eventDao().insertEvent(event1,event2,event3);});
@@ -189,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         if (getIntent().getBooleanExtra("EXIT", false)) {
-            saveDatabaseNames(getApplicationContext(),"DatabaseNames.csv");
+            saveDatabaseNames(getApplicationContext(), "DatabaseNames.csv");
             finish();
         }
     }
