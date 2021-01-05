@@ -17,8 +17,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Executors;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.entity.Product;
 
 public class whSelectorFragment extends Fragment {
     ListView listView;
@@ -50,6 +53,11 @@ public class whSelectorFragment extends Fragment {
                 in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
                 PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
                 PublicDatabaseAcces.currentDatabaseName = PublicDatabaseAcces.databaseNameList.get(i);
+
+                Executors.newSingleThreadExecutor().execute(() -> {
+                    PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
+                });
+
                 startActivity(in);
             }
         });

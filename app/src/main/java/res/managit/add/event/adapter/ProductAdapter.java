@@ -43,7 +43,6 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         }
 
         Product product = getItem(position);
-        System.out.println(product.toString());
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.one_row_product_with_input_number, parent, false);
         }

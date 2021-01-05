@@ -7,6 +7,7 @@ public class PublicDatabaseAcces {
     public static List<String> databaseNameList;
     public static String currentDatabaseName;
     public static WarehouseDb currentDatabase;
+    public static int currentDatabaseEventNumber;
 
     public static List<WarehouseDb> getDatabaseList() {
         return databaseList;

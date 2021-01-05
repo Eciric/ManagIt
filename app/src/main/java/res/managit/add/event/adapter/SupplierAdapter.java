@@ -79,7 +79,7 @@ public class SupplierAdapter extends ArrayAdapter<Supply> {
                     }
                 }
 
-                System.out.println(suppliesListChecked);
+//                System.out.println(suppliesListChecked);
             }
         });
         setSupply.setText(supply.name);

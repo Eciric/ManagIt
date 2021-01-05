@@ -146,7 +146,7 @@ public class planerFragment extends Fragment {
                 });
 
                 Event value = (Event) adapter.getItemAtPosition(position);
-                System.out.println(value.toString());
+
                 new EventRetriever(popupView, PublicDatabaseAcces.currentDatabase, value).execute();
 
             }

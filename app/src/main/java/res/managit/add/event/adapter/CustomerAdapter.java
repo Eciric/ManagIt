@@ -70,7 +70,7 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
                     }
                 }
 
-                System.out.println(customerListChecked);
+//                System.out.println(customerListChecked);
             }
         });
 

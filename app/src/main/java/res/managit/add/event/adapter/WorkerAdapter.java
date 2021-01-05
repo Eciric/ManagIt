@@ -70,7 +70,7 @@ public class WorkerAdapter extends ArrayAdapter<Worker> {
                     }
                 }
 
-                System.out.println(workerListChecked);
+//                System.out.println(workerListChecked);
             }
         });
 

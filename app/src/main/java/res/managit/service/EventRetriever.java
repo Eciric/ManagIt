@@ -96,9 +96,7 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<String> customersNames = new ArrayList<>();
         List<String> productsNames = new ArrayList<>();
         int i = 0;
-        System.out.println("Rozm: " + result.worker.size());
         for (Worker w : result.worker){
-            System.out.println(w.toString());
             workersNames.add(w.getName());
         }
 

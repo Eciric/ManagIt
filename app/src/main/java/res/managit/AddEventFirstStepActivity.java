@@ -152,7 +152,6 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
             @Override
             public void onClick(View view) {
                 if (isAllAssigned()) {
-//                    System.out.println("wszystko git");
                     monthEvent += 1;
                     String monthString = monthEvent >= 10 ? monthEvent.toString() : "0" + monthEvent.toString();
                     String minuteString = minuteEvent >= 10 ? minuteEvent.toString() : "0" + minuteEvent.toString();
