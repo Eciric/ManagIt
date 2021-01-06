@@ -18,12 +18,22 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import res.managit.add.event.adapter.EventAdapter;
+import res.managit.dbo.entity.Category;
+import res.managit.dbo.entity.Contact;
+import res.managit.dbo.entity.Customer;
+import res.managit.dbo.entity.EventItem;
+import res.managit.dbo.entity.Product;
+import res.managit.dbo.entity.Supply;
+import res.managit.dbo.entity.Worker;
 import res.managit.service.EventRetriever;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
@@ -95,10 +105,9 @@ public class planerFragment extends Fragment {
         calendarView = (CalendarView) view.findViewById(R.id.calendarView);
 
         //list with calendar events not databases
-        List<EventDay> events = new ArrayList<>();
+        List<EventDay> events = Collections.synchronizedList(new ArrayList<EventDay>());
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-
-        Executors.newSingleThreadExecutor().execute(() -> {
+        Thread t1 = new Thread(() -> {
             List<Event> eventList = db.eventDao().getAll();
             for (Event event : eventList) {
                 LocalDateTime date = event.getDate();
@@ -114,6 +123,12 @@ public class planerFragment extends Fragment {
 
             }
         });
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         //set how many months we can see. In that case 1 previous and 5 next
         Calendar min = Calendar.getInstance();
@@ -132,24 +147,21 @@ public class planerFragment extends Fragment {
         adapterToEventsList = new EventAdapter(this.getContext(), eventsListInCurrentDate);
         listEvents.setAdapter(adapterToEventsList);
 
-        listEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapter, View v, int position, long arg3) {
+        listEvents.setOnItemClickListener((adapter, v, position, arg3) -> {
 
-                View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.event_popup, null);
-                final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-                popupWindow.showAsDropDown(popupView,0,0);
+            View popupView = LayoutInflater.from(getActivity()).inflate(R.layout.event_popup, null);
+            final PopupWindow popupWindow = new PopupWindow(popupView, WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+            popupWindow.showAsDropDown(popupView, 0, 0);
 
-                Button close = popupView.findViewById(R.id.close);
-                close.setOnClickListener((event) -> {
-                    popupWindow.dismiss();
-                });
+            Button close = popupView.findViewById(R.id.close);
+            close.setOnClickListener((event) -> {
+                popupWindow.dismiss();
+            });
 
-                Event value = (Event) adapter.getItemAtPosition(position);
+            Event value = (Event) adapter.getItemAtPosition(position);
 
-                new EventRetriever(popupView, PublicDatabaseAcces.currentDatabase, value).execute();
+            new EventRetriever(popupView, PublicDatabaseAcces.currentDatabase, value).execute();
 
-            }
         });
 
 
@@ -177,12 +189,7 @@ public class planerFragment extends Fragment {
 
         //set button to add event
         FloatingActionButton fab = view.findViewById(R.id.add_event_button_start_activity);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openAddEventFirstStepActivity();
-            }
-        });
+        fab.setOnClickListener(view1 -> openAddEventFirstStepActivity());
         return view;
     }
 
@@ -197,9 +204,41 @@ public class planerFragment extends Fragment {
         });
     }
 
-    private void openAddEventFirstStepActivity(){
+    private void openAddEventFirstStepActivity() {
         Intent intent = new Intent(getActivity(), AddEventFirstStepActivity.class);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<EventDay> events = Collections.synchronizedList(new ArrayList<>());
+
+        WarehouseDb db = PublicDatabaseAcces.currentDatabase;
+        Thread threadToUpdateDataBase = new Thread(() -> {
+            List<Event> eventList = db.eventDao().getAll();
+            for (Event event : eventList) {
+                LocalDateTime date = event.getDate();
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.set(date.getYear(),
+                        date.getMonthValue() - 1,
+                        date.getDayOfMonth(),
+                        date.getHour(),
+                        date.getMinute());
+                events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
+                                .getApplicationContext(),
+                        event.getAction().equals("loading") ? "L" : "UL")));
+
+            }
+        });
+        threadToUpdateDataBase.start();
+        try {
+            threadToUpdateDataBase.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        calendarView.setEvents(events);
     }
 
 }
