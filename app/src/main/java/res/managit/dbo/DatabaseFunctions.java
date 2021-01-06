@@ -203,7 +203,7 @@ public abstract class DatabaseFunctions {
                                     String[] products = tempNames[7].split(",");
 
 
-                                    Event event = new Event(localDateTime, tempNames[2], convertStrLong(eventItems), convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), convertStrLong(products));
+                                    Event event = new Event(localDateTime, tempNames[2], convertStrLong(eventItems), convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), convertStrLong(products), false);
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.eventDao().insertEvent(event);
                                     });

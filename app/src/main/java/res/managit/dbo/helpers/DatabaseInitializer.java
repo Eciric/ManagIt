@@ -88,12 +88,12 @@ public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
                 Arrays.asList(1l, 2l),
                 Arrays.asList(1l),
                 Arrays.asList(),
-                Arrays.asList(1l)));
+                Arrays.asList(1l), false));
         db.eventDao().insertEvent(new Event(LocalDateTime.now(), "loading", Arrays.asList(2l, 3l),
                 Arrays.asList(3l),
                 Arrays.asList(),
                 Arrays.asList(2l, 1l),
-                Arrays.asList(3l, 4l)));
+                Arrays.asList(3l, 4l), false));
         return null;
     }
 }

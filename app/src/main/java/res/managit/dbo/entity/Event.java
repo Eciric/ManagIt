@@ -25,9 +25,10 @@ public class Event {
     public List<Long> supplier_Id;
     public List<Long> customer_Id;
     public List<Long> product_Id;
+    public boolean isExecuted;
 
 
-    public Event(LocalDateTime date, String action, List<Long> eventItem_Id, List<Long> worker_Id, List<Long> supplier_Id, List<Long> customer_Id, List<Long> product_Id) {
+    public Event(LocalDateTime date, String action, List<Long> eventItem_Id, List<Long> worker_Id, List<Long> supplier_Id, List<Long> customer_Id, List<Long> product_Id, boolean isExecuted) {
         this.date = date;
         this.action = action;
         this.eventItem_Id = eventItem_Id;
@@ -35,6 +36,7 @@ public class Event {
         this.supplier_Id = supplier_Id;
         this.customer_Id = customer_Id;
         this.product_Id = product_Id;
+        this.isExecuted = isExecuted;
     }
 
     public long getEventId() {

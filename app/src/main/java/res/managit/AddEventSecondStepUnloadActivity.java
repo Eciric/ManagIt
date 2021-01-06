@@ -105,7 +105,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                             int size = db.eventItemDao().getAll().size();
                             eventItemsId.add(db.eventItemDao().getAll().get(size - 1).getEventItemId());
                         }
-                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), "unloading", eventItemsId, workers, supplies, customers, products);
+                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), "unloading", eventItemsId, workers, supplies, customers, products, false);
                         db.eventDao().insertEvent(event);
                         PublicDatabaseAcces.currentDatabaseEventNumber += 1;
                     });

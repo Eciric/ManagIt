@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
 
         //Event
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
-        Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading", new ArrayList<Long>(Arrays.asList(1l,2l,3l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)));
-        Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading", new ArrayList<Long>(Arrays.asList(4l,5l,6l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)));
-        Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading", new ArrayList<Long>(Arrays.asList(7l,8l,8l,10l,11l,12l,13l,14l)), new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
+        Event event1 = new Event(LocalDateTime.parse("20-12-2020 10:00",formatter),"loading", new ArrayList<Long>(Arrays.asList(1l,2l,3l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(1l,2l)), new ArrayList<Long>(Arrays.asList(1l)),new ArrayList<Long>(Arrays.asList(1l,5l,8l)), false);
+        Event event2 = new Event(LocalDateTime.parse("05-01-2021 15:00",formatter),"unloading", new ArrayList<Long>(Arrays.asList(4l,5l,6l)), new ArrayList<Long>(Arrays.asList(2l,3l)),new ArrayList<Long>(Arrays.asList(2l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(6l,9l,10l)), false);
+        Event event3 = new Event(LocalDateTime.parse("15-03-2021 11:30",formatter),"loading", new ArrayList<Long>(Arrays.asList(7l,8l,8l,10l,11l,12l,13l,14l)), new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)),false);
         //Event event4 = new Event(LocalDateTime.parse("15-03-2021 14:30",formatter),"unloading",1, new ArrayList<Long>(Arrays.asList(3l)),new ArrayList<Long>(Arrays.asList(1l)), new ArrayList<Long>(Arrays.asList()),new ArrayList<Long>(Arrays.asList(1l,2l,3l,4l,6l,8l,9l,10l)));
 
         //EventWorker

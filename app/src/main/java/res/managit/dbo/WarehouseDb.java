@@ -39,7 +39,7 @@ import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
 @Database(entities = {Category.class, Contact.class, Customer.class, Event.class, Product.class,
         Supply.class, Worker.class, EventItem.class, EventProductCross.class, EventCustomerCross.class,
-        EventSupplyCross.class, EventWorkerCross.class}, version = 3, exportSchema = false)
+        EventSupplyCross.class, EventWorkerCross.class}, version = 4, exportSchema = false)
 @TypeConverters({ListConverter.class, DateConverter.class})
 public abstract class WarehouseDb extends RoomDatabase {
 
