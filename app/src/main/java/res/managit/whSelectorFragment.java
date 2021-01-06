@@ -21,12 +21,16 @@ import java.util.List;
 import java.util.concurrent.Executors;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
+import res.managit.dbo.helpers.ExecuteEvents;
 
 public class whSelectorFragment extends Fragment {
     ListView listView;
     ArrayList<String> dbNames;
     NavController navController;
+
+    Thread executeEvents;
 
     public whSelectorFragment() {
         // Required empty public constructor
@@ -58,6 +62,8 @@ public class whSelectorFragment extends Fragment {
                     PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
                 });
 
+                Thread t = new ExecuteEvents();
+                t.start();
                 startActivity(in);
             }
         });
