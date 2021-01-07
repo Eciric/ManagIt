@@ -18,8 +18,8 @@ public class EventItemProduct {
     @Embedded
     public EventItem eventItem;
     @Relation(
-            parentColumn = "productId",
-            entityColumn = "product_Id"
+            parentColumn = "product_Id",
+            entityColumn = "productId"
     )
     public Product product;
 }

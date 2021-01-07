@@ -9,6 +9,7 @@ import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.relations.TypeAction;
+import res.managit.dbo.relations.onetoone.EventItemProduct;
 
 public class ExecuteEvents extends Thread {
 
@@ -25,34 +26,28 @@ public class ExecuteEvents extends Thread {
     @Override
     public void run() {
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-        List<Event> listEvents;
+
+        EventItemProduct eventItemProduct;
         List<EventItem> listEventItem;
-        List<Product> listProduct;
+        List<Event> listEvents;
 
         while (canBeExecute) {
-            listEvents = db.eventDao().getAll();
+            listEvents = db.eventDao().getEventByDateAndExecution(false);
             System.out.println("run " + this.getName());
             for (Event event : listEvents) {
-                if (event.getDate().compareTo(LocalDateTime.now()) <= 0 && !event.isExecuted) {
-                    listEventItem = db.eventItemDao().getAll();
+                    listEventItem = db.eventItemDao().getEventItemByEventId(event.eventId);
                     for (EventItem eventItem : listEventItem) {
-                        if (eventItem.event_Id == event.eventId) {
-                            listProduct = db.productDao().getAll();
-                            for (Product product : listProduct) {
-                                if (product.productId == eventItem.product_Id) {
-                                    if (event.action.equals(TypeAction.Loading.label)) {
-                                        product.amount -= eventItem.amount;
-                                    } else {
-                                        product.amount += eventItem.amount;
-                                    }
-                                    event.isExecuted = true;
-                                    db.eventDao().updateEvent(event);
-                                    db.productDao().updateProduct(product);
-                                }
+                            eventItemProduct = db.eventItemDao().getEventItemByEventIdAndProductId(event.eventId, eventItem.product_Id);
+                            if (event.action.equals(TypeAction.Loading.label)) {
+                                eventItemProduct.product.amount -= eventItem.amount;
+                            } else {
+                                eventItemProduct.product.amount += eventItem.amount;
                             }
-                        }
+                            event.isExecuted = true;
+                            db.eventDao().updateEvent(event);
+                            db.productDao().updateProduct(eventItemProduct.product);
                     }
-                }
+
             }
             try {
                 Thread.sleep(50000);

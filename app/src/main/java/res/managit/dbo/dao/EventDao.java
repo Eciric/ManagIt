@@ -23,6 +23,10 @@ public interface EventDao {
     @Query("Select * from Event")
      public List<Event> getAll();
 
+
+    @Query("Select * from Event where isExecuted like :bool and date <= (SELECT strftime('%H:%M    %d-%m-%Y', datetime('now')))")
+    public List<Event> getEventByDateAndExecution(boolean bool);
+
     @Query("SELECT * FROM Event WHERE `action` LIKE :act")
     public List<Event> getEventByAction(String act);
 
