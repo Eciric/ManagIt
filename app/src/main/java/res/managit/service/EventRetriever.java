@@ -61,25 +61,19 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<Supply> supply = new ArrayList<>();
         List<Product> product = new ArrayList<>();
         List<Customer> customer = new ArrayList<>();
-//        List<EventItem> item = new ArrayList<>();
-        List<EventItem> test =   db.eventItemDao().getEventItemByEventId(event.eventId);
-        for(EventItem eventItem : test){
+        List<EventItem> item =   db.eventItemDao().getEventItemByEventId(event.eventId);
+        for(EventItem eventItem : item)
             product.add(db.productDao().getProductById(eventItem.product_Id));
-        }
-
         for (Long id : event.worker_Id)
             worker.add(db.workerDao().getWorkerById(id));
         for (Long id : event.supplier_Id)
             supply.add(db.supplyDao().getSupplyById(id));
-//        for (Long id : event.product_Id)
-//            product.add(db.productDao().getProductById(id));
         for (Long id : event.customer_Id)
             customer.add(db.customerDao().getCustomerById(id));
-//        for(Long id : event.eventItem_Id)
-//            item.add(db.eventItemDao().getEventItemById(id));
 
 
-        Data data = new Data(event, test, worker, supply, product, customer);
+
+        Data data = new Data(event, item, worker, supply, product, customer);
         return data;
     }
 
