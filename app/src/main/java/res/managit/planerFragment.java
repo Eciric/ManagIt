@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -18,27 +17,19 @@ import com.applandeo.materialcalendarview.EventDay;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import res.managit.add.event.adapter.EventAdapter;
-import res.managit.dbo.entity.Category;
-import res.managit.dbo.entity.Contact;
-import res.managit.dbo.entity.Customer;
-import res.managit.dbo.entity.EventItem;
-import res.managit.dbo.entity.Product;
-import res.managit.dbo.entity.Supply;
-import res.managit.dbo.entity.Worker;
-import res.managit.service.EventRetriever;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
+import res.managit.dbo.relations.TypeAction;
 import res.managit.materials.DrawableUtils;
+import res.managit.service.EventRetriever;
 
 
 /**
@@ -61,7 +52,6 @@ public class planerFragment extends Fragment {
     private String mParam2;
 
 
-    private ListView listEvents;
     private EventAdapter adapterToEventsList;
 
     public planerFragment() {
@@ -96,6 +86,17 @@ public class planerFragment extends Fragment {
 
     }
 
+    public void createRunAndJoinThreadToLoadingCalendarView(List<EventDay> events, WarehouseDb db){
+        Thread t1 = new Thread(() -> {
+            loadingEventsToCalendarView(events, db);
+        });
+        t1.start();
+        try {
+            t1.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,30 +106,9 @@ public class planerFragment extends Fragment {
         calendarView = (CalendarView) view.findViewById(R.id.calendarView);
 
         //list with calendar events not databases
-        List<EventDay> events = Collections.synchronizedList(new ArrayList<EventDay>());
+        List<EventDay> events = Collections.synchronizedList(new ArrayList<>());
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-        Thread t1 = new Thread(() -> {
-            List<Event> eventList = db.eventDao().getAll();
-            for (Event event : eventList) {
-                LocalDateTime date = event.getDate();
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(date.getYear(),
-                        date.getMonthValue() - 1,
-                        date.getDayOfMonth(),
-                        date.getHour(),
-                        date.getMinute());
-                events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
-                                .getApplicationContext(),
-                        event.getAction().equals("loading") ? "L" : "UL")));
-
-            }
-        });
-        t1.start();
-        try {
-            t1.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        createRunAndJoinThreadToLoadingCalendarView(events, db);
 
         //set how many months we can see. In that case 1 previous and 5 next
         Calendar min = Calendar.getInstance();
@@ -142,9 +122,9 @@ public class planerFragment extends Fragment {
         calendarView.setEvents(events);
 
         //initialize variable to events lists
-        listEvents = (ListView) view.findViewById(R.id.eventsList);
+        ListView listEvents = (ListView) view.findViewById(R.id.eventsList);
         ArrayList<Event> eventsListInCurrentDate = new ArrayList<>();
-        adapterToEventsList = new EventAdapter(this.getContext(), eventsListInCurrentDate);
+        adapterToEventsList = new EventAdapter(this.requireContext(), eventsListInCurrentDate);
         listEvents.setAdapter(adapterToEventsList);
 
         listEvents.setOnItemClickListener((adapter, v, position, arg3) -> {
@@ -178,7 +158,7 @@ public class planerFragment extends Fragment {
                             eventDay.getCalendar().get(Calendar.MINUTE));
 
                     for (Event event : eventList) {
-                        if (event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear()) {
+                        if (isEqualYearDay(dateTime, event)) {
                             //trzeba ustawiac text poza tym Executors bo inaczej wywala error z tym ze tylko głowny watek moze miec dostep do view
                             chosenEvents.add(event);
                         }
@@ -193,14 +173,31 @@ public class planerFragment extends Fragment {
         return view;
     }
 
+    private boolean isEqualYearDay(LocalDateTime dateTime, Event event) {
+        return event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear();
+    }
+
+    private void loadingEventsToCalendarView(List<EventDay> events, WarehouseDb db) {
+        List<Event> eventList = db.eventDao().getAll();
+        for (Event event : eventList) {
+            LocalDateTime date = event.getDate();
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(date.getYear(),
+                    date.getMonthValue() - 1,
+                    date.getDayOfMonth(),
+                    date.getHour(),
+                    date.getMinute());
+            events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
+                            .getApplicationContext(),
+                    event.getAction().equals(TypeAction.Loading.label) ? "L" : "UL")));
+        }
+    }
+
     //function to set text in main thread
     private void setEventList(List<Event> events) {
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                adapterToEventsList.clear();
-                adapterToEventsList.addAll(events);
-            }
+        requireActivity().runOnUiThread(() -> {
+            adapterToEventsList.clear();
+            adapterToEventsList.addAll(events);
         });
     }
 
@@ -216,28 +213,7 @@ public class planerFragment extends Fragment {
         List<EventDay> events = Collections.synchronizedList(new ArrayList<>());
 
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-        Thread threadToUpdateDataBase = new Thread(() -> {
-            List<Event> eventList = db.eventDao().getAll();
-            for (Event event : eventList) {
-                LocalDateTime date = event.getDate();
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.set(date.getYear(),
-                        date.getMonthValue() - 1,
-                        date.getDayOfMonth(),
-                        date.getHour(),
-                        date.getMinute());
-                events.add(new EventDay(calendar1, DrawableUtils.getCircleDrawableWithText(requireActivity()
-                                .getApplicationContext(),
-                        event.getAction().equals("loading") ? "L" : "UL")));
-
-            }
-        });
-        threadToUpdateDataBase.start();
-        try {
-            threadToUpdateDataBase.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        createRunAndJoinThreadToLoadingCalendarView(events, db);
         calendarView.setEvents(events);
     }
 

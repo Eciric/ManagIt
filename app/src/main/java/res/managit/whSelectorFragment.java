@@ -2,6 +2,11 @@ package res.managit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,28 +14,16 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import res.managit.dbo.PublicDatabaseAcces;
-import res.managit.dbo.WarehouseDb;
-import res.managit.dbo.entity.Product;
 import res.managit.dbo.helpers.ExecuteEvents;
 
 public class whSelectorFragment extends Fragment {
     ListView listView;
-    ArrayList<String> dbNames;
     NavController navController;
-    int temp = 0;
-    public static boolean run = true;
+    AtomicBoolean tempToMenageExecutedThread = new AtomicBoolean(false);
 
     ExecuteEvents executeEvents;
 
@@ -52,35 +45,30 @@ public class whSelectorFragment extends Fragment {
 
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(requireContext(), R.layout.listview_text_formatter, R.id.textView2, PublicDatabaseAcces.databaseNameList);
         listView.setAdapter(arrayAdapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        listView.setOnItemClickListener((adapterView, view1, i, l) -> {
 
-                if ( PublicDatabaseAcces.currentDatabase == null ){
-                    System.err.println("jest nulem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                    temp = 1;
-                }
-                Intent in = new Intent(getActivity(), MenuActivity.class);
-                in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
-                PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
-                PublicDatabaseAcces.currentDatabaseName = PublicDatabaseAcces.databaseNameList.get(i);
-
-                Executors.newSingleThreadExecutor().execute(() -> {
-                    PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
-                });
-                if ( temp == 1 ){
-                    executeEvents = new ExecuteEvents();
-                    temp = 0;
-                }else {
-                    executeEvents.stopProcess();
-                    executeEvents.interrupt();
-                    System.out.println("konczy proces");
-                    executeEvents = new ExecuteEvents();
-                }
-                executeEvents.setName(PublicDatabaseAcces.currentDatabaseName);
-                executeEvents.start();
-                startActivity(in);
+            if (PublicDatabaseAcces.currentDatabase == null) {
+                tempToMenageExecutedThread.set(true);
             }
+            Intent in = new Intent(getActivity(), MenuActivity.class);
+            in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
+            PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
+            PublicDatabaseAcces.currentDatabaseName = PublicDatabaseAcces.databaseNameList.get(i);
+
+            Executors.newSingleThreadExecutor().execute(() -> {
+                PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
+            });
+            if (tempToMenageExecutedThread.compareAndSet(true, false)) {
+                executeEvents = new ExecuteEvents();
+                System.out.println("Run new process for database of name " + executeEvents.getName());
+            } else {
+                executeEvents.stopProcess();
+                System.out.println("Stop Process " + executeEvents.getName());
+                executeEvents = new ExecuteEvents();
+            }
+            executeEvents.setName(PublicDatabaseAcces.currentDatabaseName);
+            executeEvents.start();
+            startActivity(in);
         });
     }
 

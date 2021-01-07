@@ -22,6 +22,7 @@ import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
+import res.managit.dbo.relations.TypeAction;
 
 public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
@@ -104,7 +105,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                             int size = db.eventItemDao().getAll().size();
                             eventItemsId.add(db.eventItemDao().getAll().get(size - 1).getEventItemId());
                         }
-                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), "loading", eventItemsId, workers, supplies, customers, products, false);
+                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), TypeAction.Loading.label, eventItemsId, workers, supplies, customers, products, false);
                         db.eventDao().insertEvent(event);
                         PublicDatabaseAcces.currentDatabaseEventNumber += 1;
                     });

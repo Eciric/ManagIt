@@ -8,17 +8,18 @@ import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
+import res.managit.dbo.relations.TypeAction;
 
 public class ExecuteEvents extends Thread {
 
     public ExecuteEvents() {
-        run = true;
+        canBeExecute = true;
     }
 
-    private boolean run;
+    private boolean canBeExecute;
 
-    public void stopProcess(){
-        run = false;
+    public void stopProcess() {
+        canBeExecute = false;
     }
 
     @Override
@@ -28,31 +29,23 @@ public class ExecuteEvents extends Thread {
         List<EventItem> listEventItem;
         List<Product> listProduct;
 
-        while (run) {
-            System.out.println("!!!!!!!!!!!!!!!!!!!");
+        while (canBeExecute) {
             listEvents = db.eventDao().getAll();
             System.out.println("run " + this.getName());
             for (Event event : listEvents) {
-//                System.out.println("enter to list event");
                 if (event.getDate().compareTo(LocalDateTime.now()) <= 0 && !event.isExecuted) {
                     listEventItem = db.eventItemDao().getAll();
                     for (EventItem eventItem : listEventItem) {
-//                        System.out.println("enter to list eventItem");
                         if (eventItem.event_Id == event.eventId) {
                             listProduct = db.productDao().getAll();
-//                            System.out.println("size listProduct "+ listProduct.size());
                             for (Product product : listProduct) {
-//                                System.out.println("enter to list eventListProduct");
                                 if (product.productId == eventItem.product_Id) {
-                                    if (event.action.equals("loading")) {
+                                    if (event.action.equals(TypeAction.Loading.label)) {
                                         product.amount -= eventItem.amount;
-                                        event.isExecuted = true;
-                                        System.out.println(product.name + " -" + eventItem.amount);
                                     } else {
                                         product.amount += eventItem.amount;
-                                        event.isExecuted = true;
-                                        System.out.println(product.name + " +" + eventItem.amount);
                                     }
+                                    event.isExecuted = true;
                                     db.eventDao().updateEvent(event);
                                     db.productDao().updateProduct(product);
                                 }
