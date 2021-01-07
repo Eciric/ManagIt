@@ -9,7 +9,17 @@ import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 
-public class ExecuteEvents extends Thread{
+public class ExecuteEvents extends Thread {
+
+    public ExecuteEvents() {
+        run = true;
+    }
+
+    private boolean run;
+
+    public void stopProcess(){
+        run = false;
+    }
 
     @Override
     public void run() {
@@ -18,30 +28,30 @@ public class ExecuteEvents extends Thread{
         List<EventItem> listEventItem;
         List<Product> listProduct;
 
-        while (true){
+        while (run) {
             System.out.println("!!!!!!!!!!!!!!!!!!!");
             listEvents = db.eventDao().getAll();
-
-            for ( Event event : listEvents ){
-                System.out.println("enter to list event");
-                if ( event.getDate().compareTo(LocalDateTime.now()) <= 0 && !event.isExecuted){
+            System.out.println("run " + this.getName());
+            for (Event event : listEvents) {
+//                System.out.println("enter to list event");
+                if (event.getDate().compareTo(LocalDateTime.now()) <= 0 && !event.isExecuted) {
                     listEventItem = db.eventItemDao().getAll();
-                    for ( EventItem eventItem: listEventItem ){
-                        System.out.println("enter to list eventItem");
-                        if ( eventItem.event_Id == event.eventId ){
+                    for (EventItem eventItem : listEventItem) {
+//                        System.out.println("enter to list eventItem");
+                        if (eventItem.event_Id == event.eventId) {
                             listProduct = db.productDao().getAll();
-                            System.out.println("size listProduct "+ listProduct.size());
-                            for ( Product product : listProduct ){
-                                System.out.println("enter to list eventListProduct");
-                                if ( product.productId == eventItem.product_Id ){
-                                    if ( event.action.equals("loading") ){
+//                            System.out.println("size listProduct "+ listProduct.size());
+                            for (Product product : listProduct) {
+//                                System.out.println("enter to list eventListProduct");
+                                if (product.productId == eventItem.product_Id) {
+                                    if (event.action.equals("loading")) {
                                         product.amount -= eventItem.amount;
                                         event.isExecuted = true;
-                                        System.out.println(product.name+" -"+eventItem.amount);
-                                    }else{
+                                        System.out.println(product.name + " -" + eventItem.amount);
+                                    } else {
                                         product.amount += eventItem.amount;
                                         event.isExecuted = true;
-                                        System.out.println(product.name+" +"+eventItem.amount);
+                                        System.out.println(product.name + " +" + eventItem.amount);
                                     }
                                     db.eventDao().updateEvent(event);
                                     db.productDao().updateProduct(product);

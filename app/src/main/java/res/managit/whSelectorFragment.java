@@ -29,8 +29,10 @@ public class whSelectorFragment extends Fragment {
     ListView listView;
     ArrayList<String> dbNames;
     NavController navController;
+    int temp = 0;
+    public static boolean run = true;
 
-    Thread executeEvents;
+    ExecuteEvents executeEvents;
 
     public whSelectorFragment() {
         // Required empty public constructor
@@ -53,6 +55,11 @@ public class whSelectorFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                if ( PublicDatabaseAcces.currentDatabase == null ){
+                    System.err.println("jest nulem!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    temp = 1;
+                }
                 Intent in = new Intent(getActivity(), MenuActivity.class);
                 in.putExtra("dbName", PublicDatabaseAcces.databaseNameList.get(i));
                 PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
@@ -61,9 +68,17 @@ public class whSelectorFragment extends Fragment {
                 Executors.newSingleThreadExecutor().execute(() -> {
                     PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
                 });
-
-                Thread t = new ExecuteEvents();
-                t.start();
+                if ( temp == 1 ){
+                    executeEvents = new ExecuteEvents();
+                    temp = 0;
+                }else {
+                    executeEvents.stopProcess();
+                    executeEvents.interrupt();
+                    System.out.println("konczy proces");
+                    executeEvents = new ExecuteEvents();
+                }
+                executeEvents.setName(PublicDatabaseAcces.currentDatabaseName);
+                executeEvents.start();
                 startActivity(in);
             }
         });

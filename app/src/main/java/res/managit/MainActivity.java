@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         reloadDatabases(getApplicationContext());
 
         // Odkomentuj aby wypelnic baze danych przykladowymi rekordami
-       //new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(0)).execute();
+//       new DatabaseInitializer(PublicDatabaseAcces.databaseList.get(1)).execute();
 
         //category
         Category category1 = new Category("Czyszczenie szyb");
@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         EventProductCross eventProductCross13 = new EventProductCross(3, 9);
         EventProductCross eventProductCross14 = new EventProductCross(3, 10);
 
-//        //database create
+        //database create
 //        WarehouseDb db = createDatabase(getApplicationContext(),"CarWarehouseExtended");
 //
 //        //Insert Category
