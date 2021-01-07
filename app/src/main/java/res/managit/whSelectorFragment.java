@@ -62,8 +62,10 @@ public class whSelectorFragment extends Fragment {
                 executeEvents = new ExecuteEvents();
                 System.out.println("Run new process for database of name " + executeEvents.getName());
             } else {
-                executeEvents.stopProcess();
-                System.out.println("Stop Process " + executeEvents.getName());
+                if (executeEvents != null) {
+                    executeEvents.stopProcess();
+                    System.out.println("Stop Process " + executeEvents.getName());
+                }
                 executeEvents = new ExecuteEvents();
             }
             executeEvents.setName(PublicDatabaseAcces.currentDatabaseName);
