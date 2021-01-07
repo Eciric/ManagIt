@@ -2,41 +2,24 @@ package res.managit.dbo;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.nfc.Tag;
 import android.os.Environment;
-import android.util.Log;
 
 import androidx.room.Room;
-import androidx.sqlite.db.SimpleSQLiteQuery;
 
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import com.opencsv.exceptions.CsvValidationException;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.xml.transform.Source;
 
 import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
@@ -46,9 +29,7 @@ import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
-import res.managit.dbo.relations.manytomany.EventWorker;
 import res.managit.dbo.relations.manytomany.cross.EventCustomerCross;
-import res.managit.dbo.relations.manytomany.cross.EventProductCross;
 import res.managit.dbo.relations.manytomany.cross.EventSupplyCross;
 import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
@@ -196,14 +177,13 @@ public abstract class DatabaseFunctions {
                                 else if (entity == "Event") {
                                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm    dd-MM-yyyy");
                                     LocalDateTime localDateTime = LocalDateTime.parse(tempNames[1], formatter);
-                                    String[] eventItems = tempNames[3].split(",");
-                                    String[] workers = tempNames[4].split(",");
-                                    String[] suppliers = tempNames[5].split(",");
-                                    String[] customers = tempNames[6].split(",");
-                                    String[] products = tempNames[7].split(",");
+                                    String[] workers = tempNames[3].split(",");
+                                    String[] suppliers = tempNames[4].split(",");
+                                    String[] customers = tempNames[5].split(",");
 
 
-                                    Event event = new Event(localDateTime, tempNames[2], convertStrLong(eventItems), convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), convertStrLong(products), false);
+
+                                    Event event = new Event(localDateTime, tempNames[2], convertStrLong(workers), convertStrLong(suppliers), convertStrLong(customers), false);
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.eventDao().insertEvent(event);
                                     });
@@ -227,12 +207,7 @@ public abstract class DatabaseFunctions {
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.eventCustomerCrossDao().insertEventCustomerCross(eventCustomerCross);
                                     });
-                                } else if (entity == "EventProductCross") {
-                                    EventProductCross eventProductCross = new EventProductCross(Long.parseLong(tempNames[0]), Long.parseLong(tempNames[1]));
-                                    Executors.newSingleThreadExecutor().execute(() -> {
-                                        db.eventProductCrossDao().insertEventProductCross(eventProductCross);
-                                    });
-                                } else if (entity == "EventSupplyCross") {
+                                }  else if (entity == "EventSupplyCross") {
                                     EventSupplyCross eventSupplyCross = new EventSupplyCross(Long.parseLong(tempNames[0]), Long.parseLong(tempNames[1]));
                                     Executors.newSingleThreadExecutor().execute(() -> {
                                         db.eventSupplyCrossDao().insertEventSupplyCross(eventSupplyCross);

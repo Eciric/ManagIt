@@ -76,7 +76,6 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                 ArrayList<Long> supplies = new ArrayList<>();
                 ArrayList<Long> customers = new ArrayList<>();
                 ArrayList<Long> products = new ArrayList<>();
-                ArrayList<Long> eventItemsId = new ArrayList<>();
                 ArrayList<EventItem> eventItems = new ArrayList<>();
 
 
@@ -104,9 +103,8 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                         for (int i = 0; i < eventItems.size(); i++) {
                             db.eventItemDao().insertEventItem(eventItems.get(i));
                             int size = db.eventItemDao().getAll().size();
-                            eventItemsId.add(db.eventItemDao().getAll().get(size - 1).getEventItemId());
                         }
-                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), TypeAction.UnLoading.label, eventItemsId, workers, supplies, customers, products, false);
+                        Event event = new Event(AddEventFirstStepActivity.getDateTime(), TypeAction.UnLoading.label, workers, supplies, customers, false);
                         db.eventDao().insertEvent(event);
                         PublicDatabaseAcces.currentDatabaseEventNumber += 1;
                     });

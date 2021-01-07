@@ -12,8 +12,6 @@ import androidx.room.Update;
 import java.util.List;
 
 import res.managit.dbo.entity.Product;
-import res.managit.dbo.relations.manytomany.EventProduct;
-import res.managit.dbo.relations.manytomany.ProductEvent;
 import res.managit.dbo.relations.manytoone.CategoryProduct;
 
 @Dao
@@ -42,10 +40,6 @@ public interface ProductDao {
     @Query("SELECT * FROM Category INNER JOIN Product Where category_Id = categoryId and product_name LIKE :name ")
     public CategoryProduct getCategoryAndProductByName(String name);
 
-    //zwraca produkt o podanej nazwie i wszystkie eventy z nim powiazane
-    @Transaction
-    @Query("Select * from Product where product_name like :name")
-    public List<ProductEvent> getEventWithAllProducts(String name);
 
     //wstawianie produktu
     @Insert(onConflict = OnConflictStrategy.IGNORE)

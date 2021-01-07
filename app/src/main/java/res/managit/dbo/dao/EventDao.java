@@ -12,10 +12,8 @@ import java.util.List;
 
 import res.managit.dbo.entity.Event;
 import res.managit.dbo.relations.manytomany.EventCustomer;
-import res.managit.dbo.relations.manytomany.EventProduct;
 import res.managit.dbo.relations.manytomany.EventSupply;
 import res.managit.dbo.relations.manytomany.EventWorker;
-import res.managit.dbo.relations.manytomany.WorkerEvent;
 
 
 @Dao
@@ -35,10 +33,6 @@ public interface EventDao {
     @Query("Select * from Event")
     public List<EventWorker> getEventWithAllWorkers();
 
-    //zwraca event i wszystkie produkty ktore sa z nim sa powiazane
-    @Transaction
-    @Query("Select * from Event")
-    public List<EventProduct> getEventWithAllProducts();
 
     //zwraca event i wszystkich dostawcow ktorzy sa z nim powiazani
     @Transaction

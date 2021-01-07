@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(indices = @Index(value = {"date","action", "eventItem_Id", "worker_Id", "supplier_Id", "customer_Id", "product_Id"} , unique = true))
+@Entity(indices = @Index(value = {"date","action", "worker_Id", "supplier_Id", "customer_Id"} , unique = true))
 @Setter
 @Getter
 @NoArgsConstructor
@@ -20,22 +20,18 @@ public class Event {
     public long eventId;
     public LocalDateTime date;
     public String action;
-    public List<Long> eventItem_Id;
     public List<Long> worker_Id;
     public List<Long> supplier_Id;
     public List<Long> customer_Id;
-    public List<Long> product_Id;
     public boolean isExecuted;
 
 
-    public Event(LocalDateTime date, String action, List<Long> eventItem_Id, List<Long> worker_Id, List<Long> supplier_Id, List<Long> customer_Id, List<Long> product_Id, boolean isExecuted) {
+    public Event(LocalDateTime date, String action, List<Long> worker_Id, List<Long> supplier_Id, List<Long> customer_Id, boolean isExecuted) {
         this.date = date;
         this.action = action;
-        this.eventItem_Id = eventItem_Id;
         this.worker_Id = worker_Id;
         this.supplier_Id = supplier_Id;
         this.customer_Id = customer_Id;
-        this.product_Id = product_Id;
         this.isExecuted = isExecuted;
     }
 
@@ -81,14 +77,6 @@ public class Event {
 
     public void setCustomer_Id(List<Long> customer_Id) {
         this.customer_Id = customer_Id;
-    }
-
-    public List<Long> getProduct_Id() {
-        return product_Id;
-    }
-
-    public void setProduct_Id(List<Long> product_Id) {
-        this.product_Id = product_Id;
     }
 
 }
