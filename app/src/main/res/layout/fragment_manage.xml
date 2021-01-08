@@ -12,6 +12,7 @@
         android:layout_height="match_parent">
 
         <include layout="@layout/fragment_manage_buttons"/>
+        <include layout="@layout/fragment_manage_add_product"/>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
