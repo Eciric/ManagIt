@@ -12,9 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import androidx.appcompat.widget.Toolbar;
 
-import res.managit.dbo.PublicDatabaseAcces;
-import res.managit.service.DatabaseRetriever;
-
 public class manageFragment extends Fragment {
     public manageFragment() {
         // Required empty public constructor
@@ -31,7 +28,6 @@ public class manageFragment extends Fragment {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Manage");
         setButtonListeners(view);
-        new DatabaseRetriever(view, PublicDatabaseAcces.currentDatabase).execute();
     }
 
     public void setButtonListeners(@NonNull View view) {
