@@ -52,6 +52,7 @@ public class manageFragment extends Fragment {
     }
 
     public void setButtonListeners(@NonNull View view) {
+        /* Main buttons */
         Button products = view.findViewById(R.id.products);
         products.setOnClickListener((event) -> {
             if (addCardsClosed(view))
@@ -87,15 +88,34 @@ public class manageFragment extends Fragment {
                         new categoriesFragment()).commit();
         });
 
-        Button addProducts = view.findViewById(R.id.addProducts);
-        addProducts.setOnClickListener((event) -> {
-            CardView card = view.findViewById(R.id.addProductsCard);
-            card.setVisibility(View.VISIBLE);
+        /* Add buttons */
+        Button addProduct = view.findViewById(R.id.addProducts);
+        addProduct.setOnClickListener((event) -> {
+            if (addCardsClosed(view)) {
+                CardView card = view.findViewById(R.id.addProductsCard);
+                card.setVisibility(View.VISIBLE);
+            }
+        });
 
-            Button close = view.findViewById(R.id.productClose);
-            close.setOnClickListener((e) -> {
-                card.setVisibility(View.INVISIBLE);
-            });
+        Button addWorker = view.findViewById(R.id.addWorker);
+        addWorker.setOnClickListener((event) -> {
+            if (addCardsClosed(view)) {
+                CardView card = view.findViewById(R.id.addWorkerCard);
+                card.setVisibility(View.VISIBLE);
+            }
+        });
+
+        /* Close buttons */
+        Button productClose = view.findViewById(R.id.productClose);
+        productClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addProductsCard);
+            card.setVisibility(View.INVISIBLE);
+        });
+
+        Button workerClose = view.findViewById(R.id.workerClose);
+        workerClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addWorkerCard);
+            card.setVisibility(View.INVISIBLE);
         });
     }
 }
