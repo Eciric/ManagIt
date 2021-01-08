@@ -128,7 +128,7 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         categories.add("Unload");
         spinnerTypeAction = "Load";
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, R.layout.spinner_layout_formatter, categories);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
