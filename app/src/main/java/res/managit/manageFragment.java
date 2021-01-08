@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.service.AddProductHandler;
 import res.managit.service.ProductSpinnerInitializer;
 
 
@@ -62,6 +65,7 @@ public class manageFragment extends Fragment {
     public void setButtonListeners(@NonNull View view) {
         setMainButtonListeners(view);
         setAddButtonListeners(view);
+        setSubAddButtonListeners(view);
         setCloseButtonListeners(view);
     }
 
@@ -144,11 +148,23 @@ public class manageFragment extends Fragment {
         });
     }
 
+    public void setSubAddButtonListeners(@NonNull View view) {
+        Button productAdd = view.findViewById(R.id.productAdd);
+        productAdd.setOnClickListener((event) -> {
+            new AddProductHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        });
+    }
+
     public void setCloseButtonListeners(@NonNull View view) {
         Button productClose = view.findViewById(R.id.productClose);
         productClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addProductsCard);
             card.setVisibility(View.INVISIBLE);
+
+            TextView errorText = view.findViewById(R.id.productError);
+            EditText text = (EditText)view.findViewById(R.id.productName);
+            errorText.setText("");
+            text.setText("");
         });
 
         Button workerClose = view.findViewById(R.id.workerClose);
@@ -175,6 +191,7 @@ public class manageFragment extends Fragment {
             card.setVisibility(View.INVISIBLE);
         });
     }
+
 
     public void initCategorySpinner(@NonNull View view) {
         new ProductSpinnerInitializer(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
