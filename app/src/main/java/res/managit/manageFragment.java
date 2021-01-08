@@ -14,6 +14,9 @@ import android.widget.Button;
 
 import androidx.appcompat.widget.Toolbar;
 
+import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.service.ProductSpinnerInitializer;
+
 
 public class manageFragment extends Fragment {
     public manageFragment() {
@@ -31,6 +34,7 @@ public class manageFragment extends Fragment {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Manage");
         setButtonListeners(view);
+        initCategorySpinner(view);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class manageFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_manage, container, false);
     }
 
-    private boolean addCardsClosed(View view) {
+    private boolean addCardsClosed(@NonNull View view) {
         if (view.findViewById(R.id.addProductsCard).getVisibility() == View.VISIBLE)
             return false;
         if (view.findViewById(R.id.addWorkerCard).getVisibility() == View.VISIBLE)
@@ -170,5 +174,9 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addCategoryCard);
             card.setVisibility(View.INVISIBLE);
         });
+    }
+
+    public void initCategorySpinner(@NonNull View view) {
+        new ProductSpinnerInitializer(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
     }
 }
