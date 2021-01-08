@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:visibility="invisible"
-        android:id="@+id/addWorkerCard"
+        android:id="@+id/addSupplierCard"
         android:layout_width="330dp"
         android:layout_height="480dp"
         android:background="@android:color/white"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Add worker"
+                android:text="Add supplier"
                 android:textColor="#363A43"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
@@ -39,7 +39,7 @@
                 android:layout_marginTop="10dp">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerName"
+                    android:id="@+id/supplierName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Fullname..."
@@ -47,20 +47,12 @@
                     android:textColorHint="#7A8089"/>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <Spinner
-                android:id="@+id/workerRoles"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"/>
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerStreet"
+                    android:id="@+id/supplierrRole"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Street..."
@@ -73,7 +65,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerCity"
+                    android:id="@+id/supplierCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City..."
@@ -86,7 +78,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerCountry"
+                    android:id="@+id/supplierCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Country..."
@@ -99,7 +91,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerPhone"
+                    android:id="@+id/supplierPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone..."
@@ -121,7 +113,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/workerClose"
+                    android:id="@+id/supplierClose"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
@@ -131,7 +123,7 @@
                     android:textSize="18sp"/>
                 <Button
 
-                    android:id="@+id/workerAdd"
+                    android:id="@+id/supplierAdd"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
