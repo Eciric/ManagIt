@@ -47,12 +47,21 @@ public class manageFragment extends Fragment {
     private boolean addCardsClosed(View view) {
         if (view.findViewById(R.id.addProductsCard).getVisibility() == View.VISIBLE)
             return false;
+        if (view.findViewById(R.id.addWorkerCard).getVisibility() == View.VISIBLE)
+            return false;
+        if (view.findViewById(R.id.addSupplierCard).getVisibility() == View.VISIBLE)
+            return false;
 
         return true;
     }
 
     public void setButtonListeners(@NonNull View view) {
-        /* Main buttons */
+        setMainButtonListeners(view);
+        setAddButtonListeners(view);
+        setCloseButtonListeners(view);
+    }
+
+    public void setMainButtonListeners(@NonNull View view) {
         Button products = view.findViewById(R.id.products);
         products.setOnClickListener((event) -> {
             if (addCardsClosed(view))
@@ -87,8 +96,9 @@ public class manageFragment extends Fragment {
                 getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new categoriesFragment()).commit();
         });
+    }
 
-        /* Add buttons */
+    public void setAddButtonListeners(@NonNull View view) {
         Button addProduct = view.findViewById(R.id.addProducts);
         addProduct.setOnClickListener((event) -> {
             if (addCardsClosed(view)) {
@@ -105,7 +115,16 @@ public class manageFragment extends Fragment {
             }
         });
 
-        /* Close buttons */
+        Button addSupplier = view.findViewById(R.id.addSupplier);
+        addSupplier.setOnClickListener((event) -> {
+            if (addCardsClosed(view)) {
+                CardView card = view.findViewById(R.id.addSupplierCard);
+                card.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    public void setCloseButtonListeners(@NonNull View view) {
         Button productClose = view.findViewById(R.id.productClose);
         productClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addProductsCard);
@@ -115,6 +134,12 @@ public class manageFragment extends Fragment {
         Button workerClose = view.findViewById(R.id.workerClose);
         workerClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addWorkerCard);
+            card.setVisibility(View.INVISIBLE);
+        });
+
+        Button supplierClose = view.findViewById(R.id.supplierClose);
+        supplierClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addSupplierCard);
             card.setVisibility(View.INVISIBLE);
         });
     }
