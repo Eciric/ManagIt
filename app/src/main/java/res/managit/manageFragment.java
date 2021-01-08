@@ -49,6 +49,8 @@ public class manageFragment extends Fragment {
             return false;
         if (view.findViewById(R.id.addCustomerCard).getVisibility() == View.VISIBLE)
             return false;
+        if (view.findViewById(R.id.addCategoryCard).getVisibility() == View.VISIBLE)
+            return false;
 
         return true;
     }
@@ -128,6 +130,14 @@ public class manageFragment extends Fragment {
                 card.setVisibility(View.VISIBLE);
             }
         });
+
+        Button addCategory = view.findViewById(R.id.addCategory);
+        addCategory.setOnClickListener((event) -> {
+            if (addCardsClosed(view)) {
+                CardView card = view.findViewById(R.id.addCategoryCard);
+                card.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -152,6 +162,12 @@ public class manageFragment extends Fragment {
         Button customerClose = view.findViewById(R.id.customerClose);
         customerClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addCustomerCard);
+            card.setVisibility(View.INVISIBLE);
+        });
+
+        Button categoryClose = view.findViewById(R.id.categoryClose);
+        categoryClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addCategoryCard);
             card.setVisibility(View.INVISIBLE);
         });
     }
