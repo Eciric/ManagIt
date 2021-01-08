@@ -9,7 +9,7 @@
         android:visibility="invisible"
         android:id="@+id/addProductsCard"
         android:layout_width="330dp"
-        android:layout_height="270dp"
+        android:layout_height="300dp"
         android:background="@android:color/white"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
@@ -47,8 +47,17 @@
                     android:textColorHint="#7A8089"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="20sp"
+                android:textSize="18sp"
+                android:textColor="#7A8089"
+                android:text="Category"/>
+
             <Spinner
-                android:id="@+id/productCategory"
+                android:id="@+id/productCategorySpinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
