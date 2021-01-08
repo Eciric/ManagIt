@@ -13,6 +13,7 @@
 
         <include layout="@layout/fragment_manage_buttons"/>
         <include layout="@layout/fragment_manage_add_product"/>
+        <include layout="@layout/fragment_manage_add_worker"/>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
