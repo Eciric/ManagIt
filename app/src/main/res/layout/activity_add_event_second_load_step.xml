@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/gradient_background"
     tools:context=".AddEventSecondStepLoadActivity">
 
 
@@ -11,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Set suppliers" />
+        android:text="Set suppliers"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/suppliersList"
@@ -22,7 +25,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Set products" />
+        android:text="Set products"
+        android:textColor="#FFFFFF"
+        android:textSize="24sp" />
 
     <ListView
         android:id="@+id/productList"
@@ -33,6 +38,10 @@
         android:id="@+id/buttonSaveEvent"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add event" />
+        android:background="@color/startGradientBtn"
+        android:text="Add event"
+        android:textAlignment="center"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 </LinearLayout>
 
