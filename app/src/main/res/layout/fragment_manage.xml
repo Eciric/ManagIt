@@ -15,6 +15,7 @@
         <include layout="@layout/fragment_manage_add_product"/>
         <include layout="@layout/fragment_manage_add_worker"/>
         <include layout="@layout/fragment_manage_add_supplier"/>
+        <include layout="@layout/fragment_manage_add_customer"/>
 
     </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
