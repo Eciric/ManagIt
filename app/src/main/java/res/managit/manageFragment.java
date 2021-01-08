@@ -10,14 +10,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class manageFragment extends Fragment {
     public manageFragment() {
@@ -50,6 +46,8 @@ public class manageFragment extends Fragment {
         if (view.findViewById(R.id.addWorkerCard).getVisibility() == View.VISIBLE)
             return false;
         if (view.findViewById(R.id.addSupplierCard).getVisibility() == View.VISIBLE)
+            return false;
+        if (view.findViewById(R.id.addCustomerCard).getVisibility() == View.VISIBLE)
             return false;
 
         return true;
@@ -122,6 +120,14 @@ public class manageFragment extends Fragment {
                 card.setVisibility(View.VISIBLE);
             }
         });
+
+        Button addCustomer = view.findViewById(R.id.addCustomer);
+        addCustomer.setOnClickListener((event) -> {
+            if (addCardsClosed(view)) {
+                CardView card = view.findViewById(R.id.addCustomerCard);
+                card.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -140,6 +146,12 @@ public class manageFragment extends Fragment {
         Button supplierClose = view.findViewById(R.id.supplierClose);
         supplierClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addSupplierCard);
+            card.setVisibility(View.INVISIBLE);
+        });
+
+        Button customerClose = view.findViewById(R.id.customerClose);
+        customerClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addCustomerCard);
             card.setVisibility(View.INVISIBLE);
         });
     }
