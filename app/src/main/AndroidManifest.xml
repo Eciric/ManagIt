@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddEventSecondStepUnloadActivity"></activity>
+        <activity android:name=".HomeActivity"
+            android:label="Home"></activity>
+        <activity android:name=".AddEventSecondStepUnloadActivity" />
         <activity android:name=".AddEventSecondStepLoadActivity" />
         <activity android:name=".AddEventFirstStepActivity" />
         <activity android:name=".MenuActivity" />

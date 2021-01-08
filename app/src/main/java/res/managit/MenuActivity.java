@@ -78,7 +78,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 Toast.makeText(this, "Database exported", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_quit:
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
                 startActivity(intent);
