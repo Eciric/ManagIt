@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:visibility="invisible"
-        android:id="@+id/addSupplierCard"
+        android:id="@+id/addCustomerCard"
         android:layout_width="330dp"
         android:layout_height="480dp"
         android:background="@android:color/white"
@@ -28,7 +28,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Add supplier"
+                android:text="Add customer"
                 android:textColor="#363A43"
                 android:textSize="30sp"
                 android:textStyle="bold"/>
@@ -39,7 +39,7 @@
                 android:layout_marginTop="10dp">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/supplierName"
+                    android:id="@+id/customerName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Name..."
@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/supplierrRole"
+                    android:id="@+id/customerStreet"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Street..."
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/supplierCity"
+                    android:id="@+id/customerCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="City..."
@@ -78,7 +78,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/supplierCountry"
+                    android:id="@+id/customerCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Country..."
@@ -91,7 +91,7 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/supplierPhone"
+                    android:id="@+id/customerPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phone..."
@@ -102,7 +102,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/supplierError"
+                android:id="@+id/customerError"
                 android:gravity="center"
                 android:textColor="#FF0000" />
 
@@ -113,7 +113,7 @@
                 android:gravity="center">
 
                 <Button
-                    android:id="@+id/supplierClose"
+                    android:id="@+id/customerClose"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
@@ -123,7 +123,7 @@
                     android:textSize="18sp"/>
                 <Button
 
-                    android:id="@+id/supplierAdd"
+                    android:id="@+id/customerAdd"
                     android:layout_width="100sp"
                     android:layout_height="wrap_content"
                     android:background="@color/colorPrimary"
