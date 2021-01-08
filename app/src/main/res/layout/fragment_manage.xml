@@ -20,49 +20,49 @@
             android:id="@+id/products"
             android:layout_width="match_parent"
             android:layout_height="70sp"
-            android:text="Products"
-            android:textAlignment="textStart"
-            android:textSize="30sp"
-            android:background="@drawable/button_background"
-            android:textColor="@color/white"
             android:layout_marginBottom="20sp"
-            android:paddingHorizontal="10sp"/>
+            android:background="@drawable/button_background"
+            android:paddingHorizontal="10sp"
+            android:text="Products"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/workers"
             android:layout_width="match_parent"
             android:layout_height="70sp"
-            android:text="Workers"
-            android:textAlignment="textStart"
-            android:textSize="30sp"
-            android:background="@drawable/button_background"
-            android:textColor="@color/white"
             android:layout_marginBottom="20sp"
-            android:paddingHorizontal="10sp"/>
+            android:background="@drawable/button_background"
+            android:paddingHorizontal="10sp"
+            android:text="Workers"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/suppliers"
             android:layout_width="match_parent"
             android:layout_height="70sp"
-            android:text="Suppliers"
-            android:textAlignment="textStart"
-            android:textSize="30sp"
-            android:background="@drawable/button_background"
-            android:textColor="@color/white"
             android:layout_marginBottom="20sp"
-            android:paddingHorizontal="10sp"/>
+            android:background="@drawable/button_background"
+            android:paddingHorizontal="10sp"
+            android:text="Suppliers"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/customers"
             android:layout_width="match_parent"
             android:layout_height="70sp"
-            android:text="Customers"
-            android:textAlignment="textStart"
-            android:textSize="30sp"
-            android:background="@drawable/button_background"
-            android:textColor="@color/white"
             android:layout_marginBottom="20sp"
-            android:paddingHorizontal="10sp"/>
+            android:background="@drawable/button_background"
+            android:paddingHorizontal="10sp"
+            android:text="Customers"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
