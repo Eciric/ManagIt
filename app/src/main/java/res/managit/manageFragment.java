@@ -55,6 +55,11 @@ public class manageFragment extends Fragment {
                     new customersFragment()).commit();
         });
 
+        Button categories = view.findViewById(R.id.categories);
+        categories.setOnClickListener((event) -> {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new categoriesFragment()).commit();
+        });
     }
 
     @Override
