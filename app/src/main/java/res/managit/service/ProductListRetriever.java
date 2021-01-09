@@ -39,8 +39,8 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     @Override
     protected void onPostExecute(List<Product> result) {
-        ListView products = view.findViewById(R.id.list);
-        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, R.id.textView2, result)  {
+        ListView workers = view.findViewById(R.id.list);
+        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, result)  {
             @Override
             public View getView(int position,
                                 View convertView,
@@ -58,6 +58,6 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
                 return convertView;
             }
         };
-        products.setAdapter(arrayAdapter);
+        workers.setAdapter(arrayAdapter);
     }
 }

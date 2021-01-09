@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -24,11 +25,13 @@ public class WorkerListRetriever extends AsyncTask<Void, Void, List<Worker>> {
     WarehouseDb db;
     View view;
     Context context;
+    LayoutInflater inflater;
 
-    public WorkerListRetriever(Context context, View view, WarehouseDb db) {
+    public WorkerListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
         this.context = context;
+        this.inflater = inflater;
     }
 
     @Override
@@ -39,16 +42,24 @@ public class WorkerListRetriever extends AsyncTask<Void, Void, List<Worker>> {
     @Override
     protected void onPostExecute(List<Worker> result) {
         ListView workers = view.findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createWorkerLabels(result));
+        ArrayAdapter<Worker> arrayAdapter = new ArrayAdapter<Worker>(context, R.layout.listview_text_formatter, result)  {
+            @Override
+            public View getView(int position,
+                                View convertView,
+                                ViewGroup parent) {
+                if(convertView == null)
+                    convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
+
+                Worker w = result.get(position);
+                TextView name = convertView.findViewById(R.id.elementName);
+                TextView info = convertView.findViewById(R.id.elementInfo);
+
+                name.setText(w.getName());
+                info.setText(w.getRole());
+
+                return convertView;
+            }
+        };
         workers.setAdapter(arrayAdapter);
     }
-
-    private List<String> createWorkerLabels(List<Worker> result) {
-        List<String> workers = new ArrayList<>();
-        for (Worker w : result) {
-            workers.add("[" + w.getWorkerId() + "] " + w.getName() + " " + w.getLastName());
-        }
-        return workers;
-    }
-
 }
