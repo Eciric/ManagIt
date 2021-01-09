@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,19 +15,18 @@ import java.util.List;
 import res.managit.R;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
-import res.managit.dbo.entity.Product;
 
-public class AddProductHandler extends AsyncTask<Void, Void, String> {
+public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Name cannot be empty";
     final String INVALID_MSG = "Name can contain only letters";
-    final String EXISTS_MSG = "Product already exists";
-    final String SUCCESS_MSG = "Product successfully added";
+    final String EXISTS_MSG = "Category already exists";
+    final String SUCCESS_MSG = "Category successfully added";
 
     WarehouseDb db;
     View view;
     Context context;
 
-    public AddProductHandler(Context context, View view, WarehouseDb db) {
+    public AddCategoryHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
@@ -36,8 +34,7 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
 
     @Override
     protected String doInBackground(Void... voids) {
-        EditText text = view.findViewById(R.id.productName);
-        Spinner mySpinner = view.findViewById(R.id.productCategorySpinner);
+        EditText text = view.findViewById(R.id.categoryName);
         String name = text.getText().toString();
 
         if (name.equals(""))
@@ -46,30 +43,27 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
         if (!name.matches("[a-zA-Z ]+"))
             return INVALID_MSG;
 
-        List<Product> products = db.productDao().getAll();
-        List<String> productsNames = new ArrayList<>();
-        for (Product p : products)
-            productsNames.add(p.getName().toLowerCase());
-        if (productsNames.contains(name.toLowerCase()))
+        List<Category> categories = db.categoryDao().getAll();
+        List<String> categoriesNames = new ArrayList<>();
+        for (Category c : categories)
+            categoriesNames.add(c.getName().toLowerCase());
+        if (categoriesNames.contains(name.toLowerCase()))
             return EXISTS_MSG;
 
-        String categoryName = mySpinner.getSelectedItem().toString().substring(1);
-        categoryName = categoryName.substring(0,categoryName.length() - 1);
-        Category category = db.categoryDao().getCategoryByName(categoryName);
-        db.productDao().insertProduct(new Product(name, 0, category.getCategoryId()));
+        db.categoryDao().insertCategory(new Category(name));
 
         return SUCCESS_MSG;
     }
 
     @Override
     protected void onPostExecute(String result) {
-        TextView errorText = view.findViewById(R.id.productError);
+        TextView errorText = view.findViewById(R.id.categoryError);
 
         if (!result.equals(SUCCESS_MSG))
             errorText.setText(result);
         else {
-            EditText text = view.findViewById(R.id.productName);
-            CardView cardView = view.findViewById(R.id.addProductsCard);
+            EditText text = view.findViewById(R.id.categoryName);
+            CardView cardView = view.findViewById(R.id.addCategoryCard);
 
             errorText.setText("");
             text.setText("");
