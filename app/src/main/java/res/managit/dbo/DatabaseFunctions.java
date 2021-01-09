@@ -34,8 +34,8 @@ import res.managit.dbo.relations.manytomany.cross.EventSupplyCross;
 import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
 public abstract class DatabaseFunctions {
-    static String[] entities = {"Category", "Contact", "Customer", "Event", "Product", "Supply",
-            "Worker", "EventCustomerCross", "EventProductCross", "EventSupplyCross", "EventWorkerCross"};
+    static String[] entities = {"Category", "Contact", "Customer", "EventItem", "Event", "Product", "Supply",
+            "Worker", "EventCustomerCross", "EventSupplyCross", "EventWorkerCross"};
 
     public static WarehouseDb createDatabase(Context context, String name) {
         if (PublicDatabaseAcces.databaseNameList.contains(name))
