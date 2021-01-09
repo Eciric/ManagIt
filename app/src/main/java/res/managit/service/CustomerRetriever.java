@@ -12,7 +12,7 @@ import res.managit.dbo.entity.Customer;
 public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.Data> {
     WarehouseDb db;
     View view;
-    long id;
+    Customer customer;
 
     protected class Data {
         protected Customer customer;
@@ -24,15 +24,14 @@ public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.D
         }
     }
 
-    public CustomerRetriever(View view, WarehouseDb db, long id) {
+    public CustomerRetriever(View view, WarehouseDb db, Customer customer) {
         this.db = db;
         this.view = view;
-        this.id = id;
+        this.customer = customer;
     }
 
     @Override
     protected Data doInBackground(Void... voids) {
-        Customer customer = db.customerDao().getCustomerById(id);
         Contact contact = db.contactDao().getById(customer.getContact_Id());
         Data data = new Data(customer, contact);
         return data;

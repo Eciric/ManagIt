@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -26,11 +27,13 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
     WarehouseDb db;
     View view;
     Context context;
+    LayoutInflater inflater;
 
-    public CustomersListRetriever(Context context, View view, WarehouseDb db) {
+    public CustomersListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
         this.context = context;
+        this.inflater = inflater;
     }
 
     @Override
@@ -41,16 +44,25 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
     @Override
     protected void onPostExecute(List<Customer> result) {
         ListView customers = view.findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createCustomerLabels(result));
-        customers.setAdapter(arrayAdapter);
-    }
+        ArrayAdapter<Customer> arrayAdapter = new ArrayAdapter<Customer>(context, R.layout.listview_text_formatter, result)  {
+            @Override
+            public View getView(int position,
+                                View convertView,
+                                ViewGroup parent) {
+                if(convertView == null)
+                    convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
-    private List<String> createCustomerLabels(List<Customer> result) {
-        List<String> customers = new ArrayList<>();
-        for (Customer c : result) {
-            customers.add("[" + c.getCustomerId() + "] " + c.getName());
-        }
-        return customers;
+                Customer c = result.get(position);
+                TextView name = convertView.findViewById(R.id.elementName);
+                TextView info = convertView.findViewById(R.id.elementInfo);
+
+                name.setText(c.getName());
+                info.setVisibility(View.INVISIBLE);
+
+                return convertView;
+            }
+        };
+        customers.setAdapter(arrayAdapter);
     }
 
 }
