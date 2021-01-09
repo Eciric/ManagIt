@@ -12,27 +12,26 @@ import res.managit.dbo.entity.Product;
 public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Data> {
     WarehouseDb db;
     View view;
-    String name;
+    Product product;
 
     protected class Data {
-        protected Product product;
-        protected String categoryName;
+        protected Product p;
+        protected String cName;
 
         public Data(Product product, String categoryName) {
-            this.product = product;
-            this.categoryName = categoryName;
+            this.p = product;
+            this.cName = categoryName;
         }
     }
 
-    public ProductRetriever(View view, WarehouseDb db, String name) {
+    public ProductRetriever(View view, WarehouseDb db, Product product) {
         this.db = db;
         this.view = view;
-        this.name = name;
+        this.product = product;
     }
 
     @Override
     protected Data doInBackground(Void... voids) {
-        Product product = db.productDao().getProductByName(name);
         Category category = db.categoryDao().getCategoryById(product.getCategory_Id());
         Data data = new Data(product, category.getName());
         return data;
@@ -45,9 +44,9 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
         TextView amount = view.findViewById(R.id.productAmount);
         TextView category = view.findViewById(R.id.productCategory);
 
-        name.setText("Name: " + result.product.getName());
-        id.setText("ID: " + result.product.getProductId());
-        amount.setText("Amount: " + result.product.getAmount());
-        category.setText("Category: " + result.categoryName);
+        name.setText("Name: " + result.p.getName());
+        id.setText("ID: " + result.p.getProductId());
+        amount.setText("Amount: " + result.p.getAmount());
+        category.setText("Category: " + result.cName);
     }
 }
