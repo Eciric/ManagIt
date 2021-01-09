@@ -12,12 +12,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Set suppliers"
+        android:text="Set customers"
         android:textColor="#FFFFFF"
         android:textSize="24sp" />
 
     <ListView
-        android:id="@+id/suppliersList"
+        android:id="@+id/customersList"
         android:layout_width="wrap_content"
         android:layout_height="310dp" />
 

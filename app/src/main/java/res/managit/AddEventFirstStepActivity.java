@@ -122,6 +122,9 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
 
+//        Load - zaladunek z magazynu - ustawiam workersow - ustawiam customersow - odejmuje przedmioty
+//        Unload - rozladunek w magazynie - ustawaim workersow - ustawiam suppliersow - dodaje przedmioty
+
         // Spinner Drop down elements
         List<String> categories = new ArrayList<>();
         categories.add("Load");

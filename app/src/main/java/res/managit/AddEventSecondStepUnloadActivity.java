@@ -29,6 +29,9 @@ import res.managit.dbo.relations.TypeAction;
 
 public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
 
+    private ListView listSuppliers;
+    private ArrayList<Supply> suppliersArrayList;
+    private static SupplierAdapter supplierAdapter;
 
     private ListView listCustomers;
     private ArrayList<Customer> customerArrayList;
@@ -47,16 +50,26 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_event_second_unload);
 
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-
-        //initialize for customers
-        listCustomers = (ListView) findViewById(R.id.customersList);
-        customerArrayList = new ArrayList<>();
+        //initialize for suppliers
+        listSuppliers = (ListView) findViewById(R.id.suppliersList);
+        suppliersArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {
-            List<Customer> customerList = db.customerDao().getAll();
-            customerArrayList.addAll(customerList);
+            List<Supply> supplyList = db.supplyDao().getAll();
+            suppliersArrayList.addAll(supplyList);
         });
-        customerAdapter = new CustomerAdapter(customerArrayList, getApplicationContext());
-        listCustomers.setAdapter(customerAdapter);
+        supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
+        listSuppliers.setAdapter(supplierAdapter);
+
+
+//        //initialize for customers
+//        listCustomers = (ListView) findViewById(R.id.customersList);
+//        customerArrayList = new ArrayList<>();
+//        Executors.newSingleThreadExecutor().execute(() -> {
+//            List<Customer> customerList = db.customerDao().getAll();
+//            customerArrayList.addAll(customerList);
+//        });
+//        customerAdapter = new CustomerAdapter(customerArrayList, getApplicationContext());
+//        listCustomers.setAdapter(customerAdapter);
 
         //initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
@@ -84,9 +97,14 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                         workers.add(s.first.getWorkerId());
                     }
                 }
-                for (Pair<Customer, Integer> s : CustomerAdapter.getCustomerListChecked()) {
+//                for (Pair<Customer, Integer> s : CustomerAdapter.getCustomerListChecked()) {
+//                    if (s.second == 1) {
+//                        customers.add(s.first.getCustomerId());
+//                    }
+//                }
+                for (Pair<Supply, Integer> s : SupplierAdapter.getSuppliesListChecked()) {
                     if (s.second == 1) {
-                        customers.add(s.first.getCustomerId());
+                        supplies.add(s.first.getSupplyId());
                     }
                 }
 
@@ -98,7 +116,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                     }
                 }
 
-                if (products.size() != 0 && customers.size() != 0) {
+                if (products.size() != 0 && supplies.size() != 0) {
                     Thread threadToUpdateDataBase = new Thread(() -> {
                         for (int i = 0; i < eventItems.size(); i++) {
                             db.eventItemDao().insertEventItem(eventItems.get(i));

@@ -12,11 +12,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import res.managit.add.event.adapter.CustomerAdapter;
 import res.managit.add.event.adapter.ProductAdapter;
 import res.managit.add.event.adapter.SupplierAdapter;
 import res.managit.add.event.adapter.WorkerAdapter;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
+import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
@@ -29,6 +31,10 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
     private ListView listSuppliers;
     private ArrayList<Supply> suppliersArrayList;
     private static SupplierAdapter supplierAdapter;
+
+    private ListView listCustomers;
+    private ArrayList<Customer> customersArrayList;
+    private static CustomerAdapter customerAdapter;
 
     private ListView listProducts;
     private ArrayList<Product> productsArrayList;
@@ -43,16 +49,27 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
 
-
-        //initialize for suppliers
-        listSuppliers = (ListView) findViewById(R.id.suppliersList);
-        suppliersArrayList = new ArrayList<>();
+        //initialize for customers
+        listCustomers = (ListView) findViewById(R.id.customersList);
+        customersArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {
-            List<Supply> supplyList = db.supplyDao().getAll();
-            suppliersArrayList.addAll(supplyList);
+            List<Customer> customerList = db.customerDao().getAll();
+            customersArrayList.addAll(customerList);
         });
-        supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
-        listSuppliers.setAdapter(supplierAdapter);
+        customerAdapter = new CustomerAdapter(customersArrayList, getApplicationContext());
+        listCustomers.setAdapter(customerAdapter);
+
+
+        /////////////////////////////////////////////////
+        //initialize for suppliers
+//        listSuppliers = (ListView) findViewById(R.id.suppliersList);
+//        suppliersArrayList = new ArrayList<>();
+//        Executors.newSingleThreadExecutor().execute(() -> {
+//            List<Supply> supplyList = db.supplyDao().getAll();
+//            suppliersArrayList.addAll(supplyList);
+//        });
+//        supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
+//        listSuppliers.setAdapter(supplierAdapter);
 
         //initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
@@ -83,9 +100,15 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                         workers.add(s.first.getWorkerId());
                     }
                 }
-                for (Pair<Supply, Integer> s : SupplierAdapter.getSuppliesListChecked()) {
-                    if (s.second == 1) {
-                        supplies.add(s.first.getSupplyId());
+//                for (Pair<Supply, Integer> s : SupplierAdapter.getSuppliesListChecked()) {
+//                    if (s.second == 1) {
+//                        supplies.add(s.first.getSupplyId());
+//                    }
+//                }
+
+                for(Pair<Customer, Integer> c : CustomerAdapter.getCustomerListChecked()){
+                    if(c.second == 1){
+                        customers.add(c.first.getCustomerId());
                     }
                 }
 
@@ -97,7 +120,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                     }
                 }
 
-                if (products.size() != 0 && supplies.size() != 0) {
+                if (products.size() != 0 && customers.size() != 0) {
                     Thread threadToUpdateDataBase = new Thread(() -> {
                         for (int i = 0; i < eventItems.size(); i++) {
                             db.eventItemDao().insertEventItem(eventItems.get(i));
