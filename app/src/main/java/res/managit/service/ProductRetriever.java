@@ -44,9 +44,9 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
         TextView amount = view.findViewById(R.id.productAmount);
         TextView category = view.findViewById(R.id.productCategory);
 
-        name.setText("Name: " + result.p.getName());
-        id.setText("ID: " + result.p.getProductId());
-        amount.setText("Amount: " + result.p.getAmount());
-        category.setText("Category: " + result.cName);
+        name.setText(result.p.getName());
+        id.setText(Long.toString(result.p.getProductId()));
+        amount.setText(Integer.toString(result.p.getAmount()));
+        category.setText(result.cName);
     }
 }

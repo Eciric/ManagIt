@@ -46,11 +46,11 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
         TextView country = view.findViewById(R.id.country);
         TextView phone = view.findViewById(R.id.phone);
 
-        fullname.setText("Fullname: " + result.worker.getName() + " " + result.worker.getLastName());
-        role.setText("Role: " + result.worker.getRole());
-        street.setText("Street: " + result.contact.getStreetNumber() + " " + result.contact.getStreetName() + " st");
-        city.setText("City: " + result.contact.getPostalCode() + " " + result.contact.getCity());
-        country.setText("Country: " + result.contact.getCountry());
-        phone.setText("Phone: " + result.contact.getPhoneNumber());
+        fullname.setText(result.worker.getName() + " " + result.worker.getLastName());
+        role.setText(result.worker.getRole());
+        street.setText(result.contact.getStreetNumber() + " " + result.contact.getStreetName() + " st");
+        city.setText(result.contact.getPostalCode() + " " + result.contact.getCity());
+        country.setText(result.contact.getCountry());
+        phone.setText(result.contact.getPhoneNumber());
     }
 }

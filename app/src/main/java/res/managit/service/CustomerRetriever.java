@@ -45,10 +45,10 @@ public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.D
         TextView country = view.findViewById(R.id.country);
         TextView phone = view.findViewById(R.id.phone);
 
-        name.setText("Name: " + result.customer.getName());
-        street.setText("Street: " + result.contact.getStreetNumber() + " " + result.contact.getStreetName() + " st");
-        city.setText("City: " + result.contact.getPostalCode() + " " + result.contact.getCity());
-        country.setText("Country: " + result.contact.getCountry());
-        phone.setText("Phone: " + result.contact.getPhoneNumber());
+        name.setText(result.customer.getName());
+        street.setText(result.contact.getStreetNumber() + " " + result.contact.getStreetName() + " st");
+        city.setText(result.contact.getPostalCode() + " " + result.contact.getCity());
+        country.setText(result.contact.getCountry());
+        phone.setText(result.contact.getPhoneNumber());
     }
 }
