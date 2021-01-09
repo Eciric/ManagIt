@@ -55,9 +55,6 @@ public class whSelectorFragment extends Fragment {
             PublicDatabaseAcces.currentDatabase = PublicDatabaseAcces.getDatabaseByName(PublicDatabaseAcces.databaseNameList.get(i));
             PublicDatabaseAcces.currentDatabaseName = PublicDatabaseAcces.databaseNameList.get(i);
 
-            Executors.newSingleThreadExecutor().execute(() -> {
-                PublicDatabaseAcces.currentDatabaseEventNumber = PublicDatabaseAcces.currentDatabase.eventDao().getAll().size();
-            });
             if (tempToMenageExecutedThread.compareAndSet(true, false)) {
                 executeEvents = new ExecuteEvents();
                 System.out.println("Run new process for database of name " + executeEvents.getName());

@@ -10,4 +10,5 @@
     <color name="drawerBackground">#ffe9ec</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="red">#ffff0000</color>
 </resources>

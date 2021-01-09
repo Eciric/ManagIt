@@ -28,6 +28,9 @@ public interface EventDao {
     @Query("SELECT * FROM Event WHERE `action` LIKE :act")
     public List<Event> getEventByAction(String act);
 
+    @Query("Select MAX(eventId) from Event")
+    public long getMaxEventId();
+
     //zwraca event i wszystkich pracownikow ktorzy z nim sa powiazani
     @Transaction
     @Query("Select * from Event")

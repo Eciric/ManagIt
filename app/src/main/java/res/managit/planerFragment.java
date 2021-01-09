@@ -137,8 +137,26 @@ public class planerFragment extends Fragment {
             close.setOnClickListener((event) -> {
                 popupWindow.dismiss();
             });
+            Button delete = popupView.findViewById(R.id.delete);
 
             Event value = (Event) adapter.getItemAtPosition(position);
+
+            delete.setOnClickListener((event) -> {
+
+                Thread deleteEvent = new Thread(() ->{
+                    db.eventDao().deleteEvent(value);
+                });
+                deleteEvent.start();
+                try {
+                    deleteEvent.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                popupWindow.dismiss();
+                setEventList(new ArrayList<>());
+                onResume();// jak cos to tu moze cos nie dzialac XD
+            });
+
 
             new EventRetriever(popupView, PublicDatabaseAcces.currentDatabase, value).execute();
 

@@ -77,7 +77,6 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                 ArrayList<Long> supplies = new ArrayList<>();
                 ArrayList<Long> customers = new ArrayList<>();
                 ArrayList<Long> products = new ArrayList<>();
-                ArrayList<EventItem> eventItems = new ArrayList<>();
 
 
                 for (Pair<Worker, Integer> s : WorkerAdapter.getWorkerListChecked()) {
@@ -96,20 +95,22 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                 for (Pair<Product, Integer> p : ProductAdapter.getProductQuantityList()) {
                     if (p.second != 0) {
                         products.add(p.first.getProductId());
-                        EventItem eventItem = new EventItem(p.second, p.first.getProductId(), PublicDatabaseAcces.currentDatabaseEventNumber + 1);
-                        eventItems.add(eventItem);
                     }
                 }
 
                 if (products.size() != 0 && customers.size() != 0) {
                     Thread threadToUpdateDataBase = new Thread(() -> {
-                        for (int i = 0; i < eventItems.size(); i++) {
-                            db.eventItemDao().insertEventItem(eventItems.get(i));
-                            int size = db.eventItemDao().getAll().size();
-                        }
                         Event event = new Event(AddEventFirstStepActivity.getDateTime(), TypeAction.Loading.label, workers, supplies, customers, false);
                         db.eventDao().insertEvent(event);
-                        PublicDatabaseAcces.currentDatabaseEventNumber += 1;
+                        long id = db.eventDao().getMaxEventId();
+
+                        for (Pair<Product, Integer> p : ProductAdapter.getProductQuantityList()) {
+                            if (p.second != 0) {
+                                EventItem eventItem = new EventItem(p.second, p.first.getProductId(), id);
+                                db.eventItemDao().insertEventItem(eventItem);
+
+                            }
+                        }
                     });
                     threadToUpdateDataBase.start();
                     try {
