@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.service.AddCategoryHandler;
 import res.managit.service.AddCustomerHandler;
 import res.managit.service.AddProductHandler;
 import res.managit.service.AddSupplierHandler;
@@ -171,6 +172,11 @@ public class manageFragment extends Fragment {
         customerAdd.setOnClickListener((event) -> {
             new AddCustomerHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
         });
+
+        Button categoryAdd = view.findViewById(R.id.categoryAdd);
+        categoryAdd.setOnClickListener((event) -> {
+            new AddCategoryHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -234,6 +240,9 @@ public class manageFragment extends Fragment {
         categoryClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addCategoryCard);
             card.setVisibility(View.INVISIBLE);
+
+            ((TextView)view.findViewById(R.id.categoryError)).setText("");
+            ((EditText)view.findViewById(R.id.categoryName)).setText("");
         });
     }
 
