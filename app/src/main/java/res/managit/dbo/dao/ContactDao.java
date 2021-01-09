@@ -27,7 +27,7 @@ public interface ContactDao {
 
     //wstawia nowy kontakt
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    void insertContact(Contact... contacts);
+    long[] insertContact(Contact... contacts);
 
     //usuwa kontakt
     @Delete
