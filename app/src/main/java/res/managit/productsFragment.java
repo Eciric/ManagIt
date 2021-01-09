@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.entity.Product;
 import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductRetriever;
 
@@ -32,7 +33,7 @@ public class productsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new ProductListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        new ProductListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Products");
 
@@ -47,18 +48,8 @@ public class productsFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            String name = getProductName((String)adapterView.getAdapter().getItem(i));
-            new ProductRetriever(popupView, PublicDatabaseAcces.currentDatabase, name).execute();
+            new ProductRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Product)adapterView.getAdapter().getItem(i)).execute();
         });
-    }
-
-    private String getProductName(String text) {
-        String name = text;
-        int index = name.lastIndexOf(']') + 2;
-        name = name.substring(index);
-        index = name.indexOf('(') - 1;
-        name = name.substring(0, index);
-        return name;
     }
 
     @Override
