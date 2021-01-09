@@ -17,6 +17,7 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.service.AddCustomerHandler;
 import res.managit.service.AddProductHandler;
 import res.managit.service.AddSupplierHandler;
 import res.managit.service.AddWorkerHandler;
@@ -165,6 +166,11 @@ public class manageFragment extends Fragment {
         supplierAdd.setOnClickListener((event) -> {
             new AddSupplierHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
         });
+
+        Button customerAdd = view.findViewById(R.id.customerAdd);
+        customerAdd.setOnClickListener((event) -> {
+            new AddCustomerHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -213,6 +219,15 @@ public class manageFragment extends Fragment {
         customerClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addCustomerCard);
             card.setVisibility(View.INVISIBLE);
+
+            ((EditText)view.findViewById(R.id.customerName)).setText("");
+            ((EditText)view.findViewById(R.id.customerStreet)).setText("");
+            ((EditText)view.findViewById(R.id.customerStreetNumber)).setText("");
+            ((EditText)view.findViewById(R.id.customerCountry)).setText("");
+            ((EditText)view.findViewById(R.id.customerCity)).setText("");
+            ((EditText)view.findViewById(R.id.customerCityCode)).setText("");
+            ((EditText)view.findViewById(R.id.customerPhone)).setText("");
+            ((TextView)view.findViewById(R.id.customerError)).setText("");
         });
 
         Button categoryClose = view.findViewById(R.id.categoryClose);
