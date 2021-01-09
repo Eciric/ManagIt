@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.AddProductHandler;
+import res.managit.service.AddSupplierHandler;
 import res.managit.service.AddWorkerHandler;
 import res.managit.service.ProductSpinnerInitializer;
 
@@ -159,6 +160,11 @@ public class manageFragment extends Fragment {
         workerAdd.setOnClickListener((event) -> {
             new AddWorkerHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
         });
+
+        Button supplierAdd = view.findViewById(R.id.supplierAdd);
+        supplierAdd.setOnClickListener((event) -> {
+            new AddSupplierHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -173,6 +179,9 @@ public class manageFragment extends Fragment {
 
         Button workerClose = view.findViewById(R.id.workerClose);
         workerClose.setOnClickListener((e) -> {
+            CardView card = view.findViewById(R.id.addWorkerCard);
+            card.setVisibility(View.INVISIBLE);
+
             ((EditText)view.findViewById(R.id.workerName)).setText("");
             ((EditText)view.findViewById(R.id.workerLastname)).setText("");
             ((EditText)view.findViewById(R.id.workerRole)).setText("");
@@ -183,15 +192,21 @@ public class manageFragment extends Fragment {
             ((EditText)view.findViewById(R.id.workerCityCode)).setText("");
             ((EditText)view.findViewById(R.id.workerPhone)).setText("");
             ((TextView)view.findViewById(R.id.workerError)).setText("");
-
-            CardView card = view.findViewById(R.id.addWorkerCard);
-            card.setVisibility(View.INVISIBLE);
         });
 
         Button supplierClose = view.findViewById(R.id.supplierClose);
         supplierClose.setOnClickListener((e) -> {
             CardView card = view.findViewById(R.id.addSupplierCard);
             card.setVisibility(View.INVISIBLE);
+
+            ((EditText)view.findViewById(R.id.supplierName)).setText("");
+            ((EditText)view.findViewById(R.id.supplierStreet)).setText("");
+            ((EditText)view.findViewById(R.id.supplierStreetNumber)).setText("");
+            ((EditText)view.findViewById(R.id.supplierCountry)).setText("");
+            ((EditText)view.findViewById(R.id.supplierCity)).setText("");
+            ((EditText)view.findViewById(R.id.supplierCityCode)).setText("");
+            ((EditText)view.findViewById(R.id.supplierPhone)).setText("");
+            ((TextView)view.findViewById(R.id.supplierError)).setText("");
         });
 
         Button customerClose = view.findViewById(R.id.customerClose);
