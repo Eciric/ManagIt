@@ -22,6 +22,7 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Name cannot be empty";
     final String INVALID_MSG = "Name can contain only letters";
     final String EXISTS_MSG = "Product already exists";
+    final String SUCCESS_MSG = "Product successfully added";
 
     WarehouseDb db;
     View view;
@@ -63,18 +64,19 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String result) {
         TextView errorText = view.findViewById(R.id.productError);
-        EditText text = (EditText)view.findViewById(R.id.productName);
-        CardView cardView = view.findViewById(R.id.addProductsCard);
 
-        if (result.equals(EMPTY_MSG) || result.equals(INVALID_MSG) || result.equals(EXISTS_MSG) )
+        if (!result.equals(SUCCESS_MSG))
             errorText.setText(result);
         else {
+            EditText text = view.findViewById(R.id.productName);
+            CardView cardView = view.findViewById(R.id.addProductsCard);
+
             errorText.setText("");
             text.setText("");
+
             cardView.setVisibility(View.INVISIBLE);
-            Toast toast = Toast.makeText(context, "Product successfully added", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(context, SUCCESS_MSG, Toast.LENGTH_SHORT);
             toast.show();
         }
-        System.out.println("Result: " + result);
     }
 }
