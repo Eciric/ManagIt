@@ -33,9 +33,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
     private ArrayList<Supply> suppliersArrayList;
     private static SupplierAdapter supplierAdapter;
 
-    private ListView listCustomers;
-    private ArrayList<Customer> customerArrayList;
-    private static CustomerAdapter customerAdapter;
+
 
     private ListView listProducts;
     private ArrayList<Product> productsArrayList;
@@ -61,15 +59,6 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
         listSuppliers.setAdapter(supplierAdapter);
 
 
-//        //initialize for customers
-//        listCustomers = (ListView) findViewById(R.id.customersList);
-//        customerArrayList = new ArrayList<>();
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//            List<Customer> customerList = db.customerDao().getAll();
-//            customerArrayList.addAll(customerList);
-//        });
-//        customerAdapter = new CustomerAdapter(customerArrayList, getApplicationContext());
-//        listCustomers.setAdapter(customerAdapter);
 
         //initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
@@ -97,11 +86,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
                         workers.add(s.first.getWorkerId());
                     }
                 }
-//                for (Pair<Customer, Integer> s : CustomerAdapter.getCustomerListChecked()) {
-//                    if (s.second == 1) {
-//                        customers.add(s.first.getCustomerId());
-//                    }
-//                }
+
                 for (Pair<Supply, Integer> s : SupplierAdapter.getSuppliesListChecked()) {
                     if (s.second == 1) {
                         supplies.add(s.first.getSupplyId());

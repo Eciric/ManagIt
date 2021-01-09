@@ -28,10 +28,6 @@ import res.managit.dbo.relations.TypeAction;
 
 public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
-    private ListView listSuppliers;
-    private ArrayList<Supply> suppliersArrayList;
-    private static SupplierAdapter supplierAdapter;
-
     private ListView listCustomers;
     private ArrayList<Customer> customersArrayList;
     private static CustomerAdapter customerAdapter;
@@ -59,17 +55,6 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
         customerAdapter = new CustomerAdapter(customersArrayList, getApplicationContext());
         listCustomers.setAdapter(customerAdapter);
 
-
-        /////////////////////////////////////////////////
-        //initialize for suppliers
-//        listSuppliers = (ListView) findViewById(R.id.suppliersList);
-//        suppliersArrayList = new ArrayList<>();
-//        Executors.newSingleThreadExecutor().execute(() -> {
-//            List<Supply> supplyList = db.supplyDao().getAll();
-//            suppliersArrayList.addAll(supplyList);
-//        });
-//        supplierAdapter = new SupplierAdapter(suppliersArrayList, getApplicationContext());
-//        listSuppliers.setAdapter(supplierAdapter);
 
         //initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
@@ -100,11 +85,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
                         workers.add(s.first.getWorkerId());
                     }
                 }
-//                for (Pair<Supply, Integer> s : SupplierAdapter.getSuppliesListChecked()) {
-//                    if (s.second == 1) {
-//                        supplies.add(s.first.getSupplyId());
-//                    }
-//                }
+
 
                 for(Pair<Customer, Integer> c : CustomerAdapter.getCustomerListChecked()){
                     if(c.second == 1){
