@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.entity.Worker;
 import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductRetriever;
 import res.managit.service.WorkerListRetriever;
@@ -34,7 +35,7 @@ public class workersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new WorkerListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        new WorkerListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Workers");
 
@@ -49,8 +50,7 @@ public class workersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            Long id = getWorkerId((String) adapterView.getAdapter().getItem(i));
-            new WorkerRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
+            new WorkerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Worker)adapterView.getAdapter().getItem(i)).execute();
         });
     }
 
