@@ -46,7 +46,7 @@ public class ProductSpinnerInitializer extends AsyncTask<Void, Void, List<Catego
     private List<String> createCategoryNameList(List<Category> result) {
         List<String> categories = new ArrayList<>();
         for (Category c : result) {
-            categories.add("[" + c.getName() +")");
+            categories.add(c.getName());
         }
         return categories;
     }
