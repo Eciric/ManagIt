@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -25,11 +26,13 @@ public class SuppliersListRetriever extends AsyncTask<Void, Void, List<Supply>> 
     WarehouseDb db;
     View view;
     Context context;
+    LayoutInflater inflater;
 
-    public SuppliersListRetriever(Context context, View view, WarehouseDb db) {
+    public SuppliersListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
         this.context = context;
+        this.inflater = inflater;
     }
 
     @Override
@@ -39,17 +42,25 @@ public class SuppliersListRetriever extends AsyncTask<Void, Void, List<Supply>> 
 
     @Override
     protected void onPostExecute(List<Supply> result) {
-        ListView workers = view.findViewById(R.id.list);
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(context, R.layout.listview_text_formatter, R.id.textView2, createSupplierLabels(result));
-        workers.setAdapter(arrayAdapter);
-    }
+        ListView suppliers = view.findViewById(R.id.list);
+        ArrayAdapter<Supply> arrayAdapter = new ArrayAdapter<Supply>(context, R.layout.listview_text_formatter, result)  {
+            @Override
+            public View getView(int position,
+                                View convertView,
+                                ViewGroup parent) {
+                if(convertView == null)
+                    convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
-    private List<String> createSupplierLabels(List<Supply> result) {
-        List<String> suppliers = new ArrayList<>();
-        for (Supply s : result) {
-            suppliers.add("[" + s.getSupplyId() + "] " + s.getName());
-        }
-        return suppliers;
-    }
+                Supply s = result.get(position);
+                TextView name = convertView.findViewById(R.id.elementName);
+                TextView info = convertView.findViewById(R.id.elementInfo);
 
+                name.setText(s.getName());
+                info.setVisibility(View.INVISIBLE);
+
+                return convertView;
+            }
+        };
+        suppliers.setAdapter(arrayAdapter);
+    }
 }

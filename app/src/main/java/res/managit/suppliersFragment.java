@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.entity.Supply;
 import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
 
@@ -32,7 +33,7 @@ public class suppliersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new SuppliersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        new SuppliersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Suppliers");
 
@@ -47,8 +48,7 @@ public class suppliersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            Long id = getSupplierId((String)adapterView.getAdapter().getItem(i));
-            new SupplierRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
+            new SupplierRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Supply)adapterView.getAdapter().getItem(i)).execute();
         });
     }
 
