@@ -27,7 +27,7 @@ public class categoriesFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new CategoryListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        new CategoryListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Categories");
     }
