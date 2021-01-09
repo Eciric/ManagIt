@@ -18,6 +18,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.AddProductHandler;
+import res.managit.service.AddWorkerHandler;
 import res.managit.service.ProductSpinnerInitializer;
 
 
@@ -153,6 +154,11 @@ public class manageFragment extends Fragment {
         productAdd.setOnClickListener((event) -> {
             new AddProductHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
         });
+
+        Button workerAdd = view.findViewById(R.id.workerAdd);
+        workerAdd.setOnClickListener((event) -> {
+            new AddWorkerHandler(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        });
     }
 
     public void setCloseButtonListeners(@NonNull View view) {
@@ -161,14 +167,23 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addProductsCard);
             card.setVisibility(View.INVISIBLE);
 
-            TextView errorText = view.findViewById(R.id.productError);
-            EditText text = (EditText)view.findViewById(R.id.productName);
-            errorText.setText("");
-            text.setText("");
+            ((TextView)view.findViewById(R.id.productError)).setText("");
+            ((EditText)view.findViewById(R.id.productName)).setText("");
         });
 
         Button workerClose = view.findViewById(R.id.workerClose);
         workerClose.setOnClickListener((e) -> {
+            ((EditText)view.findViewById(R.id.workerName)).setText("");
+            ((EditText)view.findViewById(R.id.workerLastname)).setText("");
+            ((EditText)view.findViewById(R.id.workerRole)).setText("");
+            ((EditText)view.findViewById(R.id.workerStreet)).setText("");
+            ((EditText)view.findViewById(R.id.workerStreetNumber)).setText("");
+            ((EditText)view.findViewById(R.id.workerCountry)).setText("");
+            ((EditText)view.findViewById(R.id.workerCity)).setText("");
+            ((EditText)view.findViewById(R.id.workerCityCode)).setText("");
+            ((EditText)view.findViewById(R.id.workerPhone)).setText("");
+            ((TextView)view.findViewById(R.id.workerError)).setText("");
+
             CardView card = view.findViewById(R.id.addWorkerCard);
             card.setVisibility(View.INVISIBLE);
         });
