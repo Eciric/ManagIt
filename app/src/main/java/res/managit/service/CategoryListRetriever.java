@@ -37,8 +37,7 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
     @Override
     protected void onPostExecute(List<Category> result) {
         ListView products = view.findViewById(R.id.list);
-        List<Data> data = createCategoryLabels(result);
-        ArrayAdapter<Data> arrayAdapter = new ArrayAdapter<Data>(context, R.layout.manage_listview_formatter, R.id.elementId, data) {
+        ArrayAdapter<Category> arrayAdapter = new ArrayAdapter<Category>(context, R.layout.manage_listview_formatter, result) {
             @Override
             public View getView(int position,
                                 View convertView,
@@ -46,13 +45,11 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
                 if(convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
-                Data d = data.get(position);
-                TextView id = convertView.findViewById(R.id.elementId);
+                Category c = result.get(position);
                 TextView name = convertView.findViewById(R.id.elementName);
                 TextView info = convertView.findViewById(R.id.elementInfo);
 
-                id.setText(Long.toString(d.getId()));
-                name.setText(d.getName());
+                name.setText(c.getName());
                 info.setVisibility(View.INVISIBLE);
 
                 return convertView;
@@ -60,31 +57,4 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
         };
         products.setAdapter(arrayAdapter);
     }
-
-    class Data {
-        long id;
-        String name;
-
-        public Data(long id, String name) {
-            this.id = id;
-            this.name = name;
-        }
-
-        public long getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
-    }
-
-    private List<Data> createCategoryLabels(List<Category> result) {
-        List<Data> data = new ArrayList<>();
-        for (Category c : result) {
-            data.add(new Data(c.getCategoryId(), c.getName()));
-        }
-        return data;
-    }
-
 }
