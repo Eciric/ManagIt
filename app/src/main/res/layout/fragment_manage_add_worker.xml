@@ -33,19 +33,41 @@
                 android:textSize="30sp"
                 android:textStyle="bold"/>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp">
+                android:orientation="horizontal">
 
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/workerName"
-                    android:layout_width="match_parent"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="150sp"
                     android:layout_height="wrap_content"
-                    android:hint="Fullname..."
-                    android:textColor="#363A43"
-                    android:textColorHint="#7A8089"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/workerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Name..."
+                        android:textColor="#363A43"
+                        android:textColorHint="#7A8089"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="150sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/workerLastname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Lastname..."
+                        android:textColor="#363A43"
+                        android:textColorHint="#7A8089"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -157,9 +179,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/productError"
+                android:id="@+id/workerError"
                 android:gravity="center"
-                android:textColor="#FF0000" />
+                android:textColor="#FF0000"
+                android:layout_marginBottom="5sp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
