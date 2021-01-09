@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
+import res.managit.dbo.entity.Customer;
 import res.managit.service.CustomerRetriever;
 import res.managit.service.CustomersListRetriever;
 import res.managit.service.SupplierRetriever;
@@ -34,7 +35,7 @@ public class customersFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        new CustomersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase).execute();
+        new CustomersListRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Customers");
 
@@ -49,8 +50,7 @@ public class customersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            Long id = getCustmomerId((String)adapterView.getAdapter().getItem(i));
-            new CustomerRetriever(popupView, PublicDatabaseAcces.currentDatabase, id).execute();
+            new CustomerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Customer)adapterView.getAdapter().getItem(i)).execute();
         });
 
     }
