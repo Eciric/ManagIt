@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="20px"
         android:paddingBottom="20px"
+        android:layout_marginLeft="10px"
         android:textColor="#FFFFFF"
         android:textSize="28sp" />
 
