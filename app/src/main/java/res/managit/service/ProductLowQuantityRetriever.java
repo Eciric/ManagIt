@@ -19,13 +19,13 @@ import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
 
-public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
+public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Product>>{
     WarehouseDb db;
     View view;
     Context context;
     LayoutInflater inflater;
 
-    public ProductListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
+    public ProductLowQuantityRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
         this.context = context;
@@ -34,7 +34,7 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     @Override
     protected List<Product> doInBackground(Void... voids) {
-        return db.productDao().getAll();
+        return db.productDao().gatProductsAmountLessTen();
     }
 
     @Override
@@ -61,3 +61,4 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
         products.setAdapter(arrayAdapter);
     }
 }
+
