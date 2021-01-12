@@ -60,6 +60,9 @@ public interface CustomerDao {
     @Query("DELETE FROM customer")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Customer'")
+    void deleteNumber();
+
     //modyfikuje klienta
     @Update
     void updateCustomer(Customer customer);

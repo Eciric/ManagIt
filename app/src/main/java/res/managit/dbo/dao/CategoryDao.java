@@ -36,6 +36,9 @@ public interface CategoryDao {
     @Query("DELETE FROM category")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Category'")
+    void deleteNumber();
+
     //modyfikuje kategorie
     @Update
     void updateCategory(Category category);

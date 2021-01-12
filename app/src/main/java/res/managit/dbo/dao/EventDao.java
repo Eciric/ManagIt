@@ -58,6 +58,9 @@ public interface EventDao {
     @Query("DELETE FROM event")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Event'")
+    void deleteNumber();
+
     //modyfikuje event
     @Update
     void updateEvent(Event event);

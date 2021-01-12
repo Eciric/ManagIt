@@ -36,6 +36,9 @@ public interface ContactDao {
     @Query("DELETE FROM Contact")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Contact'")
+    void deleteNumber();
+
     //modyfikuje kontakt
     @Update
     void updateContact(Contact contact);

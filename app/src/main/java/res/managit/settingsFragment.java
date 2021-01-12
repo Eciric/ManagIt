@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import static res.managit.dbo.DatabaseFunctions.downloadDatabaseBackUp;
+import static res.managit.dbo.DatabaseFunctions.uploadDatabaseBackUp;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link settingsFragment#newInstance} factory method to
@@ -59,6 +62,9 @@ public class settingsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        uploadDatabaseBackUp();
+
+
         return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 }

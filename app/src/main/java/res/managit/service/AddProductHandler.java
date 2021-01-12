@@ -53,9 +53,12 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
         if (productsNames.contains(name.toLowerCase()))
             return EXISTS_MSG;
 
-        String categoryName = mySpinner.getSelectedItem().toString().substring(1);
-        categoryName = categoryName.substring(0,categoryName.length() - 1);
+        String categoryName = mySpinner.getSelectedItem().toString();
+        System.out.println("categoryName1: " + categoryName);
+        //categoryName = categoryName.substring(0,categoryName.length() - 1);
+        System.out.println("categoryName2: " + categoryName);
         Category category = db.categoryDao().getCategoryByName(categoryName);
+        System.out.println("category: " + category);
         db.productDao().insertProduct(new Product(name, 0, category.getCategoryId()));
 
         return SUCCESS_MSG;

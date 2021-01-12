@@ -35,6 +35,17 @@ public class Event {
         this.isExecuted = isExecuted;
     }
 
+    @Ignore
+    public Event(long eventId, LocalDateTime date, String action, List<Long> worker_Id, List<Long> supplier_Id, List<Long> customer_Id, boolean isExecuted) {
+        this.eventId = eventId;
+        this.date = date;
+        this.action = action;
+        this.worker_Id = worker_Id;
+        this.supplier_Id = supplier_Id;
+        this.customer_Id = customer_Id;
+        this.isExecuted = isExecuted;
+    }
+
     public long getEventId() {
         return eventId;
     }

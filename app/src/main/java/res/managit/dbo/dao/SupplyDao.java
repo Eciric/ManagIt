@@ -59,6 +59,9 @@ public interface SupplyDao {
     @Query("DELETE FROM supply")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Supply'")
+    void deleteNumber();
+
     //modyfikowanie dostawcy
     @Update
     void updateSupply(Supply supply);

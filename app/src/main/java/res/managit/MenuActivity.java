@@ -16,6 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import res.managit.dbo.PublicDatabaseAcces;
 
+import static res.managit.dbo.DatabaseFunctions.downloadDatabaseBackUp;
 import static res.managit.dbo.DatabaseFunctions.exportDatabase;
 
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -74,6 +75,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                         new statisticsFragment()).commit();
                 break;
             case R.id.nav_export:
+                downloadDatabaseBackUp();
                 exportDatabase(PublicDatabaseAcces.currentDatabaseName);
                 Toast.makeText(this, "Database exported", Toast.LENGTH_SHORT).show();
                 break;

@@ -52,6 +52,9 @@ public interface ProductDao {
     @Query("DELETE FROM product")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Product'")
+    void deleteNumber();
+
     //modyfikowanie produktu
     @Update
     void updateProduct(Product product);

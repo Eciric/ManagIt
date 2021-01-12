@@ -58,6 +58,9 @@ public interface WorkerDao {
     @Query("DELETE FROM worker")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'Worker'")
+    void deleteNumber();
+
     //modyfikuje pracownika
     @Update
     void updateWorker(Worker worker);

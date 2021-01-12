@@ -41,6 +41,9 @@ public interface EventItemDao {
     @Query("Delete from EventItem")
     void deleteAll();
 
+    @Query("DELETE FROM sqlite_sequence WHERE name = 'EventItem'")
+    void deleteNumber();
+
     @Update
     void updateEventItem(EventItem eventItem);
 
