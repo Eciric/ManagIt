@@ -8,12 +8,12 @@
         <item android:id="@+id/nav_manage"
             android:icon="@drawable/ic_manage"
             android:title="Manage"/>
-        <item android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_settings"
-            android:title="Settings"/>
-        <item android:id="@+id/nav_statistics"
-            android:icon="@drawable/ic_statistics"
-            android:title="Statistics"/>
+        <item android:id="@+id/nav_backup"
+            android:icon="@drawable/ic_cloud"
+            android:title="Online BackUp"/>
+        <item android:id="@+id/nav_lowinstock"
+            android:icon="@drawable/ic_lowinstock"
+            android:title="Low in Stock"/>
     </group>
 
     <item android:title="Tools">

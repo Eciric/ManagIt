@@ -34,7 +34,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new statisticsFragment()).commit();
+                new planerFragment()).commit();
 
         drawer = findViewById(R.id.drawer_activity);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -66,11 +66,11 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new manageFragment()).commit();
                 break;
-            case R.id.nav_settings:
+            case R.id.nav_backup:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new backUpFragment()).commit();
                 break;
-            case R.id.nav_statistics:
+            case R.id.nav_lowinstock:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new statisticsFragment()).commit();
                 break;
