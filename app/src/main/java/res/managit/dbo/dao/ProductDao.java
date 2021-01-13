@@ -40,6 +40,8 @@ public interface ProductDao {
     @Query("SELECT * FROM Category INNER JOIN Product Where category_Id = categoryId and product_name LIKE :name ")
     public CategoryProduct getCategoryAndProductByName(String name);
 
+    @Query("SELECT * FROM Product WHERE amount < 10")
+    public List<Product> gatProductsAmountLessTen();
 
     //wstawianie produktu
     @Insert(onConflict = OnConflictStrategy.IGNORE)
