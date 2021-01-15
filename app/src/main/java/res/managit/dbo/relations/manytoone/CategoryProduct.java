@@ -12,6 +12,10 @@ import lombok.ToString;
 import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Product;
 
+/**
+ * Class which is used to Room database library
+ * This class is needed in Room library to create many-to-one relationship between Category and Product table
+ */
 @Setter
 @Getter
 @NoArgsConstructor

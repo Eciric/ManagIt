@@ -12,6 +12,10 @@ import lombok.ToString;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class which is used to Room database library
+ * This class is needed in Room library to create one-to-one relationship between Worker and Contact table
+ */
 @Setter
 @Getter
 @NoArgsConstructor
