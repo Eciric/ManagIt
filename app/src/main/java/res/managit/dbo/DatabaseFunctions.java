@@ -143,7 +143,6 @@ public abstract class DatabaseFunctions {
     }
 
     public static void importDatabase(String location, String dbName) {
-        //todo pomyslec nad wyborem lokacji - wybieranie z listy folderow znajdujacych sie na smartphonie
         int dbIndex = PublicDatabaseAcces.databaseNameList.indexOf(dbName);
         WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(dbIndex);
 
@@ -381,7 +380,13 @@ public abstract class DatabaseFunctions {
                             for (DataSnapshot snap : snapshot.getChildren()) {
                                 Event event = createBackUpEvent(snap);
                                 Executors.newSingleThreadExecutor().execute(() -> {
+                                    List<EventItem> eventItems = PublicDatabaseAcces.currentDatabase.eventItemDao().getEventItemByEventId(event.eventId);
+                                    event.eventId = 0;
                                     PublicDatabaseAcces.currentDatabase.eventDao().insertEvent(event);
+                                    eventItems.forEach((e)->{
+                                        e.event_Id = PublicDatabaseAcces.currentDatabase.eventDao().getMaxEventId();
+                                        PublicDatabaseAcces.currentDatabase.eventItemDao().updateEventItem(e);
+                                    });
                                 });
                             }
                         }
@@ -482,6 +487,10 @@ public abstract class DatabaseFunctions {
         List<Long> customer_Id = new ArrayList<>();
         List<Long> supplier_Id = new ArrayList<>();
         List<Long> worker_Id = new ArrayList<>();
+
+
+
+
 
         int temp = 0;
         Matcher m = Pattern.compile("\\[(.*?)\\]").matcher(str);
