@@ -15,53 +15,107 @@ import res.managit.dbo.relations.manytomany.EventCustomer;
 import res.managit.dbo.relations.manytomany.EventSupply;
 import res.managit.dbo.relations.manytomany.EventWorker;
 
-
+/**
+ * Class which is a Data Access Object for Event table in Room database
+ */
 @Dao
 public interface EventDao {
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return list of all entries in Event table
+     */
     @Query("Select * from Event")
-     public List<Event> getAll();
+    List<Event> getAll();
 
 
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param bool variable which is used to check that event is or not executed
+     * @return List of event objects which have date later than now and specific set isExecuted variable
+     */
     @Query("Select * from Event where isExecuted like :bool and date <= (SELECT strftime('%H:%M    %d-%m-%Y', datetime('now')))")
-    public List<Event> getEventByDateAndExecution(boolean bool);
+    List<Event> getEventByDateAndExecution(boolean bool);
 
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param act name of action
+     * @return list of event objects which have a specific action
+     */
     @Query("SELECT * FROM Event WHERE `action` LIKE :act")
-    public List<Event> getEventByAction(String act);
+    List<Event> getEventByAction(String act);
 
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return long number which is the id of last inserted event
+     */
     @Query("Select MAX(eventId) from Event")
-    public long getMaxEventId();
+    long getMaxEventId();
 
-    //zwraca event i wszystkich pracownikow ktorzy z nim sa powiazani
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of EventWorker objects - class connecting event with all his workers
+     */
     @Transaction
     @Query("Select * from Event")
-    public List<EventWorker> getEventWithAllWorkers();
+    List<EventWorker> getEventWithAllWorkers();
 
 
-    //zwraca event i wszystkich dostawcow ktorzy sa z nim powiazani
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of EventSupply objects - class connecting event with all his suppliers
+     */
     @Transaction
     @Query("Select * from Event")
-    public List<EventSupply> getEventWithAllSuppliers();
+    List<EventSupply> getEventWithAllSuppliers();
 
-    //zwraca event i wszystkich klientow ktorzy sa z nim powiazani
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of EventCustomer objects - class connecting event with all his customers
+     */
     @Transaction
     @Query("Select * from Event")
-    public List<EventCustomer> getEventWithAllCustomers();
+    List<EventCustomer> getEventWithAllCustomers();
 
-    //wstawia nowy event
+    /**
+     * Function which insert new entry to Event table
+     *
+     * @param events event objects to be inserted into Event table
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertEvent(Event... events);
 
-    //usuwa event
+    /**
+     * Function which delete specific entry in Event table
+     *
+     * @param events customer object to be deleted from Event table
+     */
     @Delete
     void deleteEvent(Event... events);
 
+    /**
+     * Function which delete all entries in Event table
+     */
     @Query("DELETE FROM event")
     void deleteAll();
 
+    /**
+     * Function which sets generating Id back to 1
+     */
     @Query("DELETE FROM sqlite_sequence WHERE name = 'Event'")
     void deleteNumber();
 
-    //modyfikuje event
+    /**
+     * Function which update specific entry in Event table
+     *
+     * @param event event object to be updated in Event table
+     */
     @Update
     void updateEvent(Event event);
 }

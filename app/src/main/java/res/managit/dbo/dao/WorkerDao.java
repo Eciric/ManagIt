@@ -16,52 +16,101 @@ import res.managit.dbo.relations.manytomany.EventWorker;
 import res.managit.dbo.relations.manytomany.WorkerEvent;
 import res.managit.dbo.relations.onetoone.ContactWorker;
 
+/**
+ * Class which is a Data Access Object for Worker table in Room database
+ */
 @Dao
 public interface WorkerDao {
-    //zwraca wszystkich pracownikow
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return list of all entries in Worker table
+     */
     @Query("SELECT * FROM Worker")
-    public List<Worker> getAll();
+    List<Worker> getAll();
 
-    //zwraca wszystkich pracownikow o podanej naziwe
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched worker
+     * @return Worker objects with specific name
+     */
     @Query("SELECT * FROM Worker WHERE worker_name LIKE :name")
-    public Worker getWorkerByName(String name);
+    Worker getWorkerByName(String name);
 
-    //zwraca wszystkich pracownikow o podanym id
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param id identity number of searched worker
+     * @return Worker object with specific id
+     */
     @Query("SELECT * FROM Worker WHERE workerId LIKE :id")
-    public Worker getWorkerById(long id);
+    Worker getWorkerById(long id);
 
-    //zwraca wsztstkich pracownikow i kontakt do kazdego z nich
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of ContactWorker objects - class connecting the worker with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Worker where contact_Id = contactId")
-    public List<ContactWorker> getContactsAndWorker();
+    List<ContactWorker> getContactsAndWorker();
 
-    //zwraca pracownika o podanej nazwie i kontakt do niego
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched worker
+     * @return ContactWorker object - class connecting the worker, who have a specific name, with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Worker where contact_Id = contactId and worker_name Like :name")
-    public ContactWorker getContactAndWorkerByName(String name);
+    ContactWorker getContactAndWorkerByName(String name);
 
-    //zwraca pracownika o danej nazwie i wszystkich eventach w jakich bierze udział
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched worker
+     * @return List of WorkerEvent objects - class connecting the worker, who have a specific name, with all events in which he is included
+     */
     @Transaction
     @Query("Select * from Worker where worker_name like :name")
-    public List<WorkerEvent> getWorkerWithAllEvents(String name);
+    List<WorkerEvent> getWorkerWithAllEvents(String name);
 
-    //wstawia nowego pracownika
+    /**
+     * Function which insert new entry to Worker table
+     *
+     * @param workers worker objects to be inserted into Worker table
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertWorker(Worker... workers);
 
-    //usuwa pracownika
+    /**
+     * Function which delete specific entry in Worker table
+     *
+     * @param workers worker object to be deleted from Worker table
+     */
     @Delete
     void deleteWorker(Worker... workers);
 
+    /**
+     * Function which delete all entries in Worker table
+     */
     @Query("DELETE FROM worker")
     void deleteAll();
 
+    /**
+     * Function which sets generating Id back to 1
+     */
     @Query("DELETE FROM sqlite_sequence WHERE name = 'Worker'")
     void deleteNumber();
 
-    //modyfikuje pracownika
+    /**
+     * Function which update specific entry in Worker table
+     *
+     * @param worker customer object to be updated in Customer table
+     */
     @Update
     void updateWorker(Worker worker);
 }

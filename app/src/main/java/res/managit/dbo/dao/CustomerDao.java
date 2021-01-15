@@ -17,53 +17,102 @@ import res.managit.dbo.relations.manytomany.CustomerEvent;
 import res.managit.dbo.relations.manytomany.EventCustomer;
 import res.managit.dbo.relations.onetoone.ContactCustomer;
 
+/**
+ * Class which is a Data Access Object for Customer table in Room database
+ */
 @Dao
 public interface CustomerDao {
 
-    //zwraca wszystich klientow
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return list of all entries in Customer table
+     */
     @Query("SELECT * FROM Customer")
-    public List<Customer> getAll();
+    List<Customer> getAll();
 
-    //zwraca wszystkich klientow o danej nazwie
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched customer
+     * @return list of Customer objects with specific name
+     */
     @Query("SELECT * FROM Customer WHERE customer_name LIKE :name")
-    public List<Customer> getCustomerByName(String name);
+    List<Customer> getCustomerByName(String name);
 
-    //zwraca klienta o danym id
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param id identity number of searched customer
+     * @return Customer object with specific id
+     */
     @Query("SELECT * FROM Customer WHERE customerId LIKE :id")
-    public Customer getCustomerById(long id);
+    Customer getCustomerById(long id);
 
-    //zwraca wszystkich klientow i kontatky do kazdego z nich
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of ContactCustomer objects - class connecting the customer with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Customer where contact_Id = contactId")
-    public List<ContactCustomer> getCustomerAndContact();
+    List<ContactCustomer> getCustomerAndContact();
 
-    //zwraca klienta o podanej nazwie i jego kontakt
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched customer
+     * @return List of ContactCustomer objects - class connecting the customer, who have a specific name, with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Customer where contact_Id = contactId and customer_name Like :name")
-    public List<ContactCustomer> getCustomerAndContactByName(String name);
+    List<ContactCustomer> getCustomerAndContactByName(String name);
 
-    //zwraca klienta o podanej nazwie i wszystkie eventy ktore sa z nim powiazane
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched customer
+     * @return List of CustomerEvent objects - class connecting the customer, who have a specific name, with all events in which he is included
+     */
     @Transaction
     @Query("Select * from Customer where customer_name like :name")
-    public List<CustomerEvent> getCustomerAndEvents(String name);
+    List<CustomerEvent> getCustomerAndEvents(String name);
 
-    //wstawia nowego klienta
+    /**
+     * Function which insert new entry to Customer table
+     *
+     * @param customers customer objects to be inserted into Customer table
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertCustomer(Customer... customers);
 
-    //usuwa klienta
+    /**
+     * Function which delete specific entry in Customer table
+     *
+     * @param customers customer object to be deleted from Customer table
+     */
     @Delete
     void deleteCustomer(Customer... customers);
 
+    /**
+     * Function which delete all entries in Customer table
+     */
     @Query("DELETE FROM customer")
     void deleteAll();
 
+    /**
+     * Function which sets generating Id back to 1
+     */
     @Query("DELETE FROM sqlite_sequence WHERE name = 'Customer'")
     void deleteNumber();
 
-    //modyfikuje klienta
+    /**
+     * Function which update specific entry in Customer table
+     *
+     * @param customer customer object to be updated in Customer table
+     */
     @Update
     void updateCustomer(Customer customer);
 

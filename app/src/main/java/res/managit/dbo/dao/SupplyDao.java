@@ -16,53 +16,102 @@ import res.managit.dbo.relations.manytomany.EventSupply;
 import res.managit.dbo.relations.manytomany.SupplyEvent;
 import res.managit.dbo.relations.onetoone.ContactSupply;
 
+/**
+ * Class which is a Data Access Object for Supply table in Room database
+ */
 @Dao
 public interface SupplyDao {
 
-    //zwraca wszystkich dostawcow
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return list of all entries in Supply table
+     */
     @Query("SELECT * FROM Supply")
-    public List<Supply> getAll();
+    List<Supply> getAll();
 
-    //zwraca wszystkich dostawcow o danej nazwie
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched supplier
+     * @return Supply object with specific name
+     */
     @Query("SELECT * FROM Supply WHERE supply_name LIKE :name")
-    public Supply getSupplyByName(String name);
+    Supply getSupplyByName(String name);
 
-    //zwraca dostawce o danym id
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param id identity number of searched supplier
+     * @return Supply object with specific id
+     */
     @Query("SELECT * FROM Supply WHERE supplyId LIKE :id")
-    public Supply getSupplyById(long id);
+    Supply getSupplyById(long id);
 
-    //zwraca wszystkich dostawcow i kontakty dla kazdego z nich
+    /**
+     * Function which represents specific SQL query
+     *
+     * @return List of ContactSupply objects - class connecting the supplier with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Supply where contact_Id = contactId")
-    public List<ContactSupply> getContactAndSupply();
+    List<ContactSupply> getContactAndSupply();
 
-    //zwraca dostawce i kontakt dla podanej nazwy
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched supplier
+     * @return ContactSupply object - class connecting the supplier, who have a specific name, with his contact
+     */
     @Transaction
     @SuppressWarnings(RoomWarnings.CURSOR_MISMATCH)
     @Query("SELECT * FROM Contact Inner Join Supply where contact_Id = contactId and supply_name Like :name")
-    public ContactSupply getContactAndSupplyByName(String name);
+    ContactSupply getContactAndSupplyByName(String name);
 
-    //zwraca dostawce o podanej nazwie i wszystkie eventy ktore sa z nim powiazane
+    /**
+     * Function which represents specific SQL query
+     *
+     * @param name name of the searched supplier
+     * @return List of SupplyEvent objects - class connecting the supplier, who have a specific name, with all events in which he is included
+     */
     @Transaction
     @Query("Select * from Supply where supply_name like :name")
-    public List<SupplyEvent> getSuppllyWithEvents(String name);
+    List<SupplyEvent> getSupplyWithEvents(String name);
 
-    //dodawanie nowego dostawcy
+    /**
+     * Function which insert new entry to Supply table
+     *
+     * @param supplies supply objects to be inserted into Supply table
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertSupply(Supply... supplies);
 
-    //usuwanie dostawcy
+    /**
+     * Function which delete specific entry in Supply table
+     *
+     * @param supplies supply object to be deleted from Supply table
+     */
     @Delete
     void deleteSupply(Supply... supplies);
 
+    /**
+     * Function which delete all entries in Supply table
+     */
     @Query("DELETE FROM supply")
     void deleteAll();
 
+    /**
+     * Function which sets generating Id back to 1
+     */
     @Query("DELETE FROM sqlite_sequence WHERE name = 'Supply'")
     void deleteNumber();
 
-    //modyfikowanie dostawcy
+    /**
+     * Function which update specific entry in Supply table
+     *
+     * @param supply supply object to be updated in Supply table
+     */
     @Update
     void updateSupply(Supply supply);
 }
