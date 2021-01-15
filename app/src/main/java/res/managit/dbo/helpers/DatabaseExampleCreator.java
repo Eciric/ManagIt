@@ -30,8 +30,8 @@ public class DatabaseExampleCreator extends AsyncTask<Void, Void, Void> {
     Context context;
 
     /**
-     * Function which set local context - variable which stores all data connected with android app
-     * @param context
+     * Function which set local context
+     * @param context  variable which stores all data connected with android app
      */
     public DatabaseExampleCreator(Context context) {
         this.context = context;
