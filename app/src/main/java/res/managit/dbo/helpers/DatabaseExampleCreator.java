@@ -23,13 +23,25 @@ import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
 import static res.managit.dbo.DatabaseFunctions.createDatabase;
 
+/**
+ * Class created to create example Warehouse database with inserting all example data to tables
+ */
 public class DatabaseExampleCreator extends AsyncTask<Void, Void, Void> {
     Context context;
 
+    /**
+     * Function which set local context - variable which stores all data connected with android app
+     * @param context
+     */
     public DatabaseExampleCreator(Context context) {
         this.context = context;
     }
 
+    /**
+     * Function which do task in background thread
+     * @param voids
+     * @return null variable
+     */
     @Override
     protected Void doInBackground(Void... voids) {
         //category

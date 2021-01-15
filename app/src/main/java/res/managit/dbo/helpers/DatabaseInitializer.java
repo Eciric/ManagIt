@@ -19,13 +19,26 @@ import res.managit.dbo.entity.Worker;
  *  Wywolanie -> new DatabaseInitializer(PublicDatabaseAcces.databaseList.get( <indeks bazy danych> )).execute();
  *  UWAGA - przed dodaniem nowych rekordow wszystkie dotychczasowe rekordy sa USUWANE!
  * */
+/**
+ * Class created to insert example data to first Database in the databases list
+ * WARNING: before inserting, all data from this database is removed
+ */
 public class DatabaseInitializer extends AsyncTask<Void, Void, Void> {
     private WarehouseDb db;
 
+    /**
+     * Function which set local Warehouse variable
+     * @param db - Warehouse variable which represents Room database
+     */
     public DatabaseInitializer(WarehouseDb db) {
         this.db = db;
     }
 
+    /**
+     * Function which do task in background thread
+     * @param voids
+     * @return null variable
+     */
     @Override
     protected Void doInBackground(Void... voids) {
         db.categoryDao().deleteAll();

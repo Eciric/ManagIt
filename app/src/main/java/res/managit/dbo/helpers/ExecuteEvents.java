@@ -11,18 +11,34 @@ import res.managit.dbo.entity.Product;
 import res.managit.dbo.relations.TypeAction;
 import res.managit.dbo.relations.onetoone.EventItemProduct;
 
+/**
+ * Class created to check date in list of events in current selected database.
+ */
 public class ExecuteEvents extends Thread {
 
+    /**
+     * Function which set boolean variable to true.
+     * This variable is needed to get to know when the thread have to stop itself.
+     */
     public ExecuteEvents() {
         canBeExecute = true;
     }
 
     private boolean canBeExecute;
 
+    /**
+     * Function which set boolean variable to false.
+     * This variable is needed to get to know when the thread have to stop itself.
+     */
     public void stopProcess() {
         canBeExecute = false;
     }
 
+    /**
+     * Function which check that is date of event is later than now or not.
+     * If date is later, function adds or subtracts amount of specific product to stock.
+     * After action, function set an event's isExecuted variable to true
+     */
     @Override
     public void run() {
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
