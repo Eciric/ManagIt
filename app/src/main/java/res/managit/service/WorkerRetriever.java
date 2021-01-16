@@ -14,6 +14,9 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
     View view;
     Worker worker;
 
+    /**
+     * Inner class which is a storage of worker data
+     */
     protected class Data {
         protected Worker worker;
         protected Contact contact;
@@ -24,12 +27,22 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
         }
     }
 
+    /**
+     * Class constructor
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param worker worker which will be displayed
+     */
     public WorkerRetriever(View view, WarehouseDb db, Worker worker) {
         this.db = db;
         this.view = view;
         this.worker = worker;
     }
 
+    /**
+     * Function to retrieve worker data from database
+     * @return worker data
+     */
     @Override
     protected Data doInBackground(Void... voids) {
         Contact contact = db.contactDao().getById(worker.getContact_Id());
@@ -37,6 +50,10 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
         return data;
     }
 
+    /**
+     * Function used to fill ui with worker data passed in result
+     * @param result worker data from doInBackground method
+     */
     @Override
     protected void onPostExecute(Data result) {
         TextView fullname = view.findViewById(R.id.fullname);

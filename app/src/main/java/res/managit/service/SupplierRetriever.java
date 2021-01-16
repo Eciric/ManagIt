@@ -14,6 +14,9 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
     View view;
     Supply supplier;
 
+    /**
+     * Inner class which is a storage of supplier data
+     */
     protected class Data {
         protected Supply supplier;
         protected Contact contact;
@@ -24,12 +27,22 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
         }
     }
 
+    /**
+     * Class constructor
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param supplier supplier which will be displayed
+     */
     public SupplierRetriever(View view, WarehouseDb db, Supply supplier) {
         this.db = db;
         this.view = view;
         this.supplier = supplier;
     }
 
+    /**
+     * Function to retrieve supplier data from database
+     * @return supplier data
+     */
     @Override
     protected Data doInBackground(Void... voids) {
         Contact contact = db.contactDao().getById(supplier.getContact_Id());
@@ -37,6 +50,10 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
         return data;
     }
 
+    /**
+     * Function used to fill ui with supplier data passed in result
+     * @param result supplier data from doInBackground method
+     */
     @Override
     protected void onPostExecute(Data result) {
         TextView name = view.findViewById(R.id.name);

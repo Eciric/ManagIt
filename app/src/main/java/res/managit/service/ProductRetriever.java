@@ -14,6 +14,9 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
     View view;
     Product product;
 
+    /**
+     * Inner class which is a storage of product data
+     */
     protected class Data {
         protected Product p;
         protected String cName;
@@ -24,12 +27,22 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
         }
     }
 
+    /**
+     * Class constructor
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param product product which will be displayed
+     */
     public ProductRetriever(View view, WarehouseDb db, Product product) {
         this.db = db;
         this.view = view;
         this.product = product;
     }
 
+    /**
+     * Function to retrieve product data from database
+     * @return product data
+     */
     @Override
     protected Data doInBackground(Void... voids) {
         Category category = db.categoryDao().getCategoryById(product.getCategory_Id());
@@ -37,6 +50,10 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
         return data;
     }
 
+    /**
+     * Function used to fill ui with product data passed in result
+     * @param result product data from doInBackground method
+     */
     @Override
     protected void onPostExecute(Data result) {
         TextView name = view.findViewById(R.id.productName);
