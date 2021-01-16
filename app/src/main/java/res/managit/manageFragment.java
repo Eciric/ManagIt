@@ -24,7 +24,9 @@ import res.managit.service.AddSupplierHandler;
 import res.managit.service.AddWorkerHandler;
 import res.managit.service.ProductSpinnerInitializer;
 
-
+/**
+ * Class which represents manage fragment
+ */
 public class manageFragment extends Fragment {
     public manageFragment() {
         // Required empty public constructor
@@ -35,6 +37,11 @@ public class manageFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize manage ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -51,6 +58,11 @@ public class manageFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_manage, container, false);
     }
 
+    /**
+     * Function which checks if all add cards are closed
+     * @param view fragment's view
+     * @return true if add cards are close, otherwise false
+     */
     private boolean addCardsClosed(@NonNull View view) {
         if (view.findViewById(R.id.addProductsCard).getVisibility() == View.VISIBLE)
             return false;
@@ -66,6 +78,10 @@ public class manageFragment extends Fragment {
         return true;
     }
 
+    /**
+     * Function which set logic on click event for all manage buttons
+     * @param view fragment's view
+     */
     public void setButtonListeners(@NonNull View view) {
         setMainButtonListeners(view);
         setAddButtonListeners(view);
@@ -73,6 +89,10 @@ public class manageFragment extends Fragment {
         setCloseButtonListeners(view);
     }
 
+    /**
+     * Function which set navigation to corresponding fragments on main buttons click
+     * @param view fragment's view
+     */
     public void setMainButtonListeners(@NonNull View view) {
         Button products = view.findViewById(R.id.products);
         products.setOnClickListener((event) -> {
@@ -110,6 +130,10 @@ public class manageFragment extends Fragment {
         });
     }
 
+    /**
+     * Function which shows corresponding add cards on (+) buttons click
+     * @param view fragment's view
+     */
     public void setAddButtonListeners(@NonNull View view) {
         Button addProduct = view.findViewById(R.id.addProducts);
         addProduct.setOnClickListener((event) -> {
@@ -152,6 +176,10 @@ public class manageFragment extends Fragment {
         });
     }
 
+    /**
+     * Function which pass data from add card input to corresponding add handler from service on card's add button click
+     * @param view fragment's view
+     */
     public void setSubAddButtonListeners(@NonNull View view) {
         Button productAdd = view.findViewById(R.id.productAdd);
         productAdd.setOnClickListener((event) -> {
@@ -179,6 +207,10 @@ public class manageFragment extends Fragment {
         });
     }
 
+    /**
+     * Function which set cleaning and closing add cards on close buttons click
+     * @param view fragment's view
+     */
     public void setCloseButtonListeners(@NonNull View view) {
         Button productClose = view.findViewById(R.id.productClose);
         productClose.setOnClickListener((e) -> {
@@ -247,6 +279,10 @@ public class manageFragment extends Fragment {
     }
 
 
+    /**
+     * Function which invokes ProductSpinnerInitializer to initialize spinner from product's add card
+     * @param view fragment's view
+     */
     public void initCategorySpinner(@NonNull View view) {
         new ProductSpinnerInitializer(getContext(), view, PublicDatabaseAcces.currentDatabase).execute();
     }
