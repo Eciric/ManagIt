@@ -18,6 +18,9 @@ import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Product;
 
+/**
+ * Class handling adding new product
+ */
 public class AddProductHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Name cannot be empty";
     final String INVALID_MSG = "Name can contain only letters";
@@ -28,12 +31,23 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
     View view;
     Context context;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     */
     public AddProductHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
     }
 
+    /**
+     * Function to validate user input data.
+     * After successful validation new product is inserted.
+     * @return validation message
+     */
     @Override
     protected String doInBackground(Void... voids) {
         EditText text = view.findViewById(R.id.productName);
@@ -54,16 +68,16 @@ public class AddProductHandler extends AsyncTask<Void, Void, String> {
             return EXISTS_MSG;
 
         String categoryName = mySpinner.getSelectedItem().toString();
-        System.out.println("categoryName1: " + categoryName);
-        //categoryName = categoryName.substring(0,categoryName.length() - 1);
-        System.out.println("categoryName2: " + categoryName);
         Category category = db.categoryDao().getCategoryByName(categoryName);
-        System.out.println("category: " + category);
         db.productDao().insertProduct(new Product(name, 0, category.getCategoryId()));
 
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function which updates ui based on passed result
+     * @param result validation message from doInBackground method
+     */
     @Override
     protected void onPostExecute(String result) {
         TextView errorText = view.findViewById(R.id.productError);

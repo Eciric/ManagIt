@@ -16,6 +16,9 @@ import res.managit.R;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
 
+/**
+ * Class handling adding new category
+ */
 public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Name cannot be empty";
     final String INVALID_MSG = "Name can contain only letters";
@@ -26,12 +29,23 @@ public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
     View view;
     Context context;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     */
     public AddCategoryHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
     }
 
+    /**
+     * Function to validate user input data.
+     * After successful validation new category is inserted.
+     * @return validation message
+     */
     @Override
     protected String doInBackground(Void... voids) {
         EditText text = view.findViewById(R.id.categoryName);
@@ -55,6 +69,10 @@ public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function which updates ui based on passed result
+     * @param result validation message from doInBackground method
+     */
     @Override
     protected void onPostExecute(String result) {
         TextView errorText = view.findViewById(R.id.categoryError);

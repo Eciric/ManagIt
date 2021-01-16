@@ -22,6 +22,9 @@ import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class handling adding new customer
+ */
 public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Fields cannot be empty";
     final String NAME_INVALID_MSG = "Name can contain only letters";
@@ -46,12 +49,23 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
     View view;
     Context context;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     */
     public AddCustomerHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
     }
 
+    /**
+     * Function to validate user input data.
+     * After successful validation process of inserting a new customer is started.
+     * @return validation message
+     */
     @Override
     protected String doInBackground(Void... voids) {
         customerName = ((EditText)view.findViewById(R.id.customerName)).getText().toString();
@@ -83,6 +97,10 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function to validate user input
+     * @return validation message
+     */
     private String validateInput() {
         if (!customerName.matches("[a-zA-Z]+"))
             return NAME_INVALID_MSG;
@@ -103,6 +121,10 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function which updates ui based on passed result
+     * @param result validation message from doInBackground method
+     */
     @Override
     protected void onPostExecute(String result) {
         if (!result.equals(SUCCESS_MSG)) {
@@ -126,15 +148,28 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
         }
     }
 
+    /**
+     * Inner class used to insert contact.
+     * After contact insertion it invokes CustomerInsertion
+     */
     public class ContactInsertion extends AsyncTask<Void, Void, Long> {
         Contact contact;
 
+        /**
+         * Function used to insert contact
+         * @return id of inserted contact
+         */
         @Override
         protected Long doInBackground(Void... voids) {
             contact = new Contact(customerStreet, Integer.parseInt(customerStreetNumber),
                     Integer.parseInt(customerCityCode), customerCity, customerCountry, customerPhone);
             return db.contactDao().insertContact(contact)[0];
         }
+
+        /**
+         * Function which invokes CustomInsertion
+         * @param result id of inserted contact form doInBackground
+         */
         @Override
         protected void onPostExecute(Long result) {
             new CustomerInsertion(result).execute();
@@ -142,13 +177,23 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
     }
 
+    /**
+     * Inner class used to insert customer
+     */
     public class CustomerInsertion extends AsyncTask<Void, Void, Void> {
         long id;
 
+        /**
+         * Class constructor
+         * @param id id of customer's contact
+         */
         public CustomerInsertion(long id) {
             this.id = id;
         }
 
+        /**
+         * Function used to insert customer
+         */
         @Override
         protected Void doInBackground(Void... voids) {
             db.customerDao().insertCustomer(new Customer(customerName, id));

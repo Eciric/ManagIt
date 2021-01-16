@@ -21,6 +21,9 @@ import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class handling adding new supplier
+ */
 public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
     final String EMPTY_MSG = "Fields cannot be empty";
     final String NAME_INVALID_MSG = "Name can contain only letters";
@@ -45,12 +48,23 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
     View view;
     Context context;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     */
     public AddSupplierHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
         this.view = view;
         this.context = context;
     }
 
+    /**
+     * Function to validate user input data.
+     * After successful validation process of inserting a new supplier is started.
+     * @return validation message
+     */
     @Override
     protected String doInBackground(Void... voids) {
         supplierName = ((EditText)view.findViewById(R.id.supplierName)).getText().toString();
@@ -82,6 +96,10 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function to validate user input
+     * @return validation message
+     */
     private String validateInput() {
         if (!supplierName.matches("[a-zA-Z]+"))
             return NAME_INVALID_MSG;
@@ -102,6 +120,10 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
         return SUCCESS_MSG;
     }
 
+    /**
+     * Function which updates ui based on passed result
+     * @param result validation message from doInBackground method
+     */
     @Override
     protected void onPostExecute(String result) {
         if (!result.equals(SUCCESS_MSG)) {
@@ -125,15 +147,28 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
         }
     }
 
+    /**
+     * Inner class used to insert contact.
+     * After contact insertion it invokes SupplierInsertion
+     */
     public class ContactInsertion extends AsyncTask<Void, Void, Long> {
         Contact contact;
 
+        /**
+         * Function used to insert contact
+         * @return id of inserted contact
+         */
         @Override
         protected Long doInBackground(Void... voids) {
             contact = new Contact(supplierStreet, Integer.parseInt(supplierStreetNumber),
                     Integer.parseInt(supplierCityCode), supplierCity, supplierCountry, supplierPhone);
             return db.contactDao().insertContact(contact)[0];
         }
+
+        /**
+         * Function which invokes SupplierInsertion
+         * @param result id of inserted contact form doInBackground
+         */
         @Override
         protected void onPostExecute(Long result) {
             new SupplierInsertion(result).execute();
@@ -141,13 +176,23 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
     }
 
+    /**
+     * Inner class used to insert supplier
+     */
     public class SupplierInsertion extends AsyncTask<Void, Void, Void> {
         long id;
 
+        /**
+         * Class constructor
+         * @param id id of supplier's contact
+         */
         public SupplierInsertion(long id) {
             this.id = id;
         }
 
+        /**
+         * Function used to insert supplier
+         */
         @Override
         protected Void doInBackground(Void... voids) {
             db.supplyDao().insertSupply(new Supply(supplierName, id));
