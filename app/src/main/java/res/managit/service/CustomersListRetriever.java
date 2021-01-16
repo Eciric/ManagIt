@@ -23,12 +23,22 @@ import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class used to retrieve customers list
+ */
 public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>> {
     WarehouseDb db;
     View view;
     Context context;
     LayoutInflater inflater;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param inflater fragment's inflater
+     */
     public CustomersListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
@@ -36,11 +46,19 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
         this.inflater = inflater;
     }
 
+    /**
+     * Function used to retrieve customers list
+     * @return customers list
+     */
     @Override
     protected List<Customer> doInBackground(Void... voids) {
         return db.customerDao().getAll();
     }
 
+    /**
+     * Populate customers' ListView with passed result
+     * @param result customers list from doInBackground method
+     */
     @Override
     protected void onPostExecute(List<Customer> result) {
         ListView customers = view.findViewById(R.id.list);

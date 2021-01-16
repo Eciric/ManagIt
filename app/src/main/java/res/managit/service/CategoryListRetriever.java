@@ -16,12 +16,22 @@ import res.managit.R;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Category;
 
+/**
+ * Class used to retrieve categories list
+ */
 public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>> {
     WarehouseDb db;
     View view;
     Context context;
     LayoutInflater inflater;
 
+    /**
+     * Class constructor
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param inflater fragment's inflater
+     */
     public CategoryListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
@@ -29,11 +39,19 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
         this.inflater = inflater;
     }
 
+    /**
+     * Function used to retrieve categories list
+     * @return categories list
+     */
     @Override
     protected List<Category> doInBackground(Void... voids) {
         return db.categoryDao().getAll();
     }
 
+    /**
+     * Populate categories' ListView with passed result
+     * @param result categories list from doInBackground method
+     */
     @Override
     protected void onPostExecute(List<Category> result) {
         ListView products = view.findViewById(R.id.list);
