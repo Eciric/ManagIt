@@ -63,12 +63,6 @@ public class customersFragment extends Fragment {
 
     }
 
-    private long getCustmomerId(String text) {
-        int index = text.lastIndexOf(']');
-        String id = text.substring(1,index);
-        return Long.parseLong(id);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
