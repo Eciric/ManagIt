@@ -20,6 +20,9 @@ import res.managit.dbo.entity.Supply;
 import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
 
+/**
+ * Class which represents supplier fragment
+ */
 public class suppliersFragment extends Fragment {
     public suppliersFragment() {
         // Required empty public constructor
@@ -30,6 +33,11 @@ public class suppliersFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize suppliers' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

@@ -20,6 +20,9 @@ import res.managit.dbo.entity.Product;
 import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductRetriever;
 
+/**
+ * Class which represents product fragment
+ */
 public class productsFragment extends Fragment {
     public productsFragment() {
         // Required empty public constructor
@@ -30,6 +33,11 @@ public class productsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize products' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

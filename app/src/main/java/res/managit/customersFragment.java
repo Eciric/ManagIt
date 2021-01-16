@@ -22,6 +22,9 @@ import res.managit.service.CustomersListRetriever;
 import res.managit.service.SupplierRetriever;
 import res.managit.service.SuppliersListRetriever;
 
+/**
+ * Class which represents customer fragment
+ */
 public class customersFragment extends Fragment {
     public customersFragment() {
         // Required empty public constructor
@@ -32,6 +35,11 @@ public class customersFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize customers' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

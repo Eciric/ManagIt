@@ -22,6 +22,9 @@ import res.managit.service.ProductRetriever;
 import res.managit.service.WorkerListRetriever;
 import res.managit.service.WorkerRetriever;
 
+/**
+ * Class which represents worker fragment
+ */
 public class workersFragment extends Fragment {
     public workersFragment() {
         // Required empty public constructor
@@ -32,6 +35,11 @@ public class workersFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize workers' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

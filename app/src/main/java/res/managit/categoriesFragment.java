@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.service.CategoryListRetriever;
 
+/**
+ * Class which represents category fragment
+ */
 public class categoriesFragment extends Fragment {
     public categoriesFragment() {
         // Required empty public constructor
@@ -24,6 +27,11 @@ public class categoriesFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize categories' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -31,6 +39,7 @@ public class categoriesFragment extends Fragment {
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle("Categories");
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
