@@ -19,8 +19,6 @@ import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.entity.Customer;
 import res.managit.service.CustomerRetriever;
 import res.managit.service.CustomersListRetriever;
-import res.managit.service.SupplierRetriever;
-import res.managit.service.SuppliersListRetriever;
 
 /**
  * Class which represents customer fragment

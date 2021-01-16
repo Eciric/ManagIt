@@ -4,20 +4,14 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import res.managit.R;
 import res.managit.dbo.WarehouseDb;
-import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
-import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Worker;
 
 /**

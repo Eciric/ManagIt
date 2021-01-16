@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,12 +14,8 @@ import java.util.List;
 
 import res.managit.R;
 import res.managit.dbo.WarehouseDb;
-import res.managit.dbo.entity.Category;
 import res.managit.dbo.entity.Contact;
 import res.managit.dbo.entity.Customer;
-import res.managit.dbo.entity.Product;
-import res.managit.dbo.entity.Supply;
-import res.managit.dbo.entity.Worker;
 
 /**
  * Class handling adding new customer

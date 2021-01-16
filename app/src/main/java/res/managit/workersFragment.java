@@ -17,8 +17,6 @@ import android.widget.PopupWindow;
 
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.entity.Worker;
-import res.managit.service.ProductListRetriever;
-import res.managit.service.ProductRetriever;
 import res.managit.service.WorkerListRetriever;
 import res.managit.service.WorkerRetriever;
 

@@ -5,17 +5,13 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import res.managit.R;
-import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
 
