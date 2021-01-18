@@ -14,6 +14,9 @@ import res.managit.R;
 import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class is responsible for created adapter for suppliers. Adapter consist of list suppliers
+ */
 public class SupplierAdapter extends ArrayAdapter<Supply> {
 
     private static ArrayList<Pair<Supply, Integer>> suppliesListChecked;

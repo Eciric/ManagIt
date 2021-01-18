@@ -14,6 +14,10 @@ import res.managit.dbo.entity.Event;
 import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
 
+/**
+ * Class which is used to Room database library
+ * This class is needed in Room library to create many-to-many relationship between Event and Worker table
+ */
 @Setter
 @Getter
 @NoArgsConstructor

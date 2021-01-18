@@ -14,6 +14,10 @@ import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Event;
 import res.managit.dbo.relations.manytomany.cross.EventCustomerCross;
 
+/**
+ * Class which is used to Room database library
+ * This class is needed in Room library to create many-to-many relationship between Event and Customer table
+ */
 @Setter
 @Getter
 @NoArgsConstructor

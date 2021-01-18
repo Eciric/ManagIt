@@ -10,7 +10,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity(indices = @Index(value = {"worker_name", "worker_lastName", "role", "contact_Id"} , unique = true))
+/**
+ * Class which is used to Room database library.
+ * It represents a table in database with the same name.
+ */
+@Entity(indices = @Index(value = {"worker_name", "worker_lastName", "role", "contact_Id"}, unique = true))
 @Setter
 @Getter
 @NoArgsConstructor
@@ -25,6 +29,14 @@ public class Worker {
     public String role;
     public long contact_Id;
 
+    /**
+     * Creating class object which represents one entry in Worker table
+     *
+     * @param name       name of worker
+     * @param lastName   last name of worker
+     * @param role       position of worker
+     * @param contact_Id Foreign key connecting worker with a dedicated to him Contact table identifier
+     */
     public Worker(String name, String lastName, String role, long contact_Id) {
         this.name = name;
         this.lastName = lastName;

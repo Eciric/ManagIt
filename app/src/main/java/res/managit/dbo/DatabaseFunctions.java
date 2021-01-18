@@ -5,12 +5,9 @@ import android.database.Cursor;
 import android.os.Environment;
 
 import androidx.annotation.NonNull;
-import androidx.room.Database;
+
 import androidx.room.Room;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,10 +25,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,12 +41,20 @@ import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.manytomany.cross.EventCustomerCross;
 import res.managit.dbo.relations.manytomany.cross.EventSupplyCross;
 import res.managit.dbo.relations.manytomany.cross.EventWorkerCross;
-import res.managit.dbo.relations.onetoone.EventItemProduct;
 
+/**
+ * Class created to use some functions which do some actions connected with Room databases
+ */
 public abstract class DatabaseFunctions {
     static String[] entities = {"Category", "Contact", "Customer", "EventItem", "Event", "Product", "Supply",
             "Worker", "EventCustomerCross", "EventSupplyCross", "EventWorkerCross"};
 
+    /**
+     * Function which create new Warehouse database object for specific name
+     * @param context  variable which stores all data connected with android app
+     * @param name name of created database
+     * @return new Warehouse database object
+     */
     public static WarehouseDb createDatabase(Context context, String name) {
         if (PublicDatabaseAcces.databaseNameList.contains(name))
             return null;
@@ -63,6 +65,10 @@ public abstract class DatabaseFunctions {
         return Db;
     }
 
+    /**
+     *  Function to reconnect connection with earlier created Warehouse databases
+     * @param context variable which stores all data connected with android app
+     */
     public static void reloadDatabases(Context context) {
         for (String name : PublicDatabaseAcces.databaseNameList) {
             if (name.isEmpty())
@@ -72,6 +78,11 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     *  Function needed to reconnect connection with earlier created Warehouse databases
+     * @param context variable which stores all data connected with android app
+     * @param path path to file which stores names of all earlier created Warehouse databases
+     */
     public static void reloadDatabaseNames(Context context, String path) {
 
         try {
@@ -94,6 +105,11 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     *  Function needed to save connection with earlier created Warehouse databases
+     * @param context variable which stores all data connected with android app
+     * @param filePath path to file which stores names of all earlier created Warehouse databases
+     */
     public static void saveDatabaseNames(Context context, String filePath) {
         try {
             FileOutputStream fileOutputStream = context.openFileOutput(filePath, Context.MODE_PRIVATE);
@@ -108,6 +124,12 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     *  Function which export current selected Warehouse database
+     *  Default location = Downloads
+     *  Database is saved in CSV files
+     * @param dbName name of Warehouse database
+     */
     public static void exportDatabase(String dbName) {
         //sciezka do folderu na telefonie Environment.getDataDirectory()
         //tworzy nowy folder(jesli nie istnieje) dla bazy danych o danej nazwie
@@ -142,6 +164,12 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     *  Function which import current selected Warehouse database from CSV files
+     *  Default location = Downloads
+     * @param location location of saved database
+     * @param dbName name of Warehouse database
+     */
     public static void importDatabase(String location, String dbName) {
         int dbIndex = PublicDatabaseAcces.databaseNameList.indexOf(dbName);
         WarehouseDb db = PublicDatabaseAcces.getDatabaseList().get(dbIndex);
@@ -243,6 +271,11 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     * Function to convert String table to Long array
+     * @param array String array which is converted to Long array
+     * @return Long array
+     */
     public static List<Long> convertStrLong(String[] array) {
         List<Long> digits = new ArrayList<>();
         if (array.length == 1 && array[0].equals("[]")) {
@@ -263,6 +296,9 @@ public abstract class DatabaseFunctions {
     }
 
 
+    /**
+     * Function which export current selected database to realtime Database system - Firebase
+     */
     public static void uploadDatabaseBackUp() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance("https://managit-2df96-default-rtdb.firebaseio.com/");
         Thread saveThread = new Thread(new Runnable() {
@@ -299,6 +335,9 @@ public abstract class DatabaseFunctions {
         }
     }
 
+    /**
+     * Function which import current selected database from realtime Database system - Firebase
+     */
     public static void downloadDatabaseBackUp() {
         final FirebaseDatabase database = FirebaseDatabase.getInstance("https://managit-2df96-default-rtdb.firebaseio.com/");
         Thread thread = new Thread(() -> {
@@ -458,6 +497,11 @@ public abstract class DatabaseFunctions {
 
     }
 
+    /**
+     * Function which is needed to create Event imported from Firebase backup
+     * @param snap instance which contains data from Firebase
+     * @return new created Event object
+     */
     private static Event createBackUpEvent(DataSnapshot snap) {
         String str = snap.getValue().toString();
         String[] variables = str.split(",");

@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import res.managit.R;
 import res.managit.dbo.entity.Product;
 
+/**
+ * Class is responsible for created adapter for product. Adapter consist of list products
+ */
 public class ProductAdapter extends ArrayAdapter<Product> {
 
     private static ArrayList<Pair<Product, Integer>> productQuantityList;

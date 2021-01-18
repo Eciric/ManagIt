@@ -11,9 +11,16 @@ import androidx.fragment.app.DialogFragment;
 
 import res.managit.AddEventFirstStepActivity;
 
+/**
+ * fragment responsible for choice date
+ */
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
+    /**
+     * @param savedInstanceState
+     * @return new instance of DatePickerDialog
+     */
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -26,6 +33,12 @@ public class DatePickerFragment extends DialogFragment
         return new DatePickerDialog(getActivity(), this, year, month, day);
     }
 
+    /**
+     * @param view current view
+     * @param year year to pass to creator event
+     * @param month month to pass to creator event
+     * @param day day to pass to creator event
+     */
     public void onDateSet(DatePicker view, int year, int month, int day) {
         AddEventFirstStepActivity.setYearEvent(year);
         AddEventFirstStepActivity.setMonthEvent(month);

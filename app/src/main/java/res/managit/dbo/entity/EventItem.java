@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
+/**
+ * Class which is used to Room database library.
+ * It represents a table in database with the same name.
+ */
 @Entity
 @Setter
 @Getter
@@ -22,6 +25,13 @@ public class EventItem {
     public long product_Id;
     public long event_Id;
 
+    /**
+     * Creating a class object which represents one entry in EventItem table
+     *
+     * @param amount     amount of a given and assigned item in the event
+     * @param product_Id Foreign key connecting eventItem with a Product table identifier
+     * @param event_Id   Foreign key connecting eventItem with a Event table identifier
+     */
     public EventItem(int amount, long product_Id, long event_Id) {
         this.amount = amount;
         this.product_Id = product_Id;

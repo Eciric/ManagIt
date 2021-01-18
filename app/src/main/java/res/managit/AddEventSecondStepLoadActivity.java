@@ -26,6 +26,9 @@ import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.TypeAction;
 
+/**
+ * second step to add load type event
+ */
 public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
     private ListView listCustomers;
@@ -38,6 +41,9 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
     private Button buttonAddEvent;
 
+    /**
+     * created activity. This activity is responsible for get data from user to add event to database
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +51,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
 
-        //initialize for customers
+        ///initialize for customers
         listCustomers = (ListView) findViewById(R.id.customersList);
         customersArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {
@@ -56,7 +62,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
         listCustomers.setAdapter(customerAdapter);
 
 
-        //initialize for products
+        ////initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
         listProducts.setItemsCanFocus(true);
         productsArrayList = new ArrayList<>();

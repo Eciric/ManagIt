@@ -10,6 +10,10 @@ import lombok.ToString;
 import res.managit.dbo.entity.EventItem;
 import res.managit.dbo.entity.Product;
 
+/**
+ * Class which is used to Room database library
+ * This class is needed in Room library to create one-to-one relationship between EventItem and Product table
+ */
 @Setter
 @Getter
 @NoArgsConstructor

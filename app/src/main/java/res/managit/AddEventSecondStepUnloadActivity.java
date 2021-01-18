@@ -27,6 +27,9 @@ import res.managit.dbo.entity.Supply;
 import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.TypeAction;
 
+/**
+ * second step to create Unload event
+ */
 public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
 
     private ListView listSuppliers;
@@ -41,14 +44,16 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
 
     private Button buttonAddEvent;
 
-
+    /**
+     * created activity. This activity is responsible for get data from user to add event to database
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event_second_unload);
 
         WarehouseDb db = PublicDatabaseAcces.currentDatabase;
-        //initialize for suppliers
+        ///initialize for suppliers
         listSuppliers = (ListView) findViewById(R.id.suppliersList);
         suppliersArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {
@@ -60,7 +65,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
 
 
 
-        //initialize for products
+        ///initialize for products
         listProducts = (ListView) findViewById(R.id.productList);
         productsArrayList = new ArrayList<>();
         Executors.newSingleThreadExecutor().execute(() -> {

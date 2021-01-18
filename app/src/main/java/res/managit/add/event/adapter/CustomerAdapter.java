@@ -15,6 +15,9 @@ import res.managit.R;
 import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class is responsible for created adapter for customers. Adapter consist of list cosumer
+ */
 public class CustomerAdapter extends ArrayAdapter<Customer> {
 
     private static ArrayList<Pair<Customer, Integer>> customerListChecked;
@@ -29,6 +32,11 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         this.customers = data;
     }
 
+    /**
+     *
+     * view consist of list of customers. Next to name of customers is checkbox to select customer
+     * to actual event
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if(start == 0){
