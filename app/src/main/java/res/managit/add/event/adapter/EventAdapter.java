@@ -14,11 +14,17 @@ import java.util.ArrayList;
 import res.managit.R;
 import res.managit.dbo.entity.Event;
 
+/**
+ * EventAdapter is responsible of crete list wit all event. All event consist of action's name on date
+ */
 public class EventAdapter extends ArrayAdapter<Event> {
     public EventAdapter(@NonNull Context context, ArrayList<Event> events) {
         super(context, 0, events);
     }
 
+    /**
+     * in this view are assigned all fields. This fields are using to show short information about event
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Event event = getItem(position);

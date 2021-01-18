@@ -29,7 +29,11 @@ import res.managit.wizard.event.DatePickerFragment;
 import res.managit.wizard.event.TimePickerFragment;
 
 
+/**
+ * first step to create ne activity
+ */
 public class AddEventFirstStepActivity extends AppCompatActivity implements OnItemSelectedListener {
+
 
     private ListView listWorkers;
     private ArrayList<Worker> workersArrayList;
@@ -122,8 +126,8 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
 
-//        Load - zaladunek z magazynu - ustawiam workersow - ustawiam customersow - odejmuje przedmioty
-//        Unload - rozladunek w magazynie - ustawaim workersow - ustawiam suppliersow - dodaje przedmioty
+///        Load - zaladunek z magazynu - ustawiam workersow - ustawiam customersow - odejmuje przedmioty
+///        Unload - rozladunek w magazynie - ustawaim workersow - ustawiam suppliersow - dodaje przedmioty
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<>();
@@ -194,6 +198,9 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         newFragment.show(getSupportFragmentManager(), "datePicker");
     }
 
+    /**
+     *method is responsible for chose event type - load or unload
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         // On selecting a spinner item
@@ -204,6 +211,9 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
         // TODO Auto-generated method stub
     }
 
+    /**
+     * @return true if all field assigned
+     */
     public boolean isAllAssigned() {
         return hourOfDayEvent != null
                 && minuteEvent != null

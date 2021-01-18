@@ -14,6 +14,9 @@ import res.managit.R;
 import res.managit.dbo.entity.Product;
 import res.managit.dbo.entity.Worker;
 
+/**
+ * Class is responsible for created adapter for workers. Adapter consist of list workers
+ */
 public class WorkerAdapter extends ArrayAdapter<Worker> {
 
     private static ArrayList<Pair<Worker, Integer>> workerListChecked;
