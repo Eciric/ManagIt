@@ -22,6 +22,9 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
     View view;
     Event event;
 
+    /**
+     * Inner class which is a storage of event data
+     */
     protected class Data {
         protected Event event;
         protected List<EventItem> items;
@@ -48,6 +51,13 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         }
     }
 
+    /**
+     * Class constructor
+     *
+     * @param view  fragment's view
+     * @param db    database on which operations will be done
+     * @param event event which will be displayed
+     */
     public EventRetriever(View view, WarehouseDb db, Event event) {
         this.db = db;
         this.view = view;
@@ -55,6 +65,11 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
     }
 
 
+    /**
+     * Function to retrieve event data from database
+     *
+     * @return event data
+     */
     @Override
     protected Data doInBackground(Void... voids) {
         List<Worker> worker = new ArrayList<>();
@@ -76,6 +91,11 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         return data;
     }
 
+    /**
+     * Function used to fill ui with event data passed in result
+     *
+     * @param result event data from doInBackground method
+     */
     @Override
     protected void onPostExecute(Data result) {
         TextView action = view.findViewById(R.id.action);
