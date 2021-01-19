@@ -18,13 +18,22 @@ import res.managit.R;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
-
+/**
+ * Class used to retrieve low quantity products list
+ */
 public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Product>> {
     WarehouseDb db;
     View view;
     Context context;
     LayoutInflater inflater;
 
+    /**
+     * Class construction
+     * @param context fragment's context
+     * @param view fragment's view
+     * @param db database on which operations will be done
+     * @param inflater fragment's inflater
+     */
     public ProductLowQuantityRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
         this.db = db;
         this.view = view;
@@ -32,11 +41,21 @@ public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Prod
         this.inflater = inflater;
     }
 
+    /**
+     * Function used to retrieve products list
+     *
+     * @return products list
+     */
     @Override
     protected List<Product> doInBackground(Void... voids) {
         return db.productDao().gatProductsAmountLessTen();
     }
 
+    /**
+     * Populate products' ListView with passed result
+     *
+     * @param result products list from doInBackground method
+     */
     @Override
     protected void onPostExecute(List<Product> result) {
         ListView products = view.findViewById(R.id.list);
