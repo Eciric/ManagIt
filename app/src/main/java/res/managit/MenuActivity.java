@@ -19,9 +19,17 @@ import res.managit.dbo.PublicDatabaseAcces;
 import static res.managit.dbo.DatabaseFunctions.downloadDatabaseBackUp;
 import static res.managit.dbo.DatabaseFunctions.exportDatabase;
 
+/**
+ * Class which represents activity with flyout menu
+ */
 public class MenuActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
+    /**
+     * Function used to initialize menu' activity ui.
+     *
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

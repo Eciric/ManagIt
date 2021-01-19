@@ -27,7 +27,7 @@ import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.TypeAction;
 
 /**
- * second step to add load type event
+ * Second step to add load type new event
  */
 public class AddEventSecondStepLoadActivity extends AppCompatActivity {
 
@@ -42,7 +42,7 @@ public class AddEventSecondStepLoadActivity extends AppCompatActivity {
     private Button buttonAddEvent;
 
     /**
-     * created activity. This activity is responsible for get data from user to add event to database
+     * Created activity. This activity is responsible for get data from user to add event to database
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

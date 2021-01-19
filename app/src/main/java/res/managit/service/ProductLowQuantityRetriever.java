@@ -19,7 +19,7 @@ import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.WarehouseDb;
 import res.managit.dbo.entity.Product;
 
-public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Product>>{
+public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Product>> {
     WarehouseDb db;
     View view;
     Context context;
@@ -40,12 +40,12 @@ public class ProductLowQuantityRetriever extends AsyncTask<Void, Void, List<Prod
     @Override
     protected void onPostExecute(List<Product> result) {
         ListView products = view.findViewById(R.id.list);
-        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, result)  {
+        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, result) {
             @Override
             public View getView(int position,
                                 View convertView,
                                 ViewGroup parent) {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
                 Product p = result.get(position);

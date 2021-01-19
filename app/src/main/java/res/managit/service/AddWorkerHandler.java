@@ -46,9 +46,10 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Class constructor
+     *
      * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      */
     public AddWorkerHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
@@ -59,23 +60,24 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
     /**
      * Function to validate user input data.
      * After successful validation process of inserting a new worker is started.
+     *
      * @return validation message
      */
     @Override
     protected String doInBackground(Void... voids) {
-        workerName = ((EditText)view.findViewById(R.id.workerName)).getText().toString();
-        workerLastname = ((EditText)view.findViewById(R.id.workerLastname)).getText().toString();
-        workerRole = ((EditText)view.findViewById(R.id.workerRole)).getText().toString();
-        workerStreet = ((EditText)view.findViewById(R.id.workerStreet)).getText().toString();
-        workerStreetNumber = ((EditText)view.findViewById(R.id.workerStreetNumber)).getText().toString();
-        workerCountry = ((EditText)view.findViewById(R.id.workerCountry)).getText().toString();
-        workerCity = ((EditText)view.findViewById(R.id.workerCity)).getText().toString();
-        workerCityCode = ((EditText)view.findViewById(R.id.workerCityCode)).getText().toString();
-        workerPhone = ((EditText)view.findViewById(R.id.workerPhone)).getText().toString();
+        workerName = ((EditText) view.findViewById(R.id.workerName)).getText().toString();
+        workerLastname = ((EditText) view.findViewById(R.id.workerLastname)).getText().toString();
+        workerRole = ((EditText) view.findViewById(R.id.workerRole)).getText().toString();
+        workerStreet = ((EditText) view.findViewById(R.id.workerStreet)).getText().toString();
+        workerStreetNumber = ((EditText) view.findViewById(R.id.workerStreetNumber)).getText().toString();
+        workerCountry = ((EditText) view.findViewById(R.id.workerCountry)).getText().toString();
+        workerCity = ((EditText) view.findViewById(R.id.workerCity)).getText().toString();
+        workerCityCode = ((EditText) view.findViewById(R.id.workerCityCode)).getText().toString();
+        workerPhone = ((EditText) view.findViewById(R.id.workerPhone)).getText().toString();
 
 
-        if (workerName.equals("") || workerRole.equals("")  || workerStreet.equals("") || workerStreetNumber.equals("") || workerLastname.equals("") ||
-                workerCountry.equals("") || workerCity.equals("") || workerCityCode.equals("") || workerPhone.equals("") )
+        if (workerName.equals("") || workerRole.equals("") || workerStreet.equals("") || workerStreetNumber.equals("") || workerLastname.equals("") ||
+                workerCountry.equals("") || workerCity.equals("") || workerCityCode.equals("") || workerPhone.equals(""))
             return EMPTY_MSG;
 
         String validMsg = validateInput();
@@ -89,6 +91,7 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function to validate user input
+     *
      * @return validation message
      */
     private String validateInput() {
@@ -107,9 +110,9 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
         if (!workerStreetNumber.matches("[0-9]+"))
             return NUMBER_INVALID_MSG;
-        if (!workerCityCode.matches("[0-9]+")  || workerCityCode.length() != 5)
+        if (!workerCityCode.matches("[0-9]+") || workerCityCode.length() != 5)
             return CODE_INVALID_MSG;
-        if (!workerPhone.matches("[0-9]+")  || workerPhone.length() != 9)
+        if (!workerPhone.matches("[0-9]+") || workerPhone.length() != 9)
             return PHONE_INVALID_MSG;
 
         return SUCCESS_MSG;
@@ -117,6 +120,7 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function which updates ui based on passed result
+     *
      * @param result validation message from doInBackground method
      */
     @Override
@@ -124,18 +128,17 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
         if (!result.equals(SUCCESS_MSG)) {
             TextView errorText = view.findViewById(R.id.workerError);
             errorText.setText(result);
-        }
-        else {
-            ((EditText)view.findViewById(R.id.workerName)).setText("");
-            ((EditText)view.findViewById(R.id.workerLastname)).setText("");
-            ((EditText)view.findViewById(R.id.workerRole)).setText("");
-            ((EditText)view.findViewById(R.id.workerStreet)).setText("");
-            ((EditText)view.findViewById(R.id.workerStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.workerCountry)).setText("");
-            ((EditText)view.findViewById(R.id.workerCity)).setText("");
-            ((EditText)view.findViewById(R.id.workerCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.workerPhone)).setText("");
-            ((TextView)view.findViewById(R.id.workerError)).setText("");
+        } else {
+            ((EditText) view.findViewById(R.id.workerName)).setText("");
+            ((EditText) view.findViewById(R.id.workerLastname)).setText("");
+            ((EditText) view.findViewById(R.id.workerRole)).setText("");
+            ((EditText) view.findViewById(R.id.workerStreet)).setText("");
+            ((EditText) view.findViewById(R.id.workerStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.workerCountry)).setText("");
+            ((EditText) view.findViewById(R.id.workerCity)).setText("");
+            ((EditText) view.findViewById(R.id.workerCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.workerPhone)).setText("");
+            ((TextView) view.findViewById(R.id.workerError)).setText("");
 
             CardView cardView = view.findViewById(R.id.addWorkerCard);
             cardView.setVisibility(View.INVISIBLE);
@@ -153,6 +156,7 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function used to insert contact
+         *
          * @return id of inserted contact
          */
         @Override
@@ -164,6 +168,7 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function which invokes WorkerInsertion
+         *
          * @param result id of inserted contact form doInBackground
          */
         @Override
@@ -181,6 +186,7 @@ public class AddWorkerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Class constructor
+         *
          * @param id id of worker's contact
          */
         public WorkerInsertion(long id) {

@@ -26,9 +26,10 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     /**
      * Class constructor
-     * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param context  fragment's context
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param inflater fragment's inflater
      */
     public ProductListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
@@ -40,6 +41,7 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     /**
      * Function used to retrieve products list
+     *
      * @return products list
      */
     @Override
@@ -49,17 +51,18 @@ public class ProductListRetriever extends AsyncTask<Void, Void, List<Product>> {
 
     /**
      * Populate products' ListView with passed result
+     *
      * @param result products list from doInBackground method
      */
     @Override
     protected void onPostExecute(List<Product> result) {
         ListView products = view.findViewById(R.id.list);
-        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, result)  {
+        ArrayAdapter<Product> arrayAdapter = new ArrayAdapter<Product>(context, R.layout.listview_text_formatter, result) {
             @Override
             public View getView(int position,
                                 View convertView,
                                 ViewGroup parent) {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
                 Product p = result.get(position);

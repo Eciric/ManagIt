@@ -61,8 +61,8 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<Supply> supply = new ArrayList<>();
         List<Product> product = new ArrayList<>();
         List<Customer> customer = new ArrayList<>();
-        List<EventItem> item =   db.eventItemDao().getEventItemByEventId(event.eventId);
-        for(EventItem eventItem : item)
+        List<EventItem> item = db.eventItemDao().getEventItemByEventId(event.eventId);
+        for (EventItem eventItem : item)
             product.add(db.productDao().getProductById(eventItem.product_Id));
         for (Long id : event.worker_Id)
             worker.add(db.workerDao().getWorkerById(id));
@@ -70,7 +70,6 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
             supply.add(db.supplyDao().getSupplyById(id));
         for (Long id : event.customer_Id)
             customer.add(db.customerDao().getCustomerById(id));
-
 
 
         Data data = new Data(event, item, worker, supply, product, customer);
@@ -95,13 +94,13 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
         List<String> customersNames = new ArrayList<>();
         List<String> productsNames = new ArrayList<>();
         int i = 0;
-        for (Worker w : result.worker){
+        for (Worker w : result.worker) {
             workersNames.add(w.getName());
         }
 
         for (Supply s : result.supply)
             suppliesNames.add(s.getName());
-        for (Product p : result.product){
+        for (Product p : result.product) {
             productsNames.add(p.getName() + " (" + result.items.get(i).amount + ")");
             i++;
         }
@@ -112,9 +111,9 @@ public class EventRetriever extends AsyncTask<Void, Void, EventRetriever.Data> {
 
         action.setText("Action: " + result.event.getAction());
         date.setText("Date: " + textDate);
-        workers.setText("Workers: " + workersNames.toString().replace("[","").replace("]",""));
-        suppliers.setText("Suppliers: " + suppliesNames.toString().replace("[","").replace("]",""));
-        customers.setText("Customers: " + customersNames.toString().replace("[","").replace("]",""));
-        products.setText("Products: " + productsNames.toString().replace("[","").replace("]",""));
+        workers.setText("Workers: " + workersNames.toString().replace("[", "").replace("]", ""));
+        suppliers.setText("Suppliers: " + suppliesNames.toString().replace("[", "").replace("]", ""));
+        customers.setText("Customers: " + customersNames.toString().replace("[", "").replace("]", ""));
+        products.setText("Products: " + productsNames.toString().replace("[", "").replace("]", ""));
     }
 }

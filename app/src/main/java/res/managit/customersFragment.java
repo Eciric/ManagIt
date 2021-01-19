@@ -35,7 +35,8 @@ public class customersFragment extends Fragment {
 
     /**
      * Function used to initialize customers' fragment ui.
-     * @param view fragment's view
+     *
+     * @param view               fragment's view
      * @param savedInstanceState fragment's bundle
      */
     @Override
@@ -56,7 +57,7 @@ public class customersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            new CustomerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Customer)adapterView.getAdapter().getItem(i)).execute();
+            new CustomerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Customer) adapterView.getAdapter().getItem(i)).execute();
         });
 
     }

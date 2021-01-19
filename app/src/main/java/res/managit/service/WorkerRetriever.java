@@ -29,8 +29,9 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
 
     /**
      * Class constructor
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param view   fragment's view
+     * @param db     database on which operations will be done
      * @param worker worker which will be displayed
      */
     public WorkerRetriever(View view, WarehouseDb db, Worker worker) {
@@ -41,6 +42,7 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
 
     /**
      * Function to retrieve worker data from database
+     *
      * @return worker data
      */
     @Override
@@ -52,6 +54,7 @@ public class WorkerRetriever extends AsyncTask<Void, Void, WorkerRetriever.Data>
 
     /**
      * Function used to fill ui with worker data passed in result
+     *
      * @param result worker data from doInBackground method
      */
     @Override

@@ -29,8 +29,9 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
 
     /**
      * Class constructor
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      * @param product product which will be displayed
      */
     public ProductRetriever(View view, WarehouseDb db, Product product) {
@@ -41,6 +42,7 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
 
     /**
      * Function to retrieve product data from database
+     *
      * @return product data
      */
     @Override
@@ -52,6 +54,7 @@ public class ProductRetriever extends AsyncTask<Void, Void, ProductRetriever.Dat
 
     /**
      * Function used to fill ui with product data passed in result
+     *
      * @param result product data from doInBackground method
      */
     @Override

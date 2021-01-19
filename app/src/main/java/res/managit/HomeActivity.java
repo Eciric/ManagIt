@@ -13,8 +13,15 @@ import static res.managit.dbo.DatabaseFunctions.reloadDatabaseNames;
 import static res.managit.dbo.DatabaseFunctions.reloadDatabases;
 import static res.managit.dbo.DatabaseFunctions.saveDatabaseNames;
 
+/**
+ * Class which represents home - main activity of the app
+ */
 public class HomeActivity extends AppCompatActivity {
 
+    /**
+     * Function to initialize all variables required to manage databases
+     * @param savedInstanceState activity bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

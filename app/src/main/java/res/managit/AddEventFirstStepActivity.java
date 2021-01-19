@@ -30,7 +30,7 @@ import res.managit.wizard.event.TimePickerFragment;
 
 
 /**
- * first step to create ne activity
+ * First step to create new event activity
  */
 public class AddEventFirstStepActivity extends AppCompatActivity implements OnItemSelectedListener {
 
@@ -199,7 +199,7 @@ public class AddEventFirstStepActivity extends AppCompatActivity implements OnIt
     }
 
     /**
-     *method is responsible for chose event type - load or unload
+     *Method is responsible for chose event type - load or unload
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

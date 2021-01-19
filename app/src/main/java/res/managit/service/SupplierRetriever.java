@@ -29,8 +29,9 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
 
     /**
      * Class constructor
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param supplier supplier which will be displayed
      */
     public SupplierRetriever(View view, WarehouseDb db, Supply supplier) {
@@ -41,6 +42,7 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
 
     /**
      * Function to retrieve supplier data from database
+     *
      * @return supplier data
      */
     @Override
@@ -52,6 +54,7 @@ public class SupplierRetriever extends AsyncTask<Void, Void, SupplierRetriever.D
 
     /**
      * Function used to fill ui with supplier data passed in result
+     *
      * @param result supplier data from doInBackground method
      */
     @Override

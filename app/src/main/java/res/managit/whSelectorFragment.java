@@ -20,6 +20,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import res.managit.dbo.PublicDatabaseAcces;
 import res.managit.dbo.helpers.ExecuteEvents;
 
+/**
+ * Class which represents databases selector fragment
+ */
 public class whSelectorFragment extends Fragment {
     ListView listView;
     NavController navController;
@@ -36,6 +39,12 @@ public class whSelectorFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize databases selector fragment ui
+     *
+     * @param view               fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

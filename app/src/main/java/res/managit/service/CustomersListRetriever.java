@@ -26,9 +26,10 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
 
     /**
      * Class constructor
-     * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param context  fragment's context
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param inflater fragment's inflater
      */
     public CustomersListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
@@ -40,6 +41,7 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
 
     /**
      * Function used to retrieve customers list
+     *
      * @return customers list
      */
     @Override
@@ -49,17 +51,18 @@ public class CustomersListRetriever extends AsyncTask<Void, Void, List<Customer>
 
     /**
      * Populate customers' ListView with passed result
+     *
      * @param result customers list from doInBackground method
      */
     @Override
     protected void onPostExecute(List<Customer> result) {
         ListView customers = view.findViewById(R.id.list);
-        ArrayAdapter<Customer> arrayAdapter = new ArrayAdapter<Customer>(context, R.layout.listview_text_formatter, result)  {
+        ArrayAdapter<Customer> arrayAdapter = new ArrayAdapter<Customer>(context, R.layout.listview_text_formatter, result) {
             @Override
             public View getView(int position,
                                 View convertView,
                                 ViewGroup parent) {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
                 Customer c = result.get(position);

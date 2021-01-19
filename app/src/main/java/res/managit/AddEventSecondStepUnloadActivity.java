@@ -28,7 +28,7 @@ import res.managit.dbo.entity.Worker;
 import res.managit.dbo.relations.TypeAction;
 
 /**
- * second step to create Unload event
+ * Second step to create Unload event
  */
 public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
 
@@ -45,7 +45,7 @@ public class AddEventSecondStepUnloadActivity extends AppCompatActivity {
     private Button buttonAddEvent;
 
     /**
-     * created activity. This activity is responsible for get data from user to add event to database
+     * Created activity. This activity is responsible for get data from user to add event to database
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

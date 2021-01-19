@@ -35,7 +35,8 @@ public class suppliersFragment extends Fragment {
 
     /**
      * Function used to initialize suppliers' fragment ui.
-     * @param view fragment's view
+     *
+     * @param view               fragment's view
      * @param savedInstanceState fragment's bundle
      */
     @Override
@@ -56,7 +57,7 @@ public class suppliersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            new SupplierRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Supply)adapterView.getAdapter().getItem(i)).execute();
+            new SupplierRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Supply) adapterView.getAdapter().getItem(i)).execute();
         });
     }
 

@@ -26,9 +26,10 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
 
     /**
      * Class constructor
-     * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param context  fragment's context
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param inflater fragment's inflater
      */
     public CategoryListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
@@ -40,6 +41,7 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
 
     /**
      * Function used to retrieve categories list
+     *
      * @return categories list
      */
     @Override
@@ -49,6 +51,7 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
 
     /**
      * Populate categories' ListView with passed result
+     *
      * @param result categories list from doInBackground method
      */
     @Override
@@ -59,7 +62,7 @@ public class CategoryListRetriever extends AsyncTask<Void, Void, List<Category>>
             public View getView(int position,
                                 View convertView,
                                 ViewGroup parent) {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
                 Category c = result.get(position);

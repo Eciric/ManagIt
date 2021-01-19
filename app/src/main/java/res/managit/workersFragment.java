@@ -35,7 +35,8 @@ public class workersFragment extends Fragment {
 
     /**
      * Function used to initialize workers' fragment ui.
-     * @param view fragment's view
+     *
+     * @param view               fragment's view
      * @param savedInstanceState fragment's bundle
      */
     @Override
@@ -56,7 +57,7 @@ public class workersFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            new WorkerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Worker)adapterView.getAdapter().getItem(i)).execute();
+            new WorkerRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Worker) adapterView.getAdapter().getItem(i)).execute();
         });
     }
 

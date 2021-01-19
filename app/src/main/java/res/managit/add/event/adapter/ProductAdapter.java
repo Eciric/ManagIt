@@ -38,9 +38,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(start == 0){
-            for(int i = 0;i<products.size();i++){
-                productQuantityList.add(new Pair<>(products.get(i),0));
+        if (start == 0) {
+            for (int i = 0; i < products.size(); i++) {
+                productQuantityList.add(new Pair<>(products.get(i), 0));
             }
             start = 1;
         }
@@ -53,9 +53,9 @@ public class ProductAdapter extends ArrayAdapter<Product> {
         TextView name = convertView.findViewById(R.id.nameProduct);
         name.setText(product.name);
         quantity.setTag(position);
-        for(int i = 0;i<productQuantityList.size();i++){
+        for (int i = 0; i < productQuantityList.size(); i++) {
             Integer number = productQuantityList.get(i).second;
-            if(i == (int)quantity.getTag()){
+            if (i == (int) quantity.getTag()) {
                 quantity.setText(number.toString());
             }
         }
@@ -64,24 +64,17 @@ public class ProductAdapter extends ArrayAdapter<Product> {
 
             @Override
             public void afterTextChanged(Editable s) {
-                final  int position2 = (int) quantity.getTag();
+                final int position2 = (int) quantity.getTag();
                 final EditText caption = quantity;
-                if(caption.getText().toString().length()>0){
+                if (caption.getText().toString().length() > 0) {
 
                 }
-//                System.out.println("Rozmiar: " + productQuantityList.size());
-//                System.out.println("Produkt: " + product.toString());
-//                System.out.println("Quan: " + quantity.getText().toString());
-//                System.out.println("QuanTag: " + quantity.getTag());
-//                System.out.println("QuanId: " + quantity.getId());
-//                System.out.println("S: " + s.toString());
 
 
-
-                for(int i = 0;i<productQuantityList.size();i++){
-                    if(i == position2 && s.length() != 0){
+                for (int i = 0; i < productQuantityList.size(); i++) {
+                    if (i == position2 && s.length() != 0) {
                         Product product1 = productQuantityList.get(i).first;
-                        productQuantityList.set(i,new Pair<>(product1,Integer.parseInt(s.toString())));
+                        productQuantityList.set(i, new Pair<>(product1, Integer.parseInt(s.toString())));
                     }
                 }
             }

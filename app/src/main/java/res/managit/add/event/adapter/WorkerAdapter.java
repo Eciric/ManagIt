@@ -33,9 +33,9 @@ public class WorkerAdapter extends ArrayAdapter<Worker> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(start == 0){
-            for(int i = 0;i<workers.size();i++){
-                workerListChecked.add(new Pair<>(workers.get(i),0));
+        if (start == 0) {
+            for (int i = 0; i < workers.size(); i++) {
+                workerListChecked.add(new Pair<>(workers.get(i), 0));
             }
             start = 1;
         }
@@ -46,9 +46,9 @@ public class WorkerAdapter extends ArrayAdapter<Worker> {
         }
         CheckBox setWorker = (CheckBox) convertView.findViewById(R.id.setWorker);
         setWorker.setTag(position);
-        for(int i = 0;i<workerListChecked.size();i++){
-           Integer number = workerListChecked.get(i).second;
-            if(i == (int) setWorker.getTag()){
+        for (int i = 0; i < workerListChecked.size(); i++) {
+            Integer number = workerListChecked.get(i).second;
+            if (i == (int) setWorker.getTag()) {
                 if (number == 0) {
                     setWorker.setChecked(false);
                 } else {
@@ -60,20 +60,18 @@ public class WorkerAdapter extends ArrayAdapter<Worker> {
         setWorker.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i<workerListChecked.size();i++){
+                for (int i = 0; i < workerListChecked.size(); i++) {
                     final int position2 = (int) ((CheckBox) v).getTag();
-                    if(i == position2){
+                    if (i == position2) {
                         Worker worker1 = workerListChecked.get(i).first;
-                        if(((CheckBox) v).isChecked()){
-                            workerListChecked.set(i,new Pair<>(worker1,1));
-                        }
-                        else {
-                            workerListChecked.set(i,new Pair<>(worker1,0));
+                        if (((CheckBox) v).isChecked()) {
+                            workerListChecked.set(i, new Pair<>(worker1, 1));
+                        } else {
+                            workerListChecked.set(i, new Pair<>(worker1, 0));
                         }
                     }
                 }
 
-//                System.out.println(workerListChecked);
             }
         });
 
@@ -81,11 +79,11 @@ public class WorkerAdapter extends ArrayAdapter<Worker> {
         return convertView;
     }
 
-    public static ArrayList<Pair<Worker,Integer>> getWorkerListChecked() {
+    public static ArrayList<Pair<Worker, Integer>> getWorkerListChecked() {
         return workerListChecked;
     }
 
-    public static void setWorkerListChecked(ArrayList<Pair<Worker,Integer>> workerListChecked) {
+    public static void setWorkerListChecked(ArrayList<Pair<Worker, Integer>> workerListChecked) {
         WorkerAdapter.workerListChecked = workerListChecked;
     }
 }

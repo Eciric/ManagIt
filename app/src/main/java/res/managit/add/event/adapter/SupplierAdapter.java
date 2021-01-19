@@ -41,9 +41,9 @@ public class SupplierAdapter extends ArrayAdapter<Supply> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(start == 0){
-            for(int i = 0;i<supplies.size();i++){
-                suppliesListChecked.add(new Pair<>(supplies.get(i),0));
+        if (start == 0) {
+            for (int i = 0; i < supplies.size(); i++) {
+                suppliesListChecked.add(new Pair<>(supplies.get(i), 0));
             }
             start = 1;
         }
@@ -55,9 +55,9 @@ public class SupplierAdapter extends ArrayAdapter<Supply> {
         CheckBox setSupply = (CheckBox) convertView.findViewById(R.id.setCustomers);
         setSupply.setTag(position);
 
-        for(int i = 0;i<suppliesListChecked.size();i++){
+        for (int i = 0; i < suppliesListChecked.size(); i++) {
             Integer number = suppliesListChecked.get(i).second;
-            if(i == (int) setSupply.getTag()){
+            if (i == (int) setSupply.getTag()) {
                 if (number == 0) {
                     setSupply.setChecked(false);
                 } else {
@@ -69,20 +69,18 @@ public class SupplierAdapter extends ArrayAdapter<Supply> {
         setSupply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i<suppliesListChecked.size();i++){
+                for (int i = 0; i < suppliesListChecked.size(); i++) {
                     final int position2 = (int) ((CheckBox) v).getTag();
-                    if(i == position2){
+                    if (i == position2) {
                         Supply supply1 = suppliesListChecked.get(i).first;
-                        if(((CheckBox) v).isChecked()){
-                            suppliesListChecked.set(i,new Pair<>(supply1,1));
-                        }
-                        else {
-                            suppliesListChecked.set(i,new Pair<>(supply1,0));
+                        if (((CheckBox) v).isChecked()) {
+                            suppliesListChecked.set(i, new Pair<>(supply1, 1));
+                        } else {
+                            suppliesListChecked.set(i, new Pair<>(supply1, 0));
                         }
                     }
                 }
 
-//                System.out.println(suppliesListChecked);
             }
         });
         setSupply.setText(supply.name);

@@ -29,8 +29,9 @@ public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.D
 
     /**
      * Class constructor
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param customer customer which will be displayed
      */
     public CustomerRetriever(View view, WarehouseDb db, Customer customer) {
@@ -41,6 +42,7 @@ public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.D
 
     /**
      * Function to retrieve customer data from database
+     *
      * @return customer data
      */
     @Override
@@ -52,6 +54,7 @@ public class CustomerRetriever extends AsyncTask<Void, Void, CustomerRetriever.D
 
     /**
      * Function used to fill ui with customer data passed in result
+     *
      * @param result customer data from doInBackground method
      */
     @Override

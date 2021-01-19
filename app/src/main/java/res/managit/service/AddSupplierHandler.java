@@ -46,9 +46,10 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Class constructor
+     *
      * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      */
     public AddSupplierHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
@@ -59,21 +60,22 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
     /**
      * Function to validate user input data.
      * After successful validation process of inserting a new supplier is started.
+     *
      * @return validation message
      */
     @Override
     protected String doInBackground(Void... voids) {
-        supplierName = ((EditText)view.findViewById(R.id.supplierName)).getText().toString();
-        supplierStreet = ((EditText)view.findViewById(R.id.supplierStreet)).getText().toString();
-        supplierStreetNumber = ((EditText)view.findViewById(R.id.supplierStreetNumber)).getText().toString();
-        supplierCountry = ((EditText)view.findViewById(R.id.supplierCountry)).getText().toString();
-        supplierCity = ((EditText)view.findViewById(R.id.supplierCity)).getText().toString();
-        supplierCityCode = ((EditText)view.findViewById(R.id.supplierCityCode)).getText().toString();
-        supplierPhone = ((EditText)view.findViewById(R.id.supplierPhone)).getText().toString();
+        supplierName = ((EditText) view.findViewById(R.id.supplierName)).getText().toString();
+        supplierStreet = ((EditText) view.findViewById(R.id.supplierStreet)).getText().toString();
+        supplierStreetNumber = ((EditText) view.findViewById(R.id.supplierStreetNumber)).getText().toString();
+        supplierCountry = ((EditText) view.findViewById(R.id.supplierCountry)).getText().toString();
+        supplierCity = ((EditText) view.findViewById(R.id.supplierCity)).getText().toString();
+        supplierCityCode = ((EditText) view.findViewById(R.id.supplierCityCode)).getText().toString();
+        supplierPhone = ((EditText) view.findViewById(R.id.supplierPhone)).getText().toString();
 
 
         if (supplierName.equals("") || supplierStreet.equals("") || supplierStreetNumber.equals("") ||
-                supplierCountry.equals("") || supplierCity.equals("") || supplierCityCode.equals("") || supplierPhone.equals("") )
+                supplierCountry.equals("") || supplierCity.equals("") || supplierCityCode.equals("") || supplierPhone.equals(""))
             return EMPTY_MSG;
 
         String validMsg = validateInput();
@@ -94,6 +96,7 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function to validate user input
+     *
      * @return validation message
      */
     private String validateInput() {
@@ -108,9 +111,9 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
         if (!supplierStreetNumber.matches("[0-9]+"))
             return NUMBER_INVALID_MSG;
-        if (!supplierCityCode.matches("[0-9]+")  || supplierCityCode.length() != 5)
+        if (!supplierCityCode.matches("[0-9]+") || supplierCityCode.length() != 5)
             return CODE_INVALID_MSG;
-        if (!supplierPhone.matches("[0-9]+")  || supplierPhone.length() != 9)
+        if (!supplierPhone.matches("[0-9]+") || supplierPhone.length() != 9)
             return PHONE_INVALID_MSG;
 
         return SUCCESS_MSG;
@@ -118,6 +121,7 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function which updates ui based on passed result
+     *
      * @param result validation message from doInBackground method
      */
     @Override
@@ -125,16 +129,15 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
         if (!result.equals(SUCCESS_MSG)) {
             TextView errorText = view.findViewById(R.id.supplierError);
             errorText.setText(result);
-        }
-        else {
-            ((EditText)view.findViewById(R.id.supplierName)).setText("");
-            ((EditText)view.findViewById(R.id.supplierStreet)).setText("");
-            ((EditText)view.findViewById(R.id.supplierStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCountry)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCity)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.supplierPhone)).setText("");
-            ((TextView)view.findViewById(R.id.supplierError)).setText("");
+        } else {
+            ((EditText) view.findViewById(R.id.supplierName)).setText("");
+            ((EditText) view.findViewById(R.id.supplierStreet)).setText("");
+            ((EditText) view.findViewById(R.id.supplierStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCountry)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCity)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.supplierPhone)).setText("");
+            ((TextView) view.findViewById(R.id.supplierError)).setText("");
 
             CardView cardView = view.findViewById(R.id.addSupplierCard);
             cardView.setVisibility(View.INVISIBLE);
@@ -152,6 +155,7 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function used to insert contact
+         *
          * @return id of inserted contact
          */
         @Override
@@ -163,6 +167,7 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function which invokes SupplierInsertion
+         *
          * @param result id of inserted contact form doInBackground
          */
         @Override
@@ -180,6 +185,7 @@ public class AddSupplierHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Class constructor
+         *
          * @param id id of supplier's contact
          */
         public SupplierInsertion(long id) {

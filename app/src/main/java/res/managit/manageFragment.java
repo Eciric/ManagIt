@@ -39,7 +39,8 @@ public class manageFragment extends Fragment {
 
     /**
      * Function used to initialize manage ui.
-     * @param view fragment's view
+     *
+     * @param view               fragment's view
      * @param savedInstanceState fragment's bundle
      */
     @Override
@@ -60,6 +61,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which checks if all add cards are closed
+     *
      * @param view fragment's view
      * @return true if add cards are close, otherwise false
      */
@@ -80,6 +82,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which set logic on click event for all manage buttons
+     *
      * @param view fragment's view
      */
     public void setButtonListeners(@NonNull View view) {
@@ -91,6 +94,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which set navigation to corresponding fragments on main buttons click
+     *
      * @param view fragment's view
      */
     public void setMainButtonListeners(@NonNull View view) {
@@ -132,6 +136,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which shows corresponding add cards on (+) buttons click
+     *
      * @param view fragment's view
      */
     public void setAddButtonListeners(@NonNull View view) {
@@ -178,6 +183,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which pass data from add card input to corresponding add handler from service on card's add button click
+     *
      * @param view fragment's view
      */
     public void setSubAddButtonListeners(@NonNull View view) {
@@ -209,6 +215,7 @@ public class manageFragment extends Fragment {
 
     /**
      * Function which set cleaning and closing add cards on close buttons click
+     *
      * @param view fragment's view
      */
     public void setCloseButtonListeners(@NonNull View view) {
@@ -217,8 +224,8 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addProductsCard);
             card.setVisibility(View.INVISIBLE);
 
-            ((TextView)view.findViewById(R.id.productError)).setText("");
-            ((EditText)view.findViewById(R.id.productName)).setText("");
+            ((TextView) view.findViewById(R.id.productError)).setText("");
+            ((EditText) view.findViewById(R.id.productName)).setText("");
         });
 
         Button workerClose = view.findViewById(R.id.workerClose);
@@ -226,16 +233,16 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addWorkerCard);
             card.setVisibility(View.INVISIBLE);
 
-            ((EditText)view.findViewById(R.id.workerName)).setText("");
-            ((EditText)view.findViewById(R.id.workerLastname)).setText("");
-            ((EditText)view.findViewById(R.id.workerRole)).setText("");
-            ((EditText)view.findViewById(R.id.workerStreet)).setText("");
-            ((EditText)view.findViewById(R.id.workerStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.workerCountry)).setText("");
-            ((EditText)view.findViewById(R.id.workerCity)).setText("");
-            ((EditText)view.findViewById(R.id.workerCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.workerPhone)).setText("");
-            ((TextView)view.findViewById(R.id.workerError)).setText("");
+            ((EditText) view.findViewById(R.id.workerName)).setText("");
+            ((EditText) view.findViewById(R.id.workerLastname)).setText("");
+            ((EditText) view.findViewById(R.id.workerRole)).setText("");
+            ((EditText) view.findViewById(R.id.workerStreet)).setText("");
+            ((EditText) view.findViewById(R.id.workerStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.workerCountry)).setText("");
+            ((EditText) view.findViewById(R.id.workerCity)).setText("");
+            ((EditText) view.findViewById(R.id.workerCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.workerPhone)).setText("");
+            ((TextView) view.findViewById(R.id.workerError)).setText("");
         });
 
         Button supplierClose = view.findViewById(R.id.supplierClose);
@@ -243,14 +250,14 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addSupplierCard);
             card.setVisibility(View.INVISIBLE);
 
-            ((EditText)view.findViewById(R.id.supplierName)).setText("");
-            ((EditText)view.findViewById(R.id.supplierStreet)).setText("");
-            ((EditText)view.findViewById(R.id.supplierStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCountry)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCity)).setText("");
-            ((EditText)view.findViewById(R.id.supplierCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.supplierPhone)).setText("");
-            ((TextView)view.findViewById(R.id.supplierError)).setText("");
+            ((EditText) view.findViewById(R.id.supplierName)).setText("");
+            ((EditText) view.findViewById(R.id.supplierStreet)).setText("");
+            ((EditText) view.findViewById(R.id.supplierStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCountry)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCity)).setText("");
+            ((EditText) view.findViewById(R.id.supplierCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.supplierPhone)).setText("");
+            ((TextView) view.findViewById(R.id.supplierError)).setText("");
         });
 
         Button customerClose = view.findViewById(R.id.customerClose);
@@ -258,14 +265,14 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addCustomerCard);
             card.setVisibility(View.INVISIBLE);
 
-            ((EditText)view.findViewById(R.id.customerName)).setText("");
-            ((EditText)view.findViewById(R.id.customerStreet)).setText("");
-            ((EditText)view.findViewById(R.id.customerStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.customerCountry)).setText("");
-            ((EditText)view.findViewById(R.id.customerCity)).setText("");
-            ((EditText)view.findViewById(R.id.customerCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.customerPhone)).setText("");
-            ((TextView)view.findViewById(R.id.customerError)).setText("");
+            ((EditText) view.findViewById(R.id.customerName)).setText("");
+            ((EditText) view.findViewById(R.id.customerStreet)).setText("");
+            ((EditText) view.findViewById(R.id.customerStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.customerCountry)).setText("");
+            ((EditText) view.findViewById(R.id.customerCity)).setText("");
+            ((EditText) view.findViewById(R.id.customerCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.customerPhone)).setText("");
+            ((TextView) view.findViewById(R.id.customerError)).setText("");
         });
 
         Button categoryClose = view.findViewById(R.id.categoryClose);
@@ -273,14 +280,15 @@ public class manageFragment extends Fragment {
             CardView card = view.findViewById(R.id.addCategoryCard);
             card.setVisibility(View.INVISIBLE);
 
-            ((TextView)view.findViewById(R.id.categoryError)).setText("");
-            ((EditText)view.findViewById(R.id.categoryName)).setText("");
+            ((TextView) view.findViewById(R.id.categoryError)).setText("");
+            ((EditText) view.findViewById(R.id.categoryName)).setText("");
         });
     }
 
 
     /**
      * Function which invokes ProductSpinnerInitializer to initialize spinner from product's add card
+     *
      * @param view fragment's view
      */
     public void initCategorySpinner(@NonNull View view) {

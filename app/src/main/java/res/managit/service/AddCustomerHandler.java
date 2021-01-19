@@ -46,9 +46,10 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Class constructor
+     *
      * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      */
     public AddCustomerHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
@@ -59,21 +60,22 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
     /**
      * Function to validate user input data.
      * After successful validation process of inserting a new customer is started.
+     *
      * @return validation message
      */
     @Override
     protected String doInBackground(Void... voids) {
-        customerName = ((EditText)view.findViewById(R.id.customerName)).getText().toString();
-        customerStreet = ((EditText)view.findViewById(R.id.customerStreet)).getText().toString();
-        customerStreetNumber = ((EditText)view.findViewById(R.id.customerStreetNumber)).getText().toString();
-        customerCountry = ((EditText)view.findViewById(R.id.customerCountry)).getText().toString();
-        customerCity = ((EditText)view.findViewById(R.id.customerCity)).getText().toString();
-        customerCityCode = ((EditText)view.findViewById(R.id.customerCityCode)).getText().toString();
-        customerPhone = ((EditText)view.findViewById(R.id.customerPhone)).getText().toString();
+        customerName = ((EditText) view.findViewById(R.id.customerName)).getText().toString();
+        customerStreet = ((EditText) view.findViewById(R.id.customerStreet)).getText().toString();
+        customerStreetNumber = ((EditText) view.findViewById(R.id.customerStreetNumber)).getText().toString();
+        customerCountry = ((EditText) view.findViewById(R.id.customerCountry)).getText().toString();
+        customerCity = ((EditText) view.findViewById(R.id.customerCity)).getText().toString();
+        customerCityCode = ((EditText) view.findViewById(R.id.customerCityCode)).getText().toString();
+        customerPhone = ((EditText) view.findViewById(R.id.customerPhone)).getText().toString();
 
 
         if (customerName.equals("") || customerStreet.equals("") || customerStreetNumber.equals("") ||
-                customerCountry.equals("") || customerCity.equals("") || customerCityCode.equals("") || customerPhone.equals("") )
+                customerCountry.equals("") || customerCity.equals("") || customerCityCode.equals("") || customerPhone.equals(""))
             return EMPTY_MSG;
 
         String validMsg = validateInput();
@@ -94,6 +96,7 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function to validate user input
+     *
      * @return validation message
      */
     private String validateInput() {
@@ -108,9 +111,9 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
         if (!customerStreetNumber.matches("[0-9]+"))
             return NUMBER_INVALID_MSG;
-        if (!customerCityCode.matches("[0-9]+")  || customerCityCode.length() != 5)
+        if (!customerCityCode.matches("[0-9]+") || customerCityCode.length() != 5)
             return CODE_INVALID_MSG;
-        if (!customerPhone.matches("[0-9]+")  || customerPhone.length() != 9)
+        if (!customerPhone.matches("[0-9]+") || customerPhone.length() != 9)
             return PHONE_INVALID_MSG;
 
         return SUCCESS_MSG;
@@ -118,6 +121,7 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function which updates ui based on passed result
+     *
      * @param result validation message from doInBackground method
      */
     @Override
@@ -125,16 +129,15 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
         if (!result.equals(SUCCESS_MSG)) {
             TextView errorText = view.findViewById(R.id.customerError);
             errorText.setText(result);
-        }
-        else {
-            ((EditText)view.findViewById(R.id.customerName)).setText("");
-            ((EditText)view.findViewById(R.id.customerStreet)).setText("");
-            ((EditText)view.findViewById(R.id.customerStreetNumber)).setText("");
-            ((EditText)view.findViewById(R.id.customerCountry)).setText("");
-            ((EditText)view.findViewById(R.id.customerCity)).setText("");
-            ((EditText)view.findViewById(R.id.customerCityCode)).setText("");
-            ((EditText)view.findViewById(R.id.customerPhone)).setText("");
-            ((TextView)view.findViewById(R.id.customerError)).setText("");
+        } else {
+            ((EditText) view.findViewById(R.id.customerName)).setText("");
+            ((EditText) view.findViewById(R.id.customerStreet)).setText("");
+            ((EditText) view.findViewById(R.id.customerStreetNumber)).setText("");
+            ((EditText) view.findViewById(R.id.customerCountry)).setText("");
+            ((EditText) view.findViewById(R.id.customerCity)).setText("");
+            ((EditText) view.findViewById(R.id.customerCityCode)).setText("");
+            ((EditText) view.findViewById(R.id.customerPhone)).setText("");
+            ((TextView) view.findViewById(R.id.customerError)).setText("");
 
             CardView cardView = view.findViewById(R.id.addCustomerCard);
             cardView.setVisibility(View.INVISIBLE);
@@ -152,6 +155,7 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function used to insert contact
+         *
          * @return id of inserted contact
          */
         @Override
@@ -163,6 +167,7 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Function which invokes CustomInsertion
+         *
          * @param result id of inserted contact form doInBackground
          */
         @Override
@@ -180,6 +185,7 @@ public class AddCustomerHandler extends AsyncTask<Void, Void, String> {
 
         /**
          * Class constructor
+         *
          * @param id id of customer's contact
          */
         public CustomerInsertion(long id) {

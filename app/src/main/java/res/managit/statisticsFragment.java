@@ -21,6 +21,9 @@ import res.managit.service.ProductListRetriever;
 import res.managit.service.ProductLowQuantityRetriever;
 import res.managit.service.ProductRetriever;
 
+/**
+ * Class which represents statistics fragment
+ */
 public class statisticsFragment extends Fragment {
 
     public statisticsFragment() {
@@ -32,6 +35,12 @@ public class statisticsFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function used to initialize statistics' fragment ui.
+     *
+     * @param view               fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -50,7 +59,7 @@ public class statisticsFragment extends Fragment {
                 popupWindow.dismiss();
             });
 
-            new ProductRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Product)adapterView.getAdapter().getItem(i)).execute();
+            new ProductRetriever(popupView, PublicDatabaseAcces.currentDatabase, (Product) adapterView.getAdapter().getItem(i)).execute();
         });
     }
 

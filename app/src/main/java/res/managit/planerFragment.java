@@ -33,60 +33,31 @@ import res.managit.service.EventRetriever;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link planerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Class which represents planner fragment
  */
 public class planerFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
     //added calendar variable
     private CalendarView calendarView;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-
     private EventAdapter adapterToEventsList;
 
     public planerFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment planerFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static planerFragment newInstance(String param1, String param2) {
-        planerFragment fragment = new planerFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
     }
 
-    public void createRunAndJoinThreadToLoadingCalendarView(List<EventDay> events, WarehouseDb db){
+    /**
+     * Thread which run function which add events to calendar as a icons
+     *
+     * @param events list with all events for selected database
+     * @param db     selected database
+     */
+    public void createRunAndJoinThreadToLoadingCalendarView(List<EventDay> events, WarehouseDb db) {
         Thread t1 = new Thread(() -> {
             loadingEventsToCalendarView(events, db);
         });
@@ -98,6 +69,15 @@ public class planerFragment extends Fragment {
         }
     }
 
+    /**
+     * Function which is responsible for set all fragment UI.
+     * It also set planner calendar and liseners which react when we pick date or event for selected date
+     *
+     * @param inflater           object that can be used to inflate any views in the fragment
+     * @param container          this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState fragment's bundle
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -143,7 +123,7 @@ public class planerFragment extends Fragment {
 
             delete.setOnClickListener((event) -> {
 
-                Thread deleteEvent = new Thread(() ->{
+                Thread deleteEvent = new Thread(() -> {
                     db.eventDao().deleteEvent(value);
                 });
                 deleteEvent.start();
@@ -154,7 +134,7 @@ public class planerFragment extends Fragment {
                 }
                 popupWindow.dismiss();
                 setEventList(new ArrayList<>());
-                onResume();// jak cos to tu moze cos nie dzialac XD
+                onResume();
             });
 
 
@@ -177,7 +157,6 @@ public class planerFragment extends Fragment {
 
                     for (Event event : eventList) {
                         if (isEqualYearDay(dateTime, event)) {
-                            //trzeba ustawiac text poza tym Executors bo inaczej wywala error z tym ze tylko głowny watek moze miec dostep do view
                             chosenEvents.add(event);
                         }
                     }
@@ -191,10 +170,23 @@ public class planerFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Function to check that date in event and dataTime are equal
+     *
+     * @param dateTime date to compare
+     * @param event    selected event to check
+     * @return true if dates are equal or false if not
+     */
     private boolean isEqualYearDay(LocalDateTime dateTime, Event event) {
         return event.getDate().getDayOfYear() == dateTime.getDayOfYear() && event.getDate().getYear() == dateTime.getYear();
     }
 
+    /**
+     * Function which add events to calendar as a icons
+     *
+     * @param events list with all events for selected database
+     * @param db     selected database
+     */
     private void loadingEventsToCalendarView(List<EventDay> events, WarehouseDb db) {
         List<Event> eventList = db.eventDao().getAll();
         for (Event event : eventList) {
@@ -211,7 +203,12 @@ public class planerFragment extends Fragment {
         }
     }
 
-    //function to set text in main thread
+
+    /**
+     * Function to set text in main thread
+     *
+     * @param events list of events
+     */
     private void setEventList(List<Event> events) {
         requireActivity().runOnUiThread(() -> {
             adapterToEventsList.clear();
@@ -219,6 +216,9 @@ public class planerFragment extends Fragment {
         });
     }
 
+    /**
+     * Function which responses for starting activity which create new event
+     */
     private void openAddEventFirstStepActivity() {
         Intent intent = new Intent(getActivity(), AddEventFirstStepActivity.class);
         startActivity(intent);

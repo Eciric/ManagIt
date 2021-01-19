@@ -19,6 +19,9 @@ import android.widget.Toast;
 import static res.managit.dbo.DatabaseFunctions.downloadDatabaseBackUp;
 import static res.managit.dbo.DatabaseFunctions.uploadDatabaseBackUp;
 
+/**
+ * Class which represents backUp fragment
+ */
 public class backUpFragment extends Fragment implements View.OnClickListener {
 
     FragmentManager fm;
@@ -34,6 +37,11 @@ public class backUpFragment extends Fragment implements View.OnClickListener {
         return inflater.inflate(R.layout.fragment_backup,container,false);
     }
 
+    /**
+     * Function used to initialize backUp' fragment ui.
+     * @param view fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -44,6 +52,10 @@ public class backUpFragment extends Fragment implements View.OnClickListener {
         importDb.setOnClickListener(this);
     }
 
+    /**
+     * Function which react after clicking on button - exports or imports database from Firebase
+     * @param v fragment's view
+     */
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.exportButton) {

@@ -23,7 +23,8 @@ public class EventAdapter extends ArrayAdapter<Event> {
     }
 
     /**
-     * in this view are assigned all fields. This fields are using to show short information about event
+     * In this view are assigned all fields.
+     * This fields are using to show short information about event
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

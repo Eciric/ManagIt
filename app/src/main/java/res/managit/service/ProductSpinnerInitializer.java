@@ -25,9 +25,10 @@ public class ProductSpinnerInitializer extends AsyncTask<Void, Void, List<Catego
 
     /**
      * Class constructor
+     *
      * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      */
     public ProductSpinnerInitializer(Context context, View view, WarehouseDb db) {
         this.db = db;
@@ -37,6 +38,7 @@ public class ProductSpinnerInitializer extends AsyncTask<Void, Void, List<Catego
 
     /**
      * Function used to retrieve categories from database
+     *
      * @return categories list
      */
     @Override
@@ -57,6 +59,7 @@ public class ProductSpinnerInitializer extends AsyncTask<Void, Void, List<Catego
 
     /**
      * Function which converts list of categories to list of categories names
+     *
      * @param result list of categories
      * @return list of categories names
      */

@@ -35,8 +35,15 @@ import static res.managit.dbo.DatabaseFunctions.reloadDatabaseNames;
 import static res.managit.dbo.DatabaseFunctions.reloadDatabases;
 import static res.managit.dbo.DatabaseFunctions.saveDatabaseNames;
 
+/**
+ * Class which represents main activity - loading screen
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * Function which initialize main activity UI and show loading screen for 3 sec
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

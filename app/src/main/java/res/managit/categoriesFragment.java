@@ -29,7 +29,8 @@ public class categoriesFragment extends Fragment {
 
     /**
      * Function used to initialize categories' fragment ui.
-     * @param view fragment's view
+     *
+     * @param view               fragment's view
      * @param savedInstanceState fragment's bundle
      */
     @Override

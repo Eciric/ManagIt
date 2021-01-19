@@ -26,9 +26,13 @@ import java.util.concurrent.Executors;
 
 import static res.managit.dbo.DatabaseFunctions.createDatabase;
 
+/**
+ * Class which represents database creator fragment
+ */
 public class whCreatorFragment extends Fragment implements View.OnClickListener {
 
     NavController navController;
+
     public whCreatorFragment() {
         // Required empty public constructor
     }
@@ -39,6 +43,12 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
         return inflater.inflate(R.layout.fragment_wh_creator, container, false);
     }
 
+    /**
+     * Function to initalize database creator fragment UI
+     *
+     * @param view               fragment's view
+     * @param savedInstanceState fragment's bundle
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -49,10 +59,14 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
         create.setOnClickListener(this);
     }
 
+    /**
+     * Function to create database with the given name after clicking on the button
+     *
+     * @param view fragment's view
+     */
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.createButton) {
-            //NOTE(Przemek): Implement the database integration here.
             EditText text = (EditText) getView().findViewById(R.id.et_name);
             String name = text.getText().toString();
             TextView errorText = getView().findViewById(R.id.error_text);
@@ -62,14 +76,11 @@ public class whCreatorFragment extends Fragment implements View.OnClickListener 
                 return;
             }
 
-            //Executors.newSingleThreadExecutor().execute(() -> {});
-
-            WarehouseDb db = createDatabase(getContext(),name);
-            if (db != null){
+            WarehouseDb db = createDatabase(getContext(), name);
+            if (db != null) {
                 errorText.setText("");
                 navController.navigate(R.id.action_whCreatorFragment_to_whSelectorFragment);
-            }
-            else {
+            } else {
                 errorText.setText("This name is already in use!");
             }
 

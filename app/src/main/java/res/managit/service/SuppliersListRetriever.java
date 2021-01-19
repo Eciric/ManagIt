@@ -26,9 +26,10 @@ public class SuppliersListRetriever extends AsyncTask<Void, Void, List<Supply>> 
 
     /**
      * Class constructor
-     * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     *
+     * @param context  fragment's context
+     * @param view     fragment's view
+     * @param db       database on which operations will be done
      * @param inflater fragment's inflater
      */
     public SuppliersListRetriever(Context context, View view, WarehouseDb db, LayoutInflater inflater) {
@@ -40,6 +41,7 @@ public class SuppliersListRetriever extends AsyncTask<Void, Void, List<Supply>> 
 
     /**
      * Function used to retrieve suppliers list
+     *
      * @return suppliers list
      */
     @Override
@@ -49,17 +51,18 @@ public class SuppliersListRetriever extends AsyncTask<Void, Void, List<Supply>> 
 
     /**
      * Populate suppliers' ListView with passed result
+     *
      * @param result suppliers list from doInBackground method
      */
     @Override
     protected void onPostExecute(List<Supply> result) {
         ListView suppliers = view.findViewById(R.id.list);
-        ArrayAdapter<Supply> arrayAdapter = new ArrayAdapter<Supply>(context, R.layout.listview_text_formatter, result)  {
+        ArrayAdapter<Supply> arrayAdapter = new ArrayAdapter<Supply>(context, R.layout.listview_text_formatter, result) {
             @Override
             public View getView(int position,
                                 View convertView,
                                 ViewGroup parent) {
-                if(convertView == null)
+                if (convertView == null)
                     convertView = inflater.inflate(R.layout.manage_listview_formatter, null, false);
 
                 Supply s = result.get(position);

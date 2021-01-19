@@ -31,9 +31,10 @@ public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Class constructor
+     *
      * @param context fragment's context
-     * @param view fragment's view
-     * @param db database on which operations will be done
+     * @param view    fragment's view
+     * @param db      database on which operations will be done
      */
     public AddCategoryHandler(Context context, View view, WarehouseDb db) {
         this.db = db;
@@ -44,6 +45,7 @@ public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
     /**
      * Function to validate user input data.
      * After successful validation new category is inserted.
+     *
      * @return validation message
      */
     @Override
@@ -71,6 +73,7 @@ public class AddCategoryHandler extends AsyncTask<Void, Void, String> {
 
     /**
      * Function which updates ui based on passed result
+     *
      * @param result validation message from doInBackground method
      */
     @Override

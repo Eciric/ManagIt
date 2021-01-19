@@ -16,7 +16,7 @@ import res.managit.dbo.entity.Customer;
 import res.managit.dbo.entity.Worker;
 
 /**
- * Class is responsible for created adapter for customers. Adapter consist of list cosumer
+ * Class is responsible for created adapter for customers. Adapter consist of list customer
  */
 public class CustomerAdapter extends ArrayAdapter<Customer> {
 
@@ -33,15 +33,14 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
     }
 
     /**
-     *
-     * view consist of list of customers. Next to name of customers is checkbox to select customer
-     * to actual event
+     * View consist of list of customers.
+     * Next to name of customers is checkbox to select customer to actual event
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        if(start == 0){
-            for(int i = 0;i<customers.size();i++){
-                customerListChecked.add(new Pair<>(customers.get(i),0));
+        if (start == 0) {
+            for (int i = 0; i < customers.size(); i++) {
+                customerListChecked.add(new Pair<>(customers.get(i), 0));
             }
             start = 1;
         }
@@ -52,9 +51,9 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         }
         CheckBox setCustomers = (CheckBox) convertView.findViewById(R.id.setCustomers);
         setCustomers.setTag(position);
-        for(int i = 0;i<customerListChecked.size();i++){
+        for (int i = 0; i < customerListChecked.size(); i++) {
             Integer number = customerListChecked.get(i).second;
-            if(i == (int) setCustomers.getTag()){
+            if (i == (int) setCustomers.getTag()) {
                 if (number == 0) {
                     setCustomers.setChecked(false);
                 } else {
@@ -65,20 +64,18 @@ public class CustomerAdapter extends ArrayAdapter<Customer> {
         setCustomers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for(int i = 0; i<customerListChecked.size();i++){
+                for (int i = 0; i < customerListChecked.size(); i++) {
                     final int position2 = (int) ((CheckBox) v).getTag();
-                    if(i == position2){
+                    if (i == position2) {
                         Customer customer1 = customerListChecked.get(i).first;
-                        if(((CheckBox) v).isChecked()){
-                            customerListChecked.set(i,new Pair<>(customer1,1));
-                        }
-                        else {
-                            customerListChecked.set(i,new Pair<>(customer1,0));
+                        if (((CheckBox) v).isChecked()) {
+                            customerListChecked.set(i, new Pair<>(customer1, 1));
+                        } else {
+                            customerListChecked.set(i, new Pair<>(customer1, 0));
                         }
                     }
                 }
 
-//                System.out.println(customerListChecked);
             }
         });
 
