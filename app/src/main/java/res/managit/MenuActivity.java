@@ -82,6 +82,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new statisticsFragment()).commit();
                 break;
+            case R.id.nav_scanner:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new scannerFragment()).commit();
+                break;
             case R.id.nav_export:
                 exportDatabase(PublicDatabaseAcces.currentDatabaseName);
                 Toast.makeText(this, "Database exported", Toast.LENGTH_SHORT).show();

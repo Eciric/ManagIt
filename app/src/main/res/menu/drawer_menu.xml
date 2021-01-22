@@ -14,6 +14,9 @@
         <item android:id="@+id/nav_lowinstock"
             android:icon="@drawable/ic_lowinstock"
             android:title="Low in Stock"/>
+        <item android:id="@+id/nav_scanner"
+            android:icon="@drawable/ic_scanner"
+            android:title="Scanner"/>
     </group>
 
     <item android:title="Tools">
