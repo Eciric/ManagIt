@@ -76,4 +76,7 @@ dependencies {
     //calendar
     implementation 'com.applandeo:material-calendar-view:1.7.0'
 
+    // LIBRERIA PARA EL LECTOR DE CODIGO DE BARRAS
+    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+
 }
