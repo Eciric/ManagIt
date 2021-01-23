@@ -37,7 +37,7 @@ public class scannerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_scaner, container, false);
 
-        textBarcode =(TextView)view.findViewById(R.id.barCode);
+        textBarcode = view.findViewById(R.id.barCode);
         btnScanBarCode = view.findViewById(R.id.btnScanBarCode);
 
         btnScanBarCode.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +50,7 @@ public class scannerFragment extends Fragment {
         return view;
     }
 
-    public void scanner(){
+    public void scanner() {
         IntentIntegrator intent = IntentIntegrator.forSupportFragment(scannerFragment.this);
         intent.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
         intent.setPrompt("Scan barcode");
@@ -64,8 +64,8 @@ public class scannerFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
 
-        if(result != null) {
-            if(result.getContents() == null) {
+        if (result != null) {
+            if (result.getContents() == null) {
                 Toast.makeText(getContext(), "Cancel scan", Toast.LENGTH_SHORT).show();
             } else {
                 textBarcode.setText(result.getContents());
