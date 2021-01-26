@@ -16,6 +16,9 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+/**
+ * Class which represents scanner Fragment
+ */
 public class scannerFragment extends Fragment {
 
 
@@ -31,6 +34,15 @@ public class scannerFragment extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
+    /**
+     * Function which is responsible for set all fragment UI.
+     * It also set lisener to scanner button
+     *
+     * @param inflater           object that can be used to inflate any views in the fragment
+     * @param container          this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState fragment's bundle
+     * @return
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +62,9 @@ public class scannerFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Function which is responsible for run bar code scanner API
+     */
     public void scanner() {
         IntentIntegrator intent = IntentIntegrator.forSupportFragment(scannerFragment.this);
         intent.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
@@ -60,6 +75,12 @@ public class scannerFragment extends Fragment {
         intent.initiateScan();
     }
 
+    /**
+     * Function which return bar code and data connected with that number
+     * @param requestCode number of bar code
+     * @param resultCode number of bar code
+     * @param data data connected with bar code
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
