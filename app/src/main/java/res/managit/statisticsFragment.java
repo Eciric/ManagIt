@@ -46,7 +46,7 @@ public class statisticsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         new ProductLowQuantityRetriever(requireContext(), view, PublicDatabaseAcces.currentDatabase, getLayoutInflater()).execute();
         Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle("Out of stock");
+        toolbar.setTitle("Low in stock");
 
         ListView productsList = view.findViewById(R.id.list);
         productsList.setOnItemClickListener((adapterView, view1, i, l) -> {

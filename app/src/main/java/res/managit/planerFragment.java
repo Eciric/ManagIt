@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import com.applandeo.materialcalendarview.CalendarView;
@@ -81,6 +82,10 @@ public class planerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Update the toolbar
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle("Planner");
+
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_planer, container, false);
         calendarView = (CalendarView) view.findViewById(R.id.calendarView);
